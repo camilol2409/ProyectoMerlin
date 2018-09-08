@@ -20,6 +20,8 @@ class ReporteController extends CI_Controller {
 		 * librerias,helper,modelos.		        
 	*/ 
 
+	// variable que contiene el nombre generico del Pdf a generar.
+	private $nombre_pdf;
     function __construct() {
         parent::__construct();
         //Invocamos a la libreria tcpdf para hacer uso de sus metodos
@@ -35,8 +37,10 @@ class ReporteController extends CI_Controller {
         $this->load->model('Interfaz_model');
         //Invocamos a la clase Normativa_model para poder hacer uso de sus metodos
         $this->load->model('Normativa_model');    
-
-        $this->load->helper('download');    
+        //El Download Helper Nos ayuda a descargar datos a nuestro computador.
+        $this->load->helper('download'); 
+        //Se inicializa el nombre generico del Pdf a generar.
+        $this->nombre_pdf='Reporte_Requisitos.pdf';   
     }
 
     /** 
@@ -251,8 +255,18 @@ class ReporteController extends CI_Controller {
 		//Close and output PDF document
 		ob_clean();
 		$pdf->Output('Reporte_Requisitos.pdf', 'F');
-		       $data = file_get_contents($this->folder.'Reporte_Requisitos.pdf');
-       force_download('Reporte_Requisitos.pdf',$data);
+
+		/*
+			* file_get_contens devuelve el fichero a un string, comenzando por el offset especificado hasta maxlen bytes. Si falla, file_get_contents() devolverá FALSE. 
+			* en caso de que la variable data contenga los datos del fichero
+			se realiza la descarga con force_download de este segun la configuracion del navegador.
+		*/
+		$data = file_get_contents($this->folder.$this->nombre_pdf);
+		if($data)
+		{
+			force_download($this->nombre_pdf,$data);
+		}
+       
 		//end_ob_clean();
 		//============================================================+
 		// END OF FILE
