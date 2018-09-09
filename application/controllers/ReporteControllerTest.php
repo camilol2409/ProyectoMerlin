@@ -13,8 +13,12 @@ if (!defined('BASEPATH'))
 		 * @package   levantamientorequisitos/application/controllers/ReporteController.		 
 		 * @version   1.0  Fecha 14-06-2018             
 	*/ 
+function testNombre()
+{
+	return 'Reporte_Requisitos.pdf';
+}
 
-class ReporteController extends CI_Controller {
+class ReporteControllerTest extends CI_Controller {
 	/**
 		 * Es una función que crea el constructor de la clase. En esta se pueden cargar 
 		 * librerias,helper,modelos.		        
@@ -41,7 +45,8 @@ class ReporteController extends CI_Controller {
         $this->load->helper('download'); 
         //Se inicializa el nombre generico del Pdf a generar.
         $this->nombre_pdf='Reporte_Requisitos.pdf';   
-
+        //La libreria de Codeigniter para pruebas unitarias sencillas
+        $this->load->library('unit_test');
     }
 
     /** 
@@ -262,12 +267,18 @@ class ReporteController extends CI_Controller {
 			* en caso de que la variable data contenga los datos del fichero
 			se realiza la descarga con force_download de este segun la configuracion del navegador.
 		*/
+
+		$this->unit->run(testNombre(),'is_string',"nombre no vacio","Prueba si la variable nombre contiene un string");
+		$this->unit->run(testNombre(),$this->nombre_pdf,"nombre de pdf","Prueba si el nombre de pdf coincide con Reporte_Requisitos.pdf");
+		
 		$data = file_get_contents($this->nombre_pdf);
+			$this->unit->run($data,'is_string',"PDF con datos","Prueba si el PDF generado contiene datos");
+
 		if($data)
 		{
-			force_download($this->nombre_pdf,$data);
+			//force_download($this->nombre_pdf,$data);
 		}
-       
+       $this->load->view('tests');
 		//end_ob_clean();
 		//============================================================+
 		// END OF FILE
