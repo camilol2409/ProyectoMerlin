@@ -26,7 +26,14 @@
     </div>
 </nav>
 
+
+</div>
+
+
 <script>
+    
+
+
     function cerrarSesion() {
         $.ajax({
             url: "<?php echo base_url();?>Login/cerrar",
@@ -47,8 +54,9 @@
         });
     }
 
-    function reporteCont() {        
-        $.post("ReporteController/generarPDF");
+    function reporteCont() {    
+
+       $.post("ReporteController/generarPDF");
         $.alert({
                         type: 'green',
                         icon: 'glyphicon glyphicon-warning',
