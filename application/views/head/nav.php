@@ -16,7 +16,7 @@
             <li><a href="<?php echo base_url(); ?>NormativaController">Normativas</a></li>
             <li><a href="<?php echo base_url(); ?>InterfazController">Interfaces</a></li>
             <li><a href="<?php echo base_url(); ?>CaracteristicaController">RNF</a></li>
-                        <li><a href="<?php echo base_url(); ?>ReporteController/generarPDF">Generar Reporte PDF</a></li>          
+                        <li><a href="ReporteController/generarPDF" onclick="showSuccessReport()">Generar Reporte PDF</a></li>          
 
         </ul>
         <ul class="nav navbar-nav navbar-right" style="margin-right: 0px;">
@@ -32,7 +32,14 @@
 
 <script>
     
-
+    function showSuccessReport() {
+        $.alert({
+                        type: 'green',
+                        icon: 'glyphicon glyphicon-warning',
+                        title: 'Exito!',
+                        content: 'Reporte PDF Creado exitosamente',
+                    });
+    }
 
     function cerrarSesion() {
         $.ajax({
