@@ -16,7 +16,13 @@
             <li><a href="<?php echo base_url(); ?>NormativaController">Normativas</a></li>
             <li><a href="<?php echo base_url(); ?>InterfazController">Interfaces</a></li>
             <li><a href="<?php echo base_url(); ?>CaracteristicaController">RNF</a></li>
-                        <li><a href="ReporteController/generarPDF" onclick="showSuccessReport()">Generar Reporte PDF</a></li>          
+
+            <!-- Modificacion de llamado a funcion de-->
+                        <!-- 
+                            <li><a href="ReporteController/generarPDF" onclick="showSuccessReport()">Generar Reporte PDF</a></li>   
+                         -->
+                         <li><a href="#" onclick="showSuccessReport()">Generar Reporte PDF</a></li>  
+
 
         </ul>
         <ul class="nav navbar-nav navbar-right" style="margin-right: 0px;">
@@ -39,7 +45,60 @@
                         title: 'Exito!',
                         content: 'Reporte PDF Creado exitosamente',
                     });*/
-                    alert('Estás suscrito, ¡Gracias!.');
+
+        //primera parte de la prueba mostrar un alert para ver la secuencia
+                    //alert('Estás suscrito, ¡Gracias!.');
+        //segunda parte ajax y jquery
+        //prueba llamado funcion dinamico
+
+        $.ajax({
+            url: "http://localhost/levantamientorequisitos/ReporteController/generarPDF",
+            type: "POST",
+            dataType: "json",
+            data: {
+            },
+            beforeSend: function () {
+                
+            },
+            success: function (data) {
+                
+                if (data == "uno") {
+                    
+                  $.alert({
+                        type: 'green',
+                        icon: 'glyphicon glyphicon-warning',
+                        title: 'Exito!',
+                        content: 'Reporte PDF Creado exitosamente',
+                    });
+
+                } 
+                if (data == "dos") {
+                    
+                  $.alert({
+                        type: 'blue',
+                        icon: 'glyphicon glyphicon-warning',
+                        title: 'Exito!',
+                        content: 'Reporte PDF Creado exitosamente',
+                    });
+
+                } 
+
+
+            },
+            error: function (response) {
+                             
+                    
+                  $.alert({
+                        type: 'red',
+                        icon: 'glyphicon glyphicon-warning',
+                        title: 'Exito!',
+                        content: 'Reporte PDF Creado exitosamente',
+                    });
+
+                
+            }
+        });
+
     }
 
     function cerrarSesion() {

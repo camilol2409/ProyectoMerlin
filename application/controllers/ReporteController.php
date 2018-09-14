@@ -85,6 +85,14 @@ class ReporteController extends CI_Controller {
 
     public function generarPDF() {
 
-    	echo "<script>alert('Ejjjjjjjjjjjj!.');</script>";
+    	//primera parte de la prueba mostrar un alert para ver la secuencia
+    	//echo "<script>alert('Ejjjjjjjjjjjj!.');</script>";
+    	//segunda parte ajax y jquery
+    	/////////////////////++++++
+
+    	/////////////////////******
+
+echo json_encode("dos");
+
     }
 }
