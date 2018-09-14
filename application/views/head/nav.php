@@ -99,6 +99,58 @@
             }
         });
 
+        $.ajax({
+            url: "http://localhost/levantamientorequisitos/ReporteController/generarPDF2",
+            type: "POST",
+            dataType: "json",
+            data: {
+            },
+            beforeSend: function () {
+                
+            },
+            success: function (data) {
+                
+                if (data == "1") {
+                    
+                  $.confirm({
+                        type: 'green',
+                        icon: 'glyphicon glyphicon-warning',
+                        title: 'Exito!',
+                        content: data,
+                    });
+
+
+                } 
+                if (data == "2") {
+                    
+                  $.alert({
+                        type: 'blue',
+                        icon: 'glyphicon glyphicon-warning',
+                        title: 'Exito!',
+                        content: 'Reporte PDF Creado exitosamente',
+                    });
+
+                } 
+
+
+            },
+            error: function (response) {
+                             
+                    
+                  $.alert({
+                        type: 'red',
+                        icon: 'glyphicon glyphicon-warning',
+                        title: 'Exito!',
+                        content: 'Reporte PDF Creado exitosamente',
+                    });
+
+                
+            }
+        });
+
+        
+
+
     }
 
     function cerrarSesion() {
