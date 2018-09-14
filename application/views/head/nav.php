@@ -33,13 +33,8 @@
 <script>
     
     function showSuccessReport() {
-        $.alert({
-                        type: 'green',
-                        icon: 'glyphicon glyphicon-warning',
-                        title: 'Exito!',
-                        content: 'Reporte PDF Creado exitosamente',
-                    });
-    }
+       alert('Estás suscrito, ¡Gracias!.');
+            }
 
     function cerrarSesion() {
         $.ajax({
