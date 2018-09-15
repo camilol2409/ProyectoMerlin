@@ -51,7 +51,7 @@
         //segunda parte ajax y jquery
         //prueba llamado funcion dinamico
 
-        $.ajax({
+    /*    $.ajax({
             url: "http://localhost/levantamientorequisitos/ReporteController/generarPDF",
             type: "POST",
             dataType: "json",
@@ -97,10 +97,10 @@
 
                 
             }
-        });
-
-        $.ajax({
-            url: "http://localhost/levantamientorequisitos/ReporteController/generarPDF2",
+        });*/
+//$.post("ReporteController/generarPDF");
+/*       $.ajax({
+            url: "http://localhost/levantamientorequisitos/ReporteController/prueba",
             type: "POST",
             dataType: "json",
             data: {
@@ -110,7 +110,7 @@
             },
             success: function (data) {
                 
-                if (data == "1") {
+               
                     
                   $.confirm({
                         type: 'green',
@@ -119,18 +119,6 @@
                         content: data,
                     });
 
-
-                } 
-                if (data == "2") {
-                    
-                  $.alert({
-                        type: 'blue',
-                        icon: 'glyphicon glyphicon-warning',
-                        title: 'Exito!',
-                        content: 'Reporte PDF Creado exitosamente',
-                    });
-
-                } 
 
 
             },
@@ -141,14 +129,77 @@
                         type: 'red',
                         icon: 'glyphicon glyphicon-warning',
                         title: 'Exito!',
-                        content: 'Reporte PDF Creado exitosamente',
+                        content: data,
+                    });
+
+                
+            }
+        });*/
+
+      
+
+
+
+        $.ajax({
+            url: "http://localhost/levantamientorequisitos/ReporteController/generarPDF",
+            type: "POST",
+            dataType: "json",
+            data: {
+            },
+            beforeSend: function () {
+                
+            },
+            success: function (data) {
+                
+               
+                    
+/*                 if( $.confirm({
+                        type: 'green',
+                        icon: 'glyphicon glyphicon-warning',
+                        title: 'Pdf Generado!',
+                        content: data + " Desea Guardarlo en otra Ubicacion?",
+                    });*/
+
+$.confirm({
+                            title: 'PDF Generado',
+                            content: 'En la Raiz del proyecto. <br> ¿ Desea Guardarlo en una Ubicacion distinta ?',
+                            icon: 'glyphicon glyphicon-ok',
+                            animation: 'scale',
+                            closeAnimation: 'scale',
+                            opacity: 0.5,
+                            buttons: {
+                                'confirm': {
+                                    text: 'Guardar',
+                                    btnClass: 'btn-blue',
+                                    action: function () {
+                                        location.href = "ReporteController/guardarPDF"; 
+                                    }
+                                },
+                                cancelar: function () {
+                                    $.alert('No se cambio la ubicacion');
+                                },
+                            }
+                        });
+
+
+
+
+
+
+            },
+            error: function (Error) {
+                             
+                    
+                  $.alert({
+                        type: 'red',
+                        icon: 'glyphicon glyphicon-warning',
+                        title: 'Error!',
+                        content: 'Pdf no generado',
                     });
 
                 
             }
         });
-
-        
 
 
     }
