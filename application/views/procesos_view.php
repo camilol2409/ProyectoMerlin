@@ -73,7 +73,7 @@
                 <div class="modal-body" style="padding:20px 40px;">
                     <form role="form">
                         <div class="form-group">
-                            <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del proceso</label><span id="require">*</span><span id="error"></span>
+                            <label for="username"><span class="glyphicon glyphicon-comment"></span> Nombre del proceso</label><span id="require">*</span><span id="error"></span>
                             <input type="text" class="form-control" id="proceso_name" placeholder="Nombre del proceso">
                         </div>
                         <div class="form-group">
@@ -221,11 +221,7 @@
                 </div>
                 <div class="modal-body" style="padding:20px 40px;">
                     <form role="form">
-                        <div class="form-group">
-                            <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del proceso</label>
-                            <input type="text" class="form-control" id="proceso_name_edit" placeholder="Nombre del proceso">
-                        </div>
-
+                        
                         <div class="form-group">
                             <label for="prioridad"><span class="glyphicon glyphicon-triangle-top"></span> Prioridad del proceso</label><span id="require">*</span><span id="error"></span>
                             <!--<input type="text" class="form-control" id="prioridad" placeholder="prioridad">-->
@@ -268,34 +264,39 @@
             <div class="modal-content">
                 <div class="modal-header" style="padding:10px 10px;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4><span class="glyphicon glyphicon-search"></span> Información de procesos</h4>
-                </div>
+                    <h4><span class="glyphicon glyphicon-search"></span> Información de proceso</h4>
+                    <div class="form-group">
+                            
+                            <b><strong><input type="text" class="text-primary form-control text-center" id="proceso_name_view" placeholder="Nombre del proceso" disabled="true"></strong></b>
+                        </div>
+
                 <div class="modal-body" style="padding:20px 40px;">
                     <form role="form">
+                        
+                        <label for="prioridad"><span class="glyphicon glyphicon-th-list"></span> Respuestas a Preguntas :</label>
                         <div id="preguntas_respuestas"></div>
+
+
                         <div class="form-group">
-                            <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del proceso</label>
-                            <input type="text" class="form-control" id="proceso_name_view" placeholder="Nombre del proceso">
+                            <label for="prioridad"><span class="glyphicon glyphicon-sort-by-order"></span> Prioridad del proceso :</label>
+                           
+                            <div id="prioridad_view"></div>
                         </div>
 
                         <div class="form-group">
-                            <label for="prioridad"><span class="glyphicon glyphicon-sort-by-order"></span> Prioridad del proceso</label>
-                            <input type="text" class="form-control" id="prioridad_view" placeholder="prioridad">
+                            <label for="prioridad"><span class="glyphicon glyphicon-flag"></span> Secuencia del proceso :</label>
+                           
+                            <div id="secuencia_view"></div>
                         </div>
 
                         <div class="form-group">
-                            <label for="prioridad"><span class="glyphicon glyphicon-flag"></span> Secuencia del proceso</label>
-                            <input type="text" class="form-control" id="secuencia_view" placeholder="1">
+                            <label for="prioridad"><span class="glyphicon glyphicon-sort-by-order"></span> Descripcion del proceso :</label>
+                            <textarea disabled="true" placeholder="Descripción"  class="form-control " id ="descrip_view" ></textarea> 
                         </div>
 
                         <div class="form-group">
-                            <label for="prioridad"><span class="glyphicon glyphicon-sort-by-order"></span> Descripcion del proceso</label>
-                            <textarea placeholder="Descripción"  class="form-control " id ="descrip_view" ></textarea> 
-                        </div>
-
-                        <div class="form-group">
-                            <label for="prioridad"><span class="glyphicon glyphicon-user"></span> Rol del proceso</label>
-                            <input type="text" class="form-control" id="rol_view" placeholder="Rol">
+                            <label for="prioridad"><span class="glyphicon glyphicon-user"></span> Rol del proceso :</label>
+                           <div id="rol_view"></div>
                         </div>
 
 

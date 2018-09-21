@@ -39,107 +39,8 @@
 <script>
     
     function showSuccessReport() {
-        /*$.alert({
-                        type: 'green',
-                        icon: 'glyphicon glyphicon-warning',
-                        title: 'Exito!',
-                        content: 'Reporte PDF Creado exitosamente',
-                    });*/
-
-        //primera parte de la prueba mostrar un alert para ver la secuencia
-                    //alert('Estás suscrito, ¡Gracias!.');
-        //segunda parte ajax y jquery
-        //prueba llamado funcion dinamico
-
-    /*    $.ajax({
-            url: "http://localhost/levantamientorequisitos/ReporteController/generarPDF",
-            type: "POST",
-            dataType: "json",
-            data: {
-            },
-            beforeSend: function () {
-                
-            },
-            success: function (data) {
-                
-                if (data == "uno") {
-                    
-                  $.alert({
-                        type: 'green',
-                        icon: 'glyphicon glyphicon-warning',
-                        title: 'Exito!',
-                        content: 'Reporte PDF Creado exitosamente',
-                    });
-
-                } 
-                if (data == "dos") {
-                    
-                  $.alert({
-                        type: 'blue',
-                        icon: 'glyphicon glyphicon-warning',
-                        title: 'Exito!',
-                        content: 'Reporte PDF Creado exitosamente',
-                    });
-
-                } 
-
-
-            },
-            error: function (response) {
-                             
-                    
-                  $.alert({
-                        type: 'red',
-                        icon: 'glyphicon glyphicon-warning',
-                        title: 'Exito!',
-                        content: 'Reporte PDF Creado exitosamente',
-                    });
-
-                
-            }
-        });*/
-//$.post("ReporteController/generarPDF");
-/*       $.ajax({
-            url: "http://localhost/levantamientorequisitos/ReporteController/prueba",
-            type: "POST",
-            dataType: "json",
-            data: {
-            },
-            beforeSend: function () {
-                
-            },
-            success: function (data) {
-                
-               
-                    
-                  $.confirm({
-                        type: 'green',
-                        icon: 'glyphicon glyphicon-warning',
-                        title: 'Exito!',
-                        content: data,
-                    });
-
-
-
-            },
-            error: function (response) {
-                             
-                    
-                  $.alert({
-                        type: 'red',
-                        icon: 'glyphicon glyphicon-warning',
-                        title: 'Exito!',
-                        content: data,
-                    });
-
-                
-            }
-        });*/
-
-      
-
-
-
+       
+//Muestra alertas de de un llamado de funcion ajax en caso exito el pdf es genrado y da la posibilidad de cambiarlo de ubicacion, en caso de fallo del genrado muestra un mensaje de alerta de pdf no generado
         $.ajax({
             url: "http://localhost/levantamientorequisitos/ReporteController/generarPDF",
             type: "POST",
@@ -150,15 +51,7 @@
                 
             },
             success: function (data) {
-                
-               
-                    
-/*                 if( $.confirm({
-                        type: 'green',
-                        icon: 'glyphicon glyphicon-warning',
-                        title: 'Pdf Generado!',
-                        content: data + " Desea Guardarlo en otra Ubicacion?",
-                    });*/
+            
 
 $.confirm({
                             title: 'PDF Generado',
