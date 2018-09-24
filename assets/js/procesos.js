@@ -323,7 +323,7 @@ function verProceso(id_proceso) {
                     
                 $("#proceso_name_view").val(data.nombre); //setea los Txt con los datos de la BD
   
-
+                $("#rol_view").val(data.rol);
                 //$("#prioridad_view").val(prioridad);
                 //prioridad
                 var html = '';

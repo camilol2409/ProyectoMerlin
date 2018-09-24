@@ -73,7 +73,7 @@
                 <div class="modal-body" style="padding:20px 40px;">
                     <form role="form">
                         <div class="form-group">
-                            <label for="username"><span class="glyphicon glyphicon-comment"></span> Nombre del proceso</label><span id="require">*</span><span id="error"></span>
+                            <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del proceso</label><span id="require">*</span><span id="error"></span>
                             <input type="text" class="form-control" id="proceso_name" placeholder="Nombre del proceso">
                         </div>
                         <div class="form-group">
@@ -221,7 +221,10 @@
                 </div>
                 <div class="modal-body" style="padding:20px 40px;">
                     <form role="form">
-                        
+                                               <div class="form-group">
+                            <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del proceso</label>
+                            <input type="text" class="form-control" id="proceso_name_edit" placeholder="Nombre del proceso">
+                        </div> 
                         <div class="form-group">
                             <label for="prioridad"><span class="glyphicon glyphicon-triangle-top"></span> Prioridad del proceso</label><span id="require">*</span><span id="error"></span>
                             <!--<input type="text" class="form-control" id="prioridad" placeholder="prioridad">-->
@@ -269,7 +272,7 @@
                             
                             <b><strong><input type="text" class="text-primary form-control text-center" id="proceso_name_view" placeholder="Nombre del proceso" disabled="true"></strong></b>
                         </div>
-
+                </div>
                 <div class="modal-body" style="padding:20px 40px;">
                     <form role="form">
                         
