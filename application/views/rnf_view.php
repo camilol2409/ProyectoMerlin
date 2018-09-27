@@ -2,9 +2,7 @@
 <?php $this->load->view('head/nav'); ?>
 <!--<script src="assets/js/rnf.js"></script>-->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style_rnf.css">
-<!--Adicion del nombre del proceso como titulo-->
-<h2 style="text-align: center; margin-top: 50px;"><?php echo $nombre_proceso ?></h2>
-<h3 style=" margin-left: 80px;">DEFINICIÓN de RNF</h3>    
+<h2 style="text-align: center; margin-top: 50px;">DEFINIR RNF</h2>
 
 <div id="rnf">
     <div class="panel panel-default" style="padding: 0%; overflow-x:auto;">

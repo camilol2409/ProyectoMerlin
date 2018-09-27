@@ -22,7 +22,10 @@ class ReporteController extends CI_Controller {
 
 	// variable que contiene el nombre generico del Pdf a generar.
 	private $nombre_pdf;
-
+	// variables de los estados del pdf
+	private $archivado;
+	private $noexiste;
+	private $generado;
 
 
 
@@ -302,14 +305,13 @@ class ReporteController extends CI_Controller {
 		
 
 		//Close and output PDF document
-		//limpiado del bufer generado por la construccion del pdf		
+				
 		ob_clean();
-		// Respuesta json afirmando la generacion del pdf
-		echo json_encode("En la carpeta Raiz del proyecto");
+		$vari=dirname(".") . PHP_EOL;
+echo json_encode("En la carpeta Raiz del proyecto");
 
-		//guardado del pdf en la carpeta Raiz
+		
 		$pdf->Output($this->nombre_pdf, 'F');
-		//En caso de fallo la funcion en la vista se capturara la no generacion del pdf
 
 		//end_ob_clean();
 
@@ -318,17 +320,15 @@ class ReporteController extends CI_Controller {
 		//============================================================+
     }
 
+public function prueba() {
+	
+		echo json_encode($this->nombre_pdf);
+	
+}
 
 public function guardarPDF() {
-  /** 
-     	 * Este funcion permite el cambio de ubicacion de un pdf existente
-     	 * en la carpeta raiz
-
-	*/ 	
-  	//verificacion que el pdf tenga contenido y exista y se guarda la rta en la variable data
+	
 		$data = file_get_contents($this->nombre_pdf);
-		//en caso de que esta variable sea diferente a nulo se descarga el pdf
-		//en la carpeta automatica de descargas o en el fichero escogido dependiendo de la configuracion de descargas del navegador.
 		if($data)
 		{
 			force_download($this->nombre_pdf,$data);

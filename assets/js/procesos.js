@@ -319,33 +319,11 @@ function verProceso(id_proceso) {
                 if (data.prioridad == 3) {
                     prioridad = "Baja";
                 }
-
-                    
                 $("#proceso_name_view").val(data.nombre); //setea los Txt con los datos de la BD
-  
-                $("#rol_view").val(data.rol);
-                //$("#prioridad_view").val(prioridad);
-                //prioridad
-                var html = '';
-                    html+='<p>'+prioridad+'</p>'
-                    $("#prioridad_view").html(html);
-                    $("#prioridad_view").show();
-                    //
-                //$("#secuencia_view").val(data.orden_secuencia);
-                //secuencica
-                                var html = '';
-                    html+='<p>'+data.orden_secuencia+'</p>'
-                    $("#secuencia_view").html(html);
-                    $("#secuencia_view").show();
+                $("#prioridad_view").val(prioridad);
+                $("#secuencia_view").val(data.orden_secuencia);
                 $("#descrip_view").val(data.descripcion);
-
-                //$("#rol_view").val(data.rol);
-                //rol
-                var html = '';
-                 html+='<p>'+data.rol+'</p>'
-                    $("#rol_view").html(html);
-                    $("#rol_view").show();
-                $("#proceso_title_view").val(data.nombre);
+                $("#rol_view").val(data.rol);
                 
                 //cargo los nuevos datos actualizados a la vista
                 cargarInterfaz_proceso(id_proceso);
@@ -768,7 +746,7 @@ function cargarRespuestasTopreguntas(id_pro) {
                 } else {
 
                     var html = '';
-                    html+='<p>'+data.respuestas+' de '+data.preguntas+'</p>'
+                    html+='<p style="font-size:16px; color:blue;">Respuestas a preguntas '+data.respuestas+'/'+data.preguntas+'</p>'
                     $("#preguntas_respuestas").html(html);
                     $("#preguntas_respuestas").show();
                 }

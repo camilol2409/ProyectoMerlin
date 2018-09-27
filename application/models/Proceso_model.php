@@ -160,26 +160,4 @@ class Proceso_model extends CI_Model {
             return false; //si no hay datos, retornamos falso al controlador.
         }
     } 
-//nueva funcion de retorno de nombre para el titulo de vistas
-    function obtener_nombre_proceso($id_proceso)
-    {
-
-        $this->db->select('nombre');
-        $this->db->where("idproceso", $id_proceso);
-        $this->db->from('proceso');
-        $data = $this->db->get();
-        //si hay valores que mostrar
-        if ($data->num_rows() > 0) {
-            $nombre=explode('"', serialize($data->row()));
-            if($nombre[5])
-                return $nombre[5]; 
-            else
-                return " ";
-        } else {
-            //si no hay informacion, retornamos al controlador el valor de false.
-            return false;
-        }
-
-
-    }
 }

@@ -71,16 +71,7 @@ class DefinirRNFController extends CI_Controller {
             $login["apellido"] = $this->session->userdata('apellido');
             $login["email"] = $this->session->userdata('email');
             $login["login"] = $this->session->userdata('login');
-            //titulo agregado
-            $nombre_proceso=$this->Proceso_model->obtener_nombre_proceso($id_proceso);
-            if($nombre_proceso)
-            {
-                $login['nombre_proceso'] = $nombre_proceso;
-            }
-            else
-            {
-                $login['nombre_proceso'] = " ";
-            }
+
             $this->load->view('rnf_view', $login);
         } else {
             $this->load->view('login');
