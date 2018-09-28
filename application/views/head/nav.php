@@ -15,6 +15,7 @@
             <li><a href="<?php echo base_url(); ?>NormativaController">Normativas</a></li>
             <li><a href="<?php echo base_url(); ?>InterfazController">Interfaces</a></li>
             <li><a href="<?php echo base_url(); ?>CaracteristicaController">RNF</a></li>
+            <li><a href="<?php echo base_url(); ?>ConfiguracionControoler">Configuracion</a></li>
 
             <!-- Modificacion de llamado a funcion de-->
                         <!-- 
