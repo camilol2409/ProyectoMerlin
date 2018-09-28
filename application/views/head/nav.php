@@ -12,7 +12,6 @@
                     <li><a href="#"></a></li>
                 </ul>
             </li>-->
-            <li><a href="<?php echo base_url(); ?>RolController">Roles</a></li>
             <li><a href="<?php echo base_url(); ?>NormativaController">Normativas</a></li>
             <li><a href="<?php echo base_url(); ?>InterfazController">Interfaces</a></li>
             <li><a href="<?php echo base_url(); ?>CaracteristicaController">RNF</a></li>
