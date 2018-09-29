@@ -187,11 +187,28 @@ class ReporteController extends CI_Controller {
 					$pdf->MultiCell($single_cell_size, 5,$record->nombre, 1, 'C', 0, 1, '100', '', true);
 					//$pdf->Cell(0,8,"Nombre: ".$record->nombre,0,0);
 					//$pdf->Ln(4);
-					$pdf->MultiCell($single_cell_size, 5,"Prioridad: ".$record->prioridad, 1, 'C', 0, 1, '100', '', true);
-					//$pdf->Cell(0,8,"Prioridad: ".$record->prioridad,0,0 );
-					$pdf->MultiCell($single_cell_size, 5,"Orden Secuencia: ".$record->orden_secuencia, 1, 'C', 0, 1, '100', '', true);
-					//$pdf->Cell(0,8,"Orden Secuencia: ".$record->orden_secuencia,0,0 );
+// Zona ha realizar cambios
+					// siguientes dos lineas comentadas
+
+					//$pdf->MultiCell($single_cell_size, 5,"Prioridad: ".$record->prioridad, 1, 'C', 0, 1, '100', '', true);
+					//*****$pdf->Cell(0,8,"Prioridad: ".$record->prioridad,0,0 );
+					//$pdf->MultiCell($single_cell_size, 5,"Orden Secuencia: ".$record->orden_secuencia, 1, 'C', 0, 1, '100', '', true);
+					//*****$pdf->Cell(0,8,"Orden Secuencia: ".$record->orden_secuencia,0,0 );
 					//$pdf->Ln(4);
+				//codigo agregado*****inicio****	
+
+
+$pdf->MultiCell($single_cell_size/2, 5,"Prioridad: ".$record->prioridad, 1, 'C', 0, 0, '100', '', true);
+$pdf->MultiCell($single_cell_size/2, 5,"Orden Secuencia: ".$record->orden_secuencia, 1, 'C', 0, 1, 100+($single_cell_size/2), '', true);
+
+
+
+
+					//codigo agregado*****cierre****
+
+
+
+
 					$pdf->MultiCell($single_cell_size, 5,"Descripción", 1, 'C', 0, 1, '100', '', true);
 					//$pdf->Cell(0,8,"Descripción",0,0 );
 					//$pdf->Ln(5);
