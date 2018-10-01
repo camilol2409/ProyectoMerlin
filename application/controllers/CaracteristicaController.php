@@ -16,7 +16,7 @@ class CaracteristicaController extends CI_Controller {
         $this->load->model('Subcaracteristica_model');
         $this->load->model('Proceso_model');
         /*
-         * bolbioteca de codigo disponible, donde hacemos el llamdo de funciones especiales para permirtir
+         * blbioteca de codigo disponible, donde hacemos el llamdo de funciones especiales para permirtir
          * usar formularios y peticiones de diferentes url
          */
         $this->load->helper(array('form', 'url'));
