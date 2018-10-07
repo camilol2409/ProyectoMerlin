@@ -44,7 +44,15 @@ class IconoController extends CI_Controller {
     
     //Funcion que recibe los datos de una nueva normativa, y crea una nueva normativa mediante el modelo 
     function registrarIcono() {
+        $nombre = $this->input->post('nombre');
+        $descripcion= $this->input->post('descripcion');
+        $direccion= $this->input->post('direccion');
         
+        //$params['idproceso'] = $idproceso;
+        $completo=time();
+        $params['nombre'] = $direccion;
+        $params['direccion'] = $nombre.$completo;
+        $params['descripcion'] = $descripcion;
 
 
         //parametros de configuracion de subida
@@ -60,7 +68,10 @@ class IconoController extends CI_Controller {
         
         
 
-       
+        $result = $this->Icono_model->registrarIcono($params);
+            echo json_encode("result");
+
+
 
 
 
