@@ -28,7 +28,7 @@ class Rol_model extends CI_Model {
     */ 
     function getRole() {
         $this->db->order_by("nombre", "asc");
-        $data = $this->db->get("role"); //nombre de la tabla en la base de datos
+        $data = $this->db->get("icono"); //nombre de la tabla en la base de datos
         if ($data->num_rows() > 0) { //si el numero de filas es mayor a 0
             return $data->result_array(); //retorna un arreglo de tipo roles
         } else {

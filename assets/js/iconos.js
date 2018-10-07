@@ -59,7 +59,7 @@ $(function () {
  */ 
 function cargarIconos() {
 
-    table = $('#tablaRol').DataTable({//los datos que me envia el controlador los seteo en la tabla html
+    table = $('#tablaIconos').DataTable({//los datos que me envia el controlador los seteo en la tabla html
         "destroy": true,
         "ajax": {
             "retrieve": true,
@@ -73,10 +73,10 @@ function cargarIconos() {
         },
         //seteo los datos que me envia el controlador, el nombre de las columnas son tal cual el nombre que se colocaron en el controlador
         "columns": [
-           //{"data": "id"},
+            //{"data": "id"},
             {"data": "nombre"},
             {"data": "descripcion"},
-            {"data": "encargado"},
+            {"data": "direccion"},
             {"data": "accion"}
         ]
     });

@@ -45,35 +45,37 @@ class IconoController extends CI_Controller {
 public function listarIconos() 
 {
 
-  $data = $this->Rol_model->getRole();  //llama al metodo que pertenece al modelo
+///////////
+        $data = $this->Icono_model->getIconos();  //llama al metodo que pertenece al modelo
         if (!$data) { //si el retorno es falso
             echo json_encode(null);
         } else {
             $row = array(); //creo un arreglo
             foreach ($data as $datos) { //foreach para recorrer la lista de los procesos que retorno el modelo
                 //botonos, esto es codigo html
-                $id_rol = $datos['idrole'];
-                $btnView = "<button class='btn btn-primary btn-sm' onclick='verRol($id_rol);'><span class='glyphicon glyphicon-search'></span></button>";
-                $btnEdit = "<button class='btn btn-warning btn-sm' onclick='actualizarRol($id_rol);'><span class='glyphicon glyphicon-pencil'></span></button>";
-                $btnDelete = "<button class='btn btn-danger btn-sm' onclick='eliminarRol($id_rol);'><span class='glyphicon glyphicon-trash'></span></button>";
+                $id_icono = $datos['id'];
+                $btnView = "<button class='btn btn-primary btn-sm' onclick='verIcono($id_icono);'><span class='glyphicon glyphicon-search'></span></button>";
+                $btnEdit = "<button class='btn btn-warning btn-sm' onclick='actualizarIcono($id_icono);'><span class='glyphicon glyphicon-pencil'></span></button>";
+                $btnDelete = "<button class='btn btn-danger btn-sm' onclick='eliminarIcono($id_icono);'><span class='glyphicon glyphicon-trash'></span></button>";
 
                 ///empiezo a llenar el arreglo con los datos de la BD para mostrarlos en la vista
                 if ($this->session->userdata('tipo')==3) {
                     $row[] = array(
-                        'id' => $datos['idrole'],
-                        'nombre' => $datos['nombre'],
-                        'descripcion' => $datos['descripcion'],
-                        'encargado' => $datos['encargado'],
-                        'accion' => $btnView 
-                    );
+                       
+                        'id' => $datos['id'],
+                            'nombre' => $datos['nombre'],
+                            'desc' => $datos['descripcion'],
+                            'direccion' => $datos['direccion'],
+                            'accion' => $btnView);
                 }
                 else{
                     $row[] = array(
-                        'id' => $datos['idrole'],
-                        'nombre' => $datos['nombre'],
-                        'descripcion' => $datos['descripcion'],
-                        'encargado' => $datos['encargado'],
-                        'accion' => $btnView . " " . $btnEdit . " " . $btnDelete
+                        'id' => $datos['id'],
+                            'nombre' => $datos['nombre'],
+                            'desc' => $datos['descripcion'],
+                            'direccion' => $datos['direccion'],
+                            'accion' => $btnView . " " . $btnEdit . " " . $btnDelete 
+
                     );
                 }
                 
@@ -81,6 +83,7 @@ public function listarIconos()
             $result = array("data" => $row);
             echo json_encode($result); ///retorno el arreglo a la vista
         }
+//////////
 
 
     }

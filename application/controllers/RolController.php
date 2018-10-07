@@ -21,6 +21,7 @@ class RolController extends CI_Controller {
         $this->load->model('Rol_model'); //Para conectarse con el modelo de procesos
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
+        $this->load->model('Icono_model');
     }
 
 
@@ -100,7 +101,7 @@ class RolController extends CI_Controller {
             $row = array(); //creo un arreglo
             foreach ($data as $datos) { //foreach para recorrer la lista de los procesos que retorno el modelo
                 //botonos, esto es codigo html
-                $id_rol = $datos['idrole'];
+                $id_rol = $datos['id'];
                 $btnView = "<button class='btn btn-primary btn-sm' onclick='verRol($id_rol);'><span class='glyphicon glyphicon-search'></span></button>";
                 $btnEdit = "<button class='btn btn-warning btn-sm' onclick='actualizarRol($id_rol);'><span class='glyphicon glyphicon-pencil'></span></button>";
                 $btnDelete = "<button class='btn btn-danger btn-sm' onclick='eliminarRol($id_rol);'><span class='glyphicon glyphicon-trash'></span></button>";
@@ -108,19 +109,19 @@ class RolController extends CI_Controller {
                 ///empiezo a llenar el arreglo con los datos de la BD para mostrarlos en la vista
                 if ($this->session->userdata('tipo')==3) {
                     $row[] = array(
-                        'id' => $datos['idrole'],
+                        'id' => $datos['id'],
                         'nombre' => $datos['nombre'],
                         'descripcion' => $datos['descripcion'],
-                        'encargado' => $datos['encargado'],
+                        'encargado' => $datos['direccion'],
                         'accion' => $btnView 
                     );
                 }
                 else{
                     $row[] = array(
-                        'id' => $datos['idrole'],
+                        'id' => $datos['id'],
                         'nombre' => $datos['nombre'],
                         'descripcion' => $datos['descripcion'],
-                        'encargado' => $datos['encargado'],
+                        'encargado' => $datos['direccion'],
                         'accion' => $btnView . " " . $btnEdit . " " . $btnDelete
                     );
                 }

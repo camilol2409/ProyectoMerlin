@@ -17,7 +17,7 @@ class Icono_model extends CI_Model {
         //$this->db->select('I.id,I.nombre,I.direccion,I.descripcion');
         //$this->db->from('iconos I');
         //$this->db->join('proceso P', 'P.idproceso = N.idproceso');
-        $data = $this->db->get("role");
+        $data = $this->db->get("iconos");
         echo $data->num_rows();
         if ($data->num_rows() > 0) {
             return $data->result_array();
