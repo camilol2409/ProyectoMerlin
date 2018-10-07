@@ -14,10 +14,11 @@ class Icono_model extends CI_Model {
 
     //Devuelve todos los registros de la tabla normativa de la base de datos
     function getIconos() {
-        $this->db->select('I.id,I.nombre,I.descripcion');
-        $this->db->from('iconos I');
+        //$this->db->select('I.id,I.nombre,I.direccion,I.descripcion');
+        //$this->db->from('iconos I');
         //$this->db->join('proceso P', 'P.idproceso = N.idproceso');
-        $data = $this->db->get();
+        $data = $this->db->get("role");
+        echo $data->num_rows();
         if ($data->num_rows() > 0) {
             return $data->result_array();
         } else {
@@ -48,12 +49,9 @@ class Icono_model extends CI_Model {
     //Recibe Id norma y devuelve el registro respectivo
     function icono_Id($id_icono) {
         //$this->db->select('N.nombre,N.descripcion,P.nombre nombreproceso,P.descripcion descripcionproceso, N.idproceso');
-                $this->db->select('I.nombre, I.ancho,I.largo, I.direccion','I.descripcion'
-            );
+       $this->db->select('I.id,I.nombre,I.direccion,I.descripcion');
         $this->db->from('icono I');
         $this->db->where('I.id', $id_icono);
-        $this->db->from('normativa N');
-        $this->db->join('proceso P','P.idproceso = N.idproceso');
         $data = $this->db->get();
         if ($data->num_rows() > 0) {
             return $data->row();

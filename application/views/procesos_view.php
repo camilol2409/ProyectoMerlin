@@ -106,7 +106,7 @@
                             <br>
 
                             <!--boton que invoca a una funcion procesos.js la cual crea un nuevo rol del proceso-->
-                            <button type="button" class="btn btn-default btn-sm" id="new_role" onclick="nuevoRol()"><span class="glyphicon glyphicon-th-list"></span><span class="glyphicon glyphicon-user"></span> Nuevo Rol</button>
+                            <button type="button" class="btn btn-default btn-sm" id="new_role" onclick="registrarIcono()"><span class="glyphicon glyphicon-th-list"></span><span class="glyphicon glyphicon-user"></span> Nuevo Rol</button>
 
 
                         </div>

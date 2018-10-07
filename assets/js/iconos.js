@@ -4,58 +4,23 @@
  * and open the template in the editor.
  */
 
-//creamos una variable global de la tabla procesos para ser utilizada en cualquier momento
+ //variable global para hacer referencia a una tabla
 var table;
 
-//varibale global del idnetificador del proceso para ser utilizada en diferentes funciones
-var idproc;
+$(function () { ///esto es jQuejry
 
-///funcion al iniciar la vista ejecuta X codigo, como si fuera un constructor
-$(function () { ///esto es del framework jquery
+    cargarIconos(); ///llamamos a la funcion para que se ejecute al cargar la vista
 
-    cargarIconos(); ///llamamos a la funcion para que se muestre los datos del proceso en la tabla al cargar la vista
-    listarRoles(); //listamos los datos de los roles al cargar la vista
     
-    //evento al hacer click en la prioridad del proceso
-    $("#prioridad").click(function () {
-
-        if ($("#proceso_name").val() == "") {
-
-            $("#proceso_name").focus().before("<span class='error'>Ingrese el nombre del proceso</span>");
-            $(".error").fadeIn();
-        }
-    });
-    
-    //evento al hacer click en la descripcion del proceso
-    $("#descrip").click(function () {
-
-        if ($("#prioridad").val() == "0") {
-
-            $("#prioridad").focus().before("<span class='error'>Seleccione la prioridad del proceso</span>");
-            $(".error").fadeIn();
-        }
-    });
-
-    //evento al hacer click en el rol del proceso
-    $("#rol").click(function () {
-
-        if ($("#descrip").val() == "") {
-
-            $("#descrip").focus().before("<span class='error'>Ingrese la descripción del proceso</span>");
-            $(".error").fadeIn();
-        }
-    });
 
 });
 
-/*
- * realiza la busqueda de los datos de los procesos en a tabla
- */
+/**
+ * Funcion que se encarga de las busquedas por columnnas en la vista 
+*/
 $(function () {
-    var ult;
     var cont = 1;
-
-    $('#tablaProcesos tfoot th').each(function () {
+    $('#tablaRol tfoot th').each(function () {
         var title = $(this).text();
         ult = this;
         $(this).html('<input type="text" placeholder="Buscar" class="form-control txt_find" id="txt' + cont + '"/>');
@@ -75,15 +40,8 @@ $(function () {
 
 });
 
-//eventos al presionar una tecla en cada campo del formulario
 $(function () {
-    $("#proceso_name").keypress(function () {
-        $(".error").remove();
-    });
-});
-
-$(function () {
-    $("#prioridad").click(function () {
+    $("#icono_name").keypress(function () {
         $(".error").remove();
     });
 });
@@ -94,23 +52,14 @@ $(function () {
     });
 });
 
-$(function () {
-    $("#rol").click(function () {
-        $(".error").remove();
-    });
-});
-//fin eventos
 
+/**
+ * funcion que carga los roles de proceso  en la  la vista 
+ * @returns {Boolean} 
+ */ 
+function cargarIconos() {
 
-/*
- * funcion que invoca al controlador, el cual devuelve un JSON con los datos de los procesos.
- * posteriormente recorremos el JSON y mostramos los datos en una tabla
- *
- */
-function cargarProcesos() {
-
-    table = $('#tablaProcesos').DataTable({//los datos que me envia el controlador se llenan el la tabla
-        "order": [[0, "asc"]], //los ordenamos de mayor a menor por el numero de la secuencia
+    table = $('#tablaRol').DataTable({//los datos que me envia el controlador los seteo en la tabla html
         "destroy": true,
         "ajax": {
             "retrieve": true,
@@ -118,402 +67,255 @@ function cargarProcesos() {
             "serverSide": true,
             "searching": false,
             "method": "POST",
-            "url": "ProcesoController/listarProcesos", //llamamos a la funcion del controlador para que me liste los proceos
+            "url": "IconoController/listarIconos", //donde llamo a la funcion del controlador para que me liste los proceos
             "data": {
             }
         },
-        //llenamos los datos de los proceos que envia el controlador, 
-        //el nombre de las columnas son tal cual el nombre que se colocaron en el controlador
+        //seteo los datos que me envia el controlador, el nombre de las columnas son tal cual el nombre que se colocaron en el controlador
         "columns": [
-            {"data": "imagen"},
+           //{"data": "id"},
             {"data": "nombre"},
-            {"data": "desc"},
-            {"data": "prioridad"},
-            {"data": "role"},
+            {"data": "descripcion"},
+            {"data": "encargado"},
             {"data": "accion"}
         ]
     });
 }
 
-/**
- * funcion que nos permite abiri una modal para diligenciar el formulario de registrar un proceso
- */
-function nuevoIcono() {
-    $("#modalRegistroIconos").modal();
-}
 
-/**
- * function que nos redirecciona a secuenciar procesos
- */
-function secuencia(){
-    location.href ="ProcesoController/secuencia";
+//Abre la ventana modal desde la pagina de gestin de subcaracteristicas
+function nuevoRol() {
+    $("#modalRegistroRol").modal();
 }
 
 /*
- * function que realiza una peticion al controlador, a la cual le enviamos como parametros por medio de AJAX 
- * los valores de registrar un nuevo proceso
+ * 
+ * funcion que envia los datos de un rol al controlador para registarlos en la base datos
+ * retorna un JSON con el resultado enviado por el controlador de si los 
+ * datos fueron insertados en la base de datos.
  */
- function prueba() {
-     $.alert({
+function registrarRol() {
+
+    if (validarDatos()) {
+        $.post("RolController/registrarRol",
+                {
+                    "nombre": $("#rol_name").val(),
+                    "descripcion": $("#descripcion").val(),
+                    "encargado": $("#encargado").val()
+
+                },
+                function (data) {
+
+                    if (data == "exist") {
+                        $.alert({
                             type: 'orange',
                             icon: 'glyphicon glyphicon-warning',
                             title: 'Advertencia!',
-                            content: 'Ya existe un Proceso con el mismo nombre y la misma descripción',
+                            content: 'Ya existe un Rol con el mismo nombre',
                         });
- }
-function registrarIcono() {
-
-    if (validarDatos())
-    {
-        $.post("IconoController/registrarIcono", //direccion url donde se encutra el controlador y el nombre de la funcion a la que deseamos llamar
-                {   
-                    //valores enviador por POST al controlador
-                    //mismo que estan en la vista
-                    //.val obtiene el valor de la variable y se la manda al controlador
-                    "nombre": $("#icono_name").val(),
-                    "descripcion": $("#descrip").val(),
-                    "direccion": $("#imagen").val()
-                },
-                function (data) {
-                    //el resultado que nos envia el controlador codificado en JSON
-                    
+                    } else {
 
                         if (data) {
                             $.alert({
                                 type: 'green',
                                 icon: 'glyphicon glyphicon-ok',
                                 title: 'Exito!',
-                                content: 'Icono Agregado',
+                                content: 'Rol Registrado',
                             });
 
-                            $("#icono_name").val("");
-                            $("#descrip").val("");
-                            $("#imagen").val("");        
-                            cargarProcesos();
-                            $('#modalRegistroIconos').modal('hide');
+                            $("#rol_name").val("");
+                            $("#descripcion").val("");
+                            $("#encargado").val("");
+
+                            cargarRoles();
+                            $('#modalRegistroRol').modal('hide');
 
                         } else {
                             $.alert({
                                 type: 'red',
-                                icon: 'glyphicon glyphicon-remove',
+                                icon: 'glyphicon glyphicon-ok',
                                 title: 'Error!',
-                                content: 'Icono NO Agregado',
+                                content: 'Rol NO Registrado',
                             });
-                            $('#modalRegistroIconos').modal('hide');
+                            $('#modalRegistroRol').modal('hide');
                         }
-                    
-
-                }, "json"); //parseamos el resultado que nos envia el controlador
-    }
-     else {
-
-        $.alert({
-            type: 'red',
-            icon: 'glyphicon glyphicon-remove',
-            title: 'Error!',
-            content: 'Diligencie todos los campos obligatorios',
-        });
-    }
-}
-
-/*
- * function la cual recibe como parametro de entrada el identificador del proceso, y que hace una peticion al controlador
- * del proceso, al cual le enviamos como parametros por AJAX que seran actualizados en la base de datos, y 
- * finalmente nos enviara como resultados los datos atualizados
- */
-function actualizarProceso(id_proceso) {
-
-
-    idP = id_proceso;
-    $.post("ProcesoController/consultarProcesoId", ///consulta los datos del proceso por ID en el controlador
-            {
-                "id_pro": id_proceso
-            },
-            function (data) {
-                //seteamos los Txt con los datos que nos envia el controlador desde la base de datos
-                $("#proceso_name_edit").val(data.nombre);
-                $("#prioridad_edit").val(data.prioridad);
-                $("#secuencia_edit").val(data.orden_secuencia);
-                $("#descrip_edit").val(data.descripcion);
-                $("#rol_edit").val(data.id_role);
-                //cargamos la modal para visualizar los datos
-                $("#modalActualizarProcesos").modal();
-            }, "json"); //recibimos los datos por medio de JSON
-}
-
-/*
- * function que hace una peticion al controlador para actualizar los datos del proceso,
- * al cual le enviamos los datos a actualia como parametros por medio de AJAX que seran actualizados en la base de datos, y 
- * finalmente nos enviara un resultado si atcualizo los datos o no.
- */
-function actualizar() {
-
-    if (validarDatos_edit()) {
-        $.post("ProcesoController/actualizarProceso", //llamamos a la funcion del controlador
-                {
-                    //enviamos los datos al controlador por medio de POST
-                    "nombre": $("#proceso_name_edit").val(),
-                    "prioridad": $("#prioridad_edit").val(),
-                    //"secuencia": $("#secuencia_edit").val(),
-                    "descripcion": $("#descrip_edit").val(),
-                    "role": $("#rol_edit").val(),
-                    "id_pro": idP
-                },
-                function (data) {
-                    //recibimos el resultado del controlador y lo procesamos para mostrar los mensajes a la vista
-                    if (data) {
-                        $.alert({
-                            type: 'green',
-                            icon: 'glyphicon glyphicon-ok',
-                            title: 'Exito!',
-                            content: 'Proceso Actualizado',
-                        });
-
-                        $("#proceso_name").val("");
-                        $("#descrip").val("");
-                        $("#prioridad").val("0");
-                        $("#rol").val("0");
-                        //si se actualizaron los datos, refescamos la tabla con los nuevos datos
-                        cargarProcesos();
-                        $('#modalActualizarProcesos').modal('hide');
-
-                    } else {
-                        $.alert({
-                            type: 'red',
-                            icon: 'glyphicon glyphicon-remove',
-                            title: 'Error!',
-                            content: 'No se actualizo el proceso',
-                        });
-                        $('#modalActualizarProcesos').modal('hide');
-                        cargarProcesos();
                     }
-                }, "json");
-    } else {
 
+                }, "json");
+
+
+    } else {
         $.alert({
-            type: 'red',
-            icon: 'glyphicon glyphicon-remove',
             title: 'Error!',
-            content: 'Diligencie todos los campos obligatorios',
+            content: 'Diligencie todos los campos',
         });
     }
+
 }
-/*
- * funcion que recibe como parametro el identificador del proceso y que mediante AJAX hace una peticion al controlador
- * enviandole como parametro el identificador y retornando como resultado un JSON con los datos del proceso.
- */
-function verProceso(id_proceso) {
-    $.post("ProcesoController/consultarProcesoId", ///consulta los datos del proceso al controldor
-            {   
-                //parametro enviado por POST
-                "id_pro": id_proceso
+
+function verRol(id_rol) {
+    $.post("RolController/consultarRolId", ///consulta los datos del proceso por ID
+            {
+                "id_rol": id_rol
             },
             function (data) {
-                //el JSON enviado por el controlador como respuesta
-                var prioridad = "";
-                if (data.prioridad == 1) {
-                    prioridad = "Alta";
-                }
-                if (data.prioridad == 2) {
-                    prioridad = "Media";
-                }
-                if (data.prioridad == 3) {
-                    prioridad = "Baja";
-                }
+                $("#rol_name_view").val(data.nombre); //setea los Txt con los datos de la BD
+                $("#descripcion_view").val(data.descripcion);
+                $("#encargado_view").val(data.encargado);
 
-                    
-                $("#proceso_name_view").val(data.nombre); //setea los Txt con los datos de la BD
-  
-                $("#rol_view").val(data.rol);
-                //$("#prioridad_view").val(prioridad);
-                //prioridad
-                var html = '';
-                    html+='<p>'+prioridad+'</p>'
-                    $("#prioridad_view").html(html);
-                    $("#prioridad_view").show();
-                    //
-                //$("#secuencia_view").val(data.orden_secuencia);
-                //secuencica
-                                var html = '';
-                    html+='<p>'+data.orden_secuencia+'</p>'
-                    $("#secuencia_view").html(html);
-                    $("#secuencia_view").show();
-                $("#descrip_view").val(data.descripcion);
-
-                //$("#rol_view").val(data.rol);
-                //rol
-                var html = '';
-                 html+='<p>'+data.rol+'</p>'
-                    $("#rol_view").html(html);
-                    $("#rol_view").show();
-                $("#proceso_title_view").val(data.nombre);
-                
-                //cargo los nuevos datos actualizados a la vista
-                cargarInterfaz_proceso(id_proceso);
-                cargarPoliticas(id_proceso);
-                cargarRespuestasTopreguntas(id_proceso);
                 ///carga la modal
-                $("#modalVerProceso").modal();
+                $("#modalVerRol").modal();
             }, "json");
 
 }
 
+function actualizarRol(id_rol) {
+    idR = id_rol;
+    $.post("RolController/consultarRolId", ///consulta los datos del proceso por ID
+            {
+                "id_rol": id_rol
+            },
+            function (data) {
+                $("#rol_name_edit").val(data.nombre); //setea los Txt con los datos de la BD
+                $("#descripcion_edit").val(data.descripcion);
+                $("#encargado_edit").val(data.encargado);
+
+                ///carga la modal
+                $("#modalActualizarRol").modal();
+            }, "json");
+
+}
+
+function ActualizarR() {
+    $.post("RolController/actualizarRol",
+            {
+                "nombre": $("#rol_name_edit").val(),
+                "descripcion": $("#descripcion_edit").val(),
+                "encargado": $("#encargado_edit").val(),
+                "id_rol": idR
+            },
+            function (data) {
+                
+                if (data) {
+                    $.alert({
+                        type: 'green',
+                        icon: 'glyphicon glyphicon-ok',
+                        title: 'Exito!',
+                        content: 'Rol Actualizado',
+                    });
+
+                    $("#rol_name").val("");
+                    $("#descripcion").val("");
+                    $("#encargado").val("");
+
+                    cargarRoles();
+                    $('#modalActualizarRol').modal('hide');
+
+                } else {
+                    $.alert({
+                        type: 'red',
+                        icon: 'glyphicon glyphicon-ok',
+                        title: 'Error!',
+                        content: 'No se actualizo el rol',
+                    });
+                    $('#modalActualizarRol').modal('hide');
+                    cargarRoles();
+                }
+            }, "json");
+}
+
 /*
- * funcion que envia una peticion al controlador por medio de AJAX y que envia como parametro
- * el identificador del proceso y retornando como resultado un JSON.
+ * funcion que se comunica con el controlador enviandolo el identificador del rol
+ * para poder eliminar los datos de la base de datos.
+ * retorna un resultado JSON de si el valor fue eliminado.
  */
-function eliminar(id_proceso) {    
-    
-    //mensaje de confirmacion,obtenido del framwork jquey
+
+function eliminarRol(id_rol) {
+
     $.confirm({
         type: 'orange',
         icon: 'glyphicon glyphicon-warning-sign',
         title: 'Advertencia!',
-        content: 'Desea eliminar el Proceso ?',
+        content: 'Desea eliminar el Rol ?',
         buttons: {
-            aceptar: function () {                
-                $.post("ProcesoController/eliminarProceso", //url donde se encuentra la funcion a la cual hacemos la peticion
+            aceptar: function () {
+                $.post("RolController/eliminarRol",
                         {
-                            //parametro que se envia por medio de POST
-                            "id_pro": id_proceso                            
+                            "id_rol": id_rol
                         },
-                        function (data) {                            
-                            //el resultado que envia el controlador            
-                            //cargamos los procesos con los nuevos datos
-                            cargarProcesos();
+                        function (data) {
+                            cargarRoles();
                         }, "json");
 
-            },            
+            },
             cancelar: function () {
 
             }
         }
     });
 }
-/*
- * funcion que sirve para valodar los caracteres especiales de una cadena
- */
+
+
+/* 
+ * funcion que valida que en una cadena no se encuentren caracteres especiales
+ * @returns {Boolean} 
+ */ 
 function isValid_txt(str) {
     return !/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(str);
 }
 
-/*
- * funcion que valida los datos del formulario, retornando una bandera de tipo boolean
- * @returns {Boolean}
- */
+
+/* 
+ * funcion que valida los datos en las ventanas modales, retornando una bandera de tipo boolean 
+ * @returns {Boolean} 
+ */ 
 function validarDatos() {
+
     var band = true;
-    if ($("#icono_name").val() == "") {
-        $("#icono_name").focus().before("<span class='error'>Ingrese el nombre del icono</span>");
+    if ($("#rol_name").val() == "") {
+        $("#rol_name").focus().before("<span class='error'>Ingrese el nombre del rol</span>");
+        $(".error").fadeIn();
+        band = false;
+    }
+    if (!isValid_txt($("#rol_name").val())) {
+        $("#rol_name").focus().before("<span class='error'>Caracteres no válidos</span>");
         $(".error").fadeIn();
         band = false;
     }
 
-    if ($("#icono_name").val().length > 50) {
-        $("#icono_name").focus().before("<span class='error'>Excede el numero de caracteres permitidos</span>");
+    if ($("#descripcion").val() == "") {
+
+        $("#descripcion").focus().before("<span class='error'>Ingrese la descripción del rol</span>");
         $(".error").fadeIn();
         band = false;
     }
 
-    //validacion del camino de la imagen
-        if ($("#imagen").val() == "") {
-        $("#imagen").focus().before("<span class='error'>Seleccione la direccion del icono</span>");
-        $(".error").fadeIn();
-        band = false;
-    }
-
-
-    if (!isValid_txt($("#icono_name").val())) {
-        $("#proceso_name").focus().before("<span class='error'>Caracteres no válidos</span>");
-        $(".error").fadeIn();
-        band = false;
-    }
-
-
-    if ($("#descrip").val() == "") {
-
-        $("#descrip").focus().before("<span class='error'>Ingrese la descripción del icono</span>");
-        $(".error").fadeIn();
-        band = false;
-    }
-
-    if ($("#descrip").val().length > 250) {
-
-        $("#descrip").focus().before("<span class='error'>Excede el numero de caracteres permitidos</span>");
-        $(".error").fadeIn();
-        band = false;
-    }
-
-
-    return band;
-}
-/*
- * funcion que validad los datos al editarlos en el formulario, retornando una bandera de tipo boolean
- * @returns {Boolean}
- */
-function validarDatos_edit() {
     var band = true;
-    if ($("#proceso_name_edit").val() == "") {
-        $("#proceso_name_edit").focus().before("<span class='error'>Ingrese el nombre del proceso</span>");
+    if ($("#encargado").val() == "") {
+        $("#encargado").focus().before("<span class='error'>Ingrese el nombre del encargado</span>");
         $(".error").fadeIn();
         band = false;
-    }
-
-    if ($("#proceso_name_edit").val().length > 50) {
-        $("#proceso_name_edit").focus().before("<span class='error'>Excede el numero de caracteres permitidos</span>");
-        $(".error").fadeIn();
-        band = false;
-    }
-
-    if (!isValid_txt($("#proceso_name_edit").val())) {
-        $("#proceso_name_edit").focus().before("<span class='error'>Caracteres no válidos</span>");
-        $(".error").fadeIn();
-        band = false;
-    }
-
-    if ($("#prioridad_edit").val() == "0") {
-
-        $("#prioridad_edit").focus().before("<span class='error'>Seleccione la prioridad del proceso</span>");
-        $(".error").fadeIn();
-        band = false;
-    }
-
-    if ($("#descrip_edit").val() == "") {
-
-        $("#descrip_edit").focus().before("<span class='error'>Ingrese la descripción del proceso</span>");
-        $(".error").fadeIn();
-        band = false;
-    }
-
-    if ($("#descrip_edit").val().length > 250) {
-
-        $("#descrip_edit").focus().before("<span class='error'>Excede el numero de caracteres permitidos</span>");
-        $(".error").fadeIn();
-        band = false;
-    }
-
-    if ($("#rol_edit").val() == "0") {
-
-        $("#rol_edit").focus().before("<span class='error'>Seleccione el rol del proceso</span>");
+    } else if (onlyLetters($("#encargado").val())) {
+        $("#encargado").focus().before("<span class='error'>Caracteres no válidos</span>");
         $(".error").fadeIn();
         band = false;
     }
 
     return band;
 }
-/*
- * function que verifica una cadena de texto no tenga caracteres especiales
- */
+
+/* 
+ * funcion que valida que en una cadena de caracteres solo sean de letras
+ * @returns {Boolean} 
+ */ 
 function onlyLetters(l) {
     var valid1 = "/^[a-zA-Z]+$/";
-    if ((/^[a-zA-Z]+$/.test
-        (l))) {
+    if ((/^[a-zA-Z]+$/.test(l))) {
         return false;
     } else {
         return true;
     }
 }
-/*
- * funcion que lista los roles de todos los procesos, para ser mostrados en la vista procesos 
- * 
- */
+
+
+
