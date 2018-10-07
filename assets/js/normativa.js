@@ -91,19 +91,12 @@ function cargarNormativas() {
 
 //Recibe el Id normativa y muestra los datos de la descripción
 function verDescripNorma(id_norma) {
-    $.post("NormativaController/consultarNormativaId",
-            {
-                "id": id_norma
-            },
-            function (data) {
-                $.alert({
-                    type: 'blue',
-                    icon: '	glyphicon glyphicon-comment',
-                    title: 'Descripción!',
-                    content: '<p>' + data.descripcion + '</p>',
-                    columnClass: 'col-md-8 col-md-offset-2',
-                });
-            }, "json");
+        $.alert({
+            type: 'red',
+            icon: 'glyphicon glyphicon-remove',
+            title: 'Error!',
+            content: 'Diligencie todos los campos obligatorios',
+        });
 }
 
 
