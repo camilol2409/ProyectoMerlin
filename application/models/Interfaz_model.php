@@ -55,7 +55,7 @@ class Interfaz_model extends CI_Model {
      * @return : un array con las interfaces que tiene el proceso vinculadas o retora false si no hay interfaces registradaas para el proceso con id : $id
      */
     function getInterfaz_Proceso($id){
-        $this->db->select('I.nombre,I.descripcion,I.tipo,I.detalle_tipo');
+        $this->db->select('I.id,I.nombre,I.descripcion,I.tipo,I.detalle_tipo');
         $this->db->where('I.proceso', $id);
         $this->db->from('interfaz I');
         $this->db->join('proceso P','I.proceso = P.idproceso');

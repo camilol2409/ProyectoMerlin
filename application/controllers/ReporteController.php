@@ -213,7 +213,10 @@ class ReporteController extends CI_Controller {
 					$interfaces = $this->Interfaz_model->getInterfaz_Proceso($idproceso);
 					$normativas = $this->Normativa_model->geNormativa_Proceso($idproceso);
 					$respuestas = $this->Reporte_model->getRespuestaPregunta($idproceso);
-									
+					/* 
+					 * Estructura comnado multicell
+					 * $pdf->MultiCell(Ancho, alto, texto, borde, alineación, llenado, Hay salto de línea? (1 sí, 0 no), posX='', posY='', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0))
+					 */									
 					$pdf->Ln(5);
 					$pdf->SetTextColor(63, 81, 181);
 					$pdf->MultiCell(2*$single_cell_size, 5,"INTERFACES Y NORMATIVIDAD", 1, 'C', 0, 1, '100', '', true);
@@ -230,55 +233,92 @@ class ReporteController extends CI_Controller {
 						else {
 							foreach ($normativas as $norma) {
 								$pdf->MultiCell($single_cell_size, 5,"Nombre: ".$norma->nombre, 1, 'C', 0, 1, '215', '', true);
-								$pdf->MultiCell($single_cell_size, 5,"Descripción: ".$norma->descripcion."\n", 1, 'C', 0, 1, '215', '', true);
 							}
 						}
 					}
 					
 					else {
 						if($normativas == false) {
-							$inter = $interfaces[0];
-							$pdf->MultiCell($single_cell_size, 5,"Nombre: ".$inter->nombre, 1, 'C', 0, 0, '100', '', true);	
+							$pdf->MultiCell($single_cell_size/2, 5, "ID interfaz", 1, 'C', 0, 0, '100', '', true);
+							$pdf->MultiCell($single_cell_size/4, 5, "Entradas", 1, 'C', 0, 0, '157.5', '', true);
+							$pdf->MultiCell($single_cell_size/4, 5, "Salidas", 1, 'C', 0, 0, '186.25', '', true);
 							$pdf->MultiCell($single_cell_size, 5,"No hay normatividad relacionada para este proceso", 1, 'C', 0, 1, '215', '', true);
-							$pdf->MultiCell($single_cell_size, 5,$inter->descripcion."\n", 1, 'C', 0, 1, '100', '', true);
-							$pdf->MultiCell($single_cell_size, 5,"Tipo: ".$inter->tipo, 1, 'C', 0, 1, '100', '', true);
-							$pdf->MultiCell($single_cell_size, 5,$inter->detalle_tipo."\n", 1, 'C', 0, 1, '100', '', true);		
-
-							for($i = 1; $i < count($interfaces); $i++) {
+							for($i = 0; $i < count($interfaces); $i++) {
 								$pdf->MultiCell($single_cell_size, 5,"Nombre: ".$inter->nombre, 1, 'C', 0, 1, '100', '', true);	
 								$pdf->MultiCell($single_cell_size, 5,$inter->descripcion."\n", 1, 'C', 0, 1, '100', '', true);
 								$pdf->MultiCell($single_cell_size, 5,"Tipo: ".$inter->tipo, 1, 'C', 0, 1, '100', '', true);
 								$pdf->MultiCell($single_cell_size, 5,$inter->detalle_tipo."\n", 1, 'C', 0, 1, '100', '', true);		
 							}
 						} else {
-							$interfaces_es_menor = count($interfaces)*2 <= count($normativas);
-							$tamano_menor = ($interfaces_es_menor) ? count($interfaces) : count($normativas);
-							for($i=0; $i < $tamano_menor; $i++) {
-								$inter = $interfaces[$i];
-								$norma = $normativas[2*$i];
-								$norma2 = $normativas[(2*$i)+1];
-								$pdf->MultiCell($single_cell_size, 5,"Nombre: ".$inter->nombre, 1, 'C', 0, 0, '100', '', true);	
-								$pdf->MultiCell($single_cell_size, 5,"Nombre: ".$norma->nombre, 1, 'C', 0, 1, '215', '', true);
-								$pdf->MultiCell($single_cell_size, 5,$inter->descripcion."\n", 1, 'C', 0, 0, '100', '', true);
-								$pdf->MultiCell($single_cell_size, 5,"Descripción: ".$norma->descripcion."\n", 1, 'C', 0, 1, '215', '', true);
-								$pdf->MultiCell($single_cell_size, 5,"Tipo: ".$inter->tipo, 1, 'C', 0, 0, '100', '', true);
-								$pdf->MultiCell($single_cell_size, 5,"Nombre: ".$norma2->nombre, 1, 'C', 0, 1, '215', '', true);
-								$pdf->MultiCell($single_cell_size, 5,$inter->detalle_tipo."\n", 1, 'C', 0, 0, '100', '', true);		
-								$pdf->MultiCell($single_cell_size, 5,"Descripción".$norma2->descripcion."\n", 1, 'C', 0, 1, '215', '', true);
+							$norm = $normativas[0];
+							$inter = $interfaces[0];
+							$pdf->MultiCell($single_cell_size/2, 5, "ID interfaz", 1, 'C', 0, 0, '100', '', true);
+							$pdf->MultiCell($single_cell_size/4, 5, "Entradas", 1, 'C', 0, 0, '157.5', '', true);
+							$pdf->MultiCell($single_cell_size/4, 5, "Salidas", 1, 'C', 0, 0, '186.25', '', true);
+							$pdf->MultiCell($single_cell_size, 5, "Nombre: ".$norm->nombre, 1, 'C', 0, 1, '215', '', true);
+							$pdf->MultiCell($single_cell_size/4, 5, $inter->id, 1, 'C', 0, 0, '100', '', true);
+							switch($inter->tipo) {
+								case 1:
+									$tipoString = "Automática";
+									break;
+								case 2:
+									$tipoString = "Semiautomática";
+									break;
+								case 3:
+									$tipoString = "Manual";
+									break;
 							}
-							if($interfaces_es_menor) {
-								for($i=(2*$tamano_menor); $i < count($normativas); $i++) {
-									$norma = $normativas[$i];
-									$pdf->MultiCell($single_cell_size, 5,"Nombre: ".$norma->nombre, 1, 'C', 0, 1, '215', '', true);
-									$pdf->MultiCell($single_cell_size, 5,"Descripción: ".$norma->descripcion."\n", 1, 'C', 0, 1, '215', '', true);
-								}
+							$pdf->MultiCell($single_cell_size/4, 5, $tipoString, 1, 'C', 0, 0, '128.75', '', true);
+							$pdf->MultiCell($single_cell_size/4, 5, "", 1, 'C', 0, 0, '157.5', '', true);
+							if (count($normativas)>1) {
+								$norm = $normativas[1];
+								$pdf->MultiCell($single_cell_size/4, 5, "", 1, 'C', 0, 0, '186.25', '', true);
+								$pdf->MultiCell($single_cell_size, 5, "Nombre: ".$norm->nombre, 1, 'C', 0, 1, '215', '', true);
 							} else {
-								for($i=$tamano_menor; $i < count($interfaces); $i++) {
+								$pdf->MultiCell($single_cell_size/4, 5, "", 1, 'C', 0, 1, '186.25', '', true);
+							}
+							$int_index = 0;
+							for($i = 2; $i < count($normativas); $i++) {
+								$int_index = $i-1;
+								$norm = $normativas[$i];
+								if ($int_index < count($interfaces)) {
+									$inter = $interfaces[$int_index];
+									$pdf->MultiCell($single_cell_size/4, 5, $inter->id, 1, 'C', 0, 0, '100', '', true);
+									switch($inter->tipo) {
+										case 1:
+											$tipoString = "Automática";
+											break;
+										case 2:
+											$tipoString = "Semiautomática";
+											break;
+										case 3:
+											$tipoString = "Manual";
+											break;
+									}
+									$pdf->MultiCell($single_cell_size/4, 5, $tipoString, 1, 'C', 0, 0, '128.75', '', true);
+									$pdf->MultiCell($single_cell_size/4, 5, "", 1, 'C', 0, 0, '157.5', '', true);
+									$pdf->MultiCell($single_cell_size/4, 5, "", 1, 'C', 0, 0, '186.25', '', true);
+								}
+								$pdf->MultiCell($single_cell_size, 5, "Nombre: ".$norm->nombre, 1, 'C', 0, 1, '215', '', true);
+							}
+							if ($int_index < count($interfaces)-1) {
+								for($i = ($int_index+1); $i < count($interfaces); $i++) {
 									$inter = $interfaces[$i];
-									$pdf->MultiCell($single_cell_size, 5,"Nombre: ".$inter->nombre, 1, 'C', 0, 1, '100', '', true);	
-									$pdf->MultiCell($single_cell_size, 5,$inter->descripcion."\n", 1, 'C', 0, 1, '100', '', true);
-									$pdf->MultiCell($single_cell_size, 5,"Tipo: ".$inter->tipo, 1, 'C', 0, 1, '100', '', true);
-									$pdf->MultiCell($single_cell_size, 5,$inter->detalle_tipo."\n", 1, 'C', 0, 1, '100', '', true);		
+									$pdf->MultiCell($single_cell_size/4, 5, $inter->id, 1, 'C', 0, 0, '100', '', true);
+									switch($inter->tipo) {
+										case 1:
+											$tipoString = "Automática";
+											break;
+										case 2:
+											$tipoString = "Semiautomática";
+											break;
+										case 3:
+											$tipoString = "Manual";
+											break;
+									}
+									$pdf->MultiCell($single_cell_size/4, 5, $tipoString, 1, 'C', 0, 0, '128.75', '', true);
+									$pdf->MultiCell($single_cell_size/4, 5, "", 1, 'C', 0, 0, '157.5', '', true);
+									$pdf->MultiCell($single_cell_size/4, 5, "", 1, 'C', 0, 1, '186.25', '', true);
 								}
 							}
 						}
@@ -319,5 +359,5 @@ class ReporteController extends CI_Controller {
 		//============================================================+
 		// END OF FILE
 		//============================================================+
-    }
+	}
 }
