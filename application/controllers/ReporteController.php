@@ -232,7 +232,7 @@ class ReporteController extends CI_Controller {
 						}
 						else {
 							foreach ($normativas as $norma) {
-								$pdf->MultiCell($single_cell_size, 5,"Nombre: ".$norma->nombre, 1, 'C', 0, 1, '215', '', true);
+								$pdf->MultiCell($single_cell_size, 5, $norma->nombre, 1, 'C', 0, 1, '215', '', true);
 							}
 						}
 					}
@@ -255,7 +255,7 @@ class ReporteController extends CI_Controller {
 							$pdf->MultiCell($single_cell_size/2, 5, "ID interfaz", 1, 'C', 0, 0, '100', '', true);
 							$pdf->MultiCell($single_cell_size/4, 5, "Entradas", 1, 'C', 0, 0, '157.5', '', true);
 							$pdf->MultiCell($single_cell_size/4, 5, "Salidas", 1, 'C', 0, 0, '186.25', '', true);
-							$pdf->MultiCell($single_cell_size, 5, "Nombre: ".$norm->nombre, 1, 'C', 0, 1, '215', '', true);
+							$pdf->MultiCell($single_cell_size, 5, $norm->nombre, 1, 'C', 0, 1, '215', '', true);
 							$pdf->MultiCell($single_cell_size/4, 5, $inter->id, 1, 'C', 0, 0, '100', '', true);
 							switch($inter->tipo) {
 								case 1:
@@ -273,7 +273,7 @@ class ReporteController extends CI_Controller {
 							if (count($normativas)>1) {
 								$norm = $normativas[1];
 								$pdf->MultiCell($single_cell_size/4, 5, "", 1, 'C', 0, 0, '186.25', '', true);
-								$pdf->MultiCell($single_cell_size, 5, "Nombre: ".$norm->nombre, 1, 'C', 0, 1, '215', '', true);
+								$pdf->MultiCell($single_cell_size, 5, $norm->nombre, 1, 'C', 0, 1, '215', '', true);
 							} else {
 								$pdf->MultiCell($single_cell_size/4, 5, "", 1, 'C', 0, 1, '186.25', '', true);
 							}
@@ -299,7 +299,7 @@ class ReporteController extends CI_Controller {
 									$pdf->MultiCell($single_cell_size/4, 5, "", 1, 'C', 0, 0, '157.5', '', true);
 									$pdf->MultiCell($single_cell_size/4, 5, "", 1, 'C', 0, 0, '186.25', '', true);
 								}
-								$pdf->MultiCell($single_cell_size, 5, "Nombre: ".$norm->nombre, 1, 'C', 0, 1, '215', '', true);
+								$pdf->MultiCell($single_cell_size, 5, $norm->nombre, 1, 'C', 0, 1, '215', '', true);
 							}
 							if ($int_index < count($interfaces)-1) {
 								for($i = ($int_index+1); $i < count($interfaces); $i++) {
