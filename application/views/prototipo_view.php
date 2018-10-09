@@ -16,28 +16,40 @@
     <div id="prototipo_container">
         <div class="left-bar">
             <div class="text-center">
-                <span class="mdi mdi-checkbox-blank-circle-outline" style="font-size: 2.5em;">
-                </span>
+                <a href="#" onclick="return false">
+                    <span class="mdi mdi-checkbox-blank-circle-outline" style="font-size: 2.5em;">
+                    </span>
+                </a>
             </div>
             <div class="text-center">
-                <span class="mdi mdi-border-all-variant" style="font-size: 2.5em;">
-                </span>
+                <a href="#" onclick="return false">
+                    <span class="mdi mdi-border-all-variant" style="font-size: 2.5em;">
+                    </span>
+                </a>
             </div>
             <div class="text-center">
-                <span class="mdi mdi-image" style="font-size: 2.5em;">
-                </span>
+                <a href="#" onclick="return false">
+                    <span class="mdi mdi-image" style="font-size: 2.5em;">
+                    </span>
+                </a>
             </div>
             <div class="text-center">
-                <span class="mdi mdi-table" style="font-size: 2.5em;">
-                </span>
+                <a href="#" onclick="return false">
+                    <span class="mdi mdi-table" style="font-size: 2.5em;">
+                    </span>
+                </a>
             </div>
             <div class="text-center">
-                <span class="mdi mdi-pencil" style="font-size: 2.5em;">
-                </span>
+                <a href="#" onclick="return false">
+                    <span class="mdi mdi-pencil" style="font-size: 2.5em;">
+                    </span>
+                </a>
             </div>
             <div class="text-center">
-                <span class="mdi mdi-chart-pie" style="font-size: 2.5em;">
-                </span>
+                <a href="#" onclick="return false">
+                    <span class="mdi mdi-chart-pie" style="font-size: 2.5em;">
+                    </span>
+                </a>
             </div>
         </div>
     </div>

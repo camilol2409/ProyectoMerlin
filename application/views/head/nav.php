@@ -16,8 +16,12 @@
             <li><a href="<?php echo base_url(); ?>NormativaController">Normativas</a></li>
             <li><a href="<?php echo base_url(); ?>InterfazController">Interfaces</a></li>
             <li><a href="<?php echo base_url(); ?>CaracteristicaController">RNF</a></li>
+<<<<<<< HEAD
             <li><a href="<?php echo base_url(); ?>ConfiguracionController">Configuración</a></li>
             <li><a href="ReporteController/generarPDF" onclick="showSuccessReport()">Generar Reporte PDF</a></li>          
+=======
+            <li><a href="/ProyectoMerlin/ReporteController/generarPDF" onclick="showSuccessReport()">Generar Reporte PDF</a></li>          
+>>>>>>> 37aa0d867ab435c213633bb7a1b05002970bd335
         </ul>
         <ul class="nav navbar-nav navbar-right" style="margin-right: 0px;">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?php echo $username; ?></a></li>
