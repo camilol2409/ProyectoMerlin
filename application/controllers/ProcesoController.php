@@ -167,7 +167,7 @@ class ProcesoController extends CI_Controller {
                     $btnInterfaz = "<button class='btn btn-info btn-sm' onclick='agregarInterfaz($id_pro);' data-toggle='tooltip' title='Agrega Interfaz(es) al proceso'><span class='glyphicon glyphicon-random'></span></button>";
 
                     $btnRNF = "<button class='btn btn-default btn-xs' onclick='ir_rnf(" . $id_pro . ")' data-toggle='tooltip' title='Definir RNF'>RNF</button>";
-
+                    $btnPrototipado = "<a href='PrototipoController/show/".$id_pro."'><button class='btn btn-default btn-sm' data-toggle='tooltip' title='Herramienta prototipado'><span class='glyphicon glyphicon-book'></span></a>";
                     $prioridad = "";
                     if ($datos['prioridad'] == 1) {
                         $prioridad = "ALTA";
@@ -190,7 +190,7 @@ class ProcesoController extends CI_Controller {
                             'prioridad' => $prioridad,
                             'secuencia' => $datos['orden_secuencia'],
                             'role' => strtoupper($datos['rol']),
-                            'accion' => $btnView . " " . $btnRNF
+                            'accion' => $btnView . " " . $btnRNF. " ".$btnPrototipado
                         );
                     } else {
                         //llenamos el arreglo con los datos procesados 
@@ -201,7 +201,7 @@ class ProcesoController extends CI_Controller {
                             'prioridad' => $prioridad,
                             'secuencia' => $datos['orden_secuencia'],
                             'role' => strtoupper($datos['rol']),
-                            'accion' => $btnView . " " . $btnEdit . " " . $btnDelete . " " . $btnNormativa . " " . $btnInterfaz . " " . $btnRNF
+                            'accion' => $btnView . " " . $btnEdit . " " . $btnDelete . " " . $btnNormativa . " " . $btnInterfaz . " " . $btnRNF. " ".$btnPrototipado
                         );
                     }
                 }
