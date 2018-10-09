@@ -237,15 +237,19 @@ function verRol(id_rol) {
 
 function actualizarRol(id_rol) {
     idR = id_rol;
-    $.post("RolController/consultarRolId", ///consulta los datos del proceso por ID
+    $.post("IconController/consultarRolId", ///consulta los datos del proceso por ID
             {
                 "id_rol": id_rol
             },
             function (data) {
+
                 $("#rol_name_edit").val(data.nombre); //setea los Txt con los datos de la BD
                 $("#descripcion_edit").val(data.descripcion);
-                $("#encargado_edit").val(data.encargado);
-
+var html = '';
+                
+                                 html+='<img src="./iconos/'+data.direccion+'.png">'
+                    $("#encargado_edit").html(html);
+                    $("#encargado_edit").show();
                 ///carga la modal
                 $("#modalActualizarRol").modal();
             }, "json");

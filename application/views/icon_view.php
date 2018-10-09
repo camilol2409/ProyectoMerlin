@@ -8,7 +8,23 @@
 <script src="assets/js/icon.js"></script>
 
 <div id="rol">
-    
+        <table class="table ">
+            <td>
+            <form action="PreguntasController">
+                <button type="submit"  class="form-control btn btn-info" id="btnPreguntas"><span class="glyphicon glyphicon-question-sign"></span> Preguntas</button>
+            </form>
+                </td>
+                <td>
+                    <form action="IconController">
+                <button type="submit"  class="form-control btn-primary" id="btnIconos"><span class="glyphicon glyphicon-picture"></span> Iconos</button>
+            </form>
+                </td>
+                <td>
+                    <form action="RolController">
+                <button type="submit"  class="form-control btn btn-info" id="btnRoles"><span class="glyphicon glyphicon-user"></span> Roles</button>
+            </form>
+            </td>
+        </table>  
     <?php if ($this->session->userdata('tipo')!=3) { 
         echo '<h2>GESTIÓN DE ICONOS</h2>';
         echo '<button type="button" class="btn btn-primary" id="btnAdd" onclick="nuevoRol();"><span class="glyphicon glyphicon-plus"></span> Nuevo Icono</button>';
@@ -169,10 +185,15 @@
                             <label for="descripcion"><span class="glyphicon glyphicon-flag"></span> Descripcion del Rol</label>
                             <input type="text" class="form-control" id="descripcion_edit" placeholder="Descripcion">
                         </div>
-
                         <div class="form-group">
-                            <label for="encargado"><span class="glyphicon glyphicon-user"></span> Encargado del Rol</label>
-                            <input type="text" class="form-control" id="encargado_edit" placeholder="Encargado">
+                            <label for="encargado"><span class="glyphicon glyphicon-picture"></span> Icono</label>
+                            <div id="encargado_edit"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="imagen"><span class="glyphicon glyphicon-picture"></span> Imagen PNG</label><span id="require">*</span><span id="error"></span>                     
+                           
+                           <input type="file" name="userfile" size="20" id="imagen" />
+                          
                         </div>
 
 <!--button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-ok"></span> Registrar</button-->

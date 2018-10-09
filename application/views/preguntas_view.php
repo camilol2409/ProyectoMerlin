@@ -6,6 +6,25 @@
 <link rel="stylesheet" href="assets/css/style_preguntas.css">
 
 <div id="preguntas">
+
+
+          <table class="table ">
+            <td>
+            <form action="PreguntasController">
+                <button type="submit"  class="form-control btn-primary" id="btnPreguntas"><span class="glyphicon glyphicon-question-sign"></span> Preguntas</button>
+            </form>
+                </td>
+                <td>
+                    <form action="IconController">
+                <button type="submit"  class="form-control btn btn-info" id="btnIconos"><span class="glyphicon glyphicon-picture"></span> Iconos</button>
+            </form>
+                </td>
+                <td>
+                    <form action="RolController">
+                <button type="submit"  class="form-control btn btn-info" id="btnRoles"><span class="glyphicon glyphicon-user"></span> Roles</button>
+            </form>
+            </td>
+        </table>
     <h2 style="margin-bottom: 40px;">PREGUNTAS</h2>
    
    

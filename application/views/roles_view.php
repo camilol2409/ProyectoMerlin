@@ -8,7 +8,23 @@
 <script src="assets/js/roles.js"></script>
 
 <div id="rol">
-    
+     <table class="table ">
+            <td>
+            <form action="PreguntasController">
+                <button type="submit"  class="form-control btn btn-info" id="btnPreguntas"><span class="glyphicon glyphicon-question-sign"></span> Preguntas</button>
+            </form>
+                </td>
+                <td>
+                    <form action="IconController">
+                <button type="submit"  class="form-control btn btn-info" id="btnIconos"><span class="glyphicon glyphicon-picture"></span> Iconos</button>
+            </form>
+                </td>
+                <td>
+                    <form action="RolController">
+                <button type="submit"  class="form-control btn-primary" id="btnRoles"><span class="glyphicon glyphicon-user"></span> Roles</button>
+            </form>
+            </td>
+        </table> 
     <?php if ($this->session->userdata('tipo')!=3) { 
         echo '<h2>GESTIÓN DE ROLES</h2>';
         echo '<button type="button" class="btn btn-primary" id="btnAdd" onclick="nuevoRol();"><span class="glyphicon glyphicon-plus"></span> Nuevo Rol</button>';

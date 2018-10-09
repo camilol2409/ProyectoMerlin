@@ -16,7 +16,7 @@
             <li><a href="<?php echo base_url(); ?>NormativaController">Normativas</a></li>
             <li><a href="<?php echo base_url(); ?>InterfazController">Interfaces</a></li>
             <li><a href="<?php echo base_url(); ?>CaracteristicaController">RNF</a></li>
-            <li><a href="<?php echo base_url(); ?>ConfiguracionController">Configuración</a></li>
+            <li><a href="<?php echo base_url(); ?>PreguntasController">Configuración</a></li>
             <li><a href="ReporteController/generarPDF" onclick="showSuccessReport()">Generar Reporte PDF</a></li>      
         </ul>
         <ul class="nav navbar-nav navbar-right" style="margin-right: 0px;">
