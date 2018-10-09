@@ -97,7 +97,7 @@
 
     function login_user() {
         $.ajax({
-            url: "http://localhost/levantamientorequisitos/Login/login_user",
+            url: "http://localhost:8080/levantamientorequisitos/Login/login_user",
             type: "POST",
             dataType: "json",
             data: {
