@@ -1,8 +1,10 @@
 <?php $this->load->view('head/headers'); ?>
 <?php $this->load->view('head/nav'); ?>
-<!--<script src="assets/js/rnf.js"></script>-->
+<script src="assets/js/rnf.js"></script>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style_rnf.css">
-<h2 style="text-align: center; margin-top: 50px;">DEFINIR RNF</h2>
+<!--Adicion del nombre del proceso como titulo-->
+<!--<h2 style="text-align: center; margin-top: 50px;"><?php echo $nombre_proceso ?></h2>-->
+<h3 style=" margin-left: 80px;">DEFINICIÓN de RNF</h3>    
 
 <div id="rnf">
     <div class="panel panel-default" style="padding: 0%; overflow-x:auto;">
@@ -16,6 +18,7 @@
 </div>
 
 <script>
+
     //variable que nos permite visualizar los paneles de las respuestas
     var panel="";
     ///obtenemos el id_del proceso enviado desde el controlador
@@ -45,6 +48,7 @@
             },
             beforeSend: function () {
                 //$("#loader").show();
+
             },
             success: function (data) {
                 //retorna el resultado enviado por el controlador
@@ -62,26 +66,17 @@
 
     function showCaracteristicas(data) {
 
+
         var html = "";
         html += '<ul class="nav nav-tabs">';
-        /*for (var i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             if (i == 0) {
                 html += '<li class="active"><a data-toggle="tab" href="#tab' + data[i].id + '" onclick="ver_sub_caract(' + data[i].id + ')">' + data[i].nombre + '</a></li>';
                 ver_sub_caract(data[i].id);
             } else {
                 html += '<li><a data-toggle="tab" href="#tab' + data[i].id + '" onclick="ver_sub_caract(' + data[i].id + ')">' + data[i].nombre + '</a></li>';
             }
-        }*/
-
-         html += '<li class="active"><a data-toggle="tab" href="#tab' + "Preguntas" + '" onclick="ver_sub_caract(' + data[i].id + ')">' + data[i].nombre + '</a></li>';
-                ver_sub_caract(data[i].id);
-
-        html += '<li class="active"><a data-toggle="tab" href="#tab' + "Iconos" + '" onclick="ver_sub_caract(' + data[i].id + ')">' + data[i].nombre + '</a></li>';
-                ver_sub_caract(data[i].id);
-
-        html += '<li class="active"><a data-toggle="tab" href="#tab' + "Roles" + '" onclick="ver_sub_caract(' + data[i].id + ')">' + data[i].nombre + '</a></li>';
-                ver_sub_caract(data[i].id);
-
+        }
         html += '</ul>';
 
         html += '<div class="tab-content">'

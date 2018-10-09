@@ -1,13 +1,7 @@
 <?php
-
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 /*
- * esta clase Definir resuiqistos no funcionales recibe peticiones de las vista rnf, la cual invoca a las
- * clases modelos caracteristicas, subcaracteristicas, preguntas y procesos, accediendo a sus metodos para motrar 
- * el resultado de las consultas 
- * Autor: Kristein Johan Ordoñez
- * Fecha: 2018-06-13 
  */
 class ConfiguracionController extends CI_Controller {
     
@@ -63,7 +57,6 @@ class ConfiguracionController extends CI_Controller {
      * redirigiendo a la vistta rnf.
      */
     function load_rnf_proceso($id_proceso) {
-
         if ($this->session->userdata('login')) {
             $login['id_proceso'] = $id_proceso;
             $login["username"] = $this->session->userdata('username');
@@ -146,7 +139,6 @@ class ConfiguracionController extends CI_Controller {
             echo json_encode($row);
         }
     }
-
     /*
      * funcion que es invocada desde la vista que recibe parametros de entrada que se utilizan
      * para enviarlos al modelo para guardarlos en la base de datos
@@ -234,5 +226,4 @@ class ConfiguracionController extends CI_Controller {
             echo json_encode($row);
         }
     }
-
 }

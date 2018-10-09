@@ -5,13 +5,35 @@
 <!--Adicion del nombre del proceso como titulo-->
 <!--<h2 style="text-align: center; margin-top: 50px;"><?php echo $nombre_proceso ?></h2>-->
 <h3 style="text-align: center; margin-top:  80px; ">CONFIGURACIÓN</h3>    
+<div id="rnf">
+    <div class="panel panel-default" style="padding: 0%; overflow-x:auto;">
+        <!--nos muestra la informacion de las repuestas de forma dinamica mediante javascript-->
+        
+        <table class="table ">
+            <td>
+            <form action="PreguntasController">
+                <button type="submit"  class="form-control btn-primary" id="btnPreguntas"><span class="glyphicon glyphicon-question-sign"></span> Preguntas</button>
+            </form>
+                </td>
+                <td>
+                    <form action="IconController">
+                <button type="submit"  class="form-control btn btn-info" id="btnIconos"><span class="glyphicon glyphicon-picture"></span> Iconos</button>
+            </form>
+                </td>
+                <td>
+                    <form action="RolController">
+                <button type="submit"  class="form-control btn btn-info" id="btnRoles"><span class="glyphicon glyphicon-user"></span> Roles</button>
+            </form>
+            </td>
+        </table>
 
-<div id="header">
-    <ul id="mainMenu">
-        <li><a href="SubcaracteristicaController">Preguntas</a></li>
-        <li><a href="">Iconos</a></li>
-        <li><a href="RolController">Roles</a></li>
-    </ul>
+        <div class="panel-body">
+
+            <div id="rnf_sol">
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -48,7 +70,6 @@
             success: function (data) {
                 //retorna el resultado enviado por el controlador
                 if (!data) {
-
                 } else {
                     showCaracteristicas(data);
                 }
@@ -58,9 +79,7 @@
             }
         });
     }
-
     function showCaracteristicas(data) {
-
         var html = "";
         html += '<ul class="nav nav-tabs">';
         for (var i = 0; i < data.length; i++) {
@@ -72,7 +91,6 @@
             }
         }
         html += '</ul>';
-
         html += '<div class="tab-content">'
         for (var i = 0; i < data.length; i++) {
             if (i == 0) {
@@ -91,9 +109,7 @@
         $("#rnf_sol").html(html);
         $(".panel_respuesta").hide();
     }
-
     function ver_sub_caract(id_sub) {
-
         $.ajax({
             url: "<?php echo base_url(); ?>SubcaracteristicaController/listarSubCarateristicas_Id",
             type: "POST",
@@ -107,7 +123,6 @@
             success: function (data) {
                 //$("#loader").hide();
                 if (!data) {
-
                 } else {
                     show_SubCaracteristicas(data, id_sub);
                 }
@@ -117,7 +132,6 @@
             }
         });
     }
-
     function show_SubCaracteristicas(data, id_data) {
         var html = "";
         html += '<p><strong>SubCaracteristicas</strong></p>'
@@ -129,9 +143,7 @@
             preguntas_sub(data[i].id_sub, id_data);
         }
         $("#sub_caract" + id_data).html(html);
-
         ///panel respuestas
-
         panel= "";
         panel += '<div class="info_respuesta">';
         panel += '<p><strong>Respuesta</strong><textarea class="form-control" rows="8" id="txt_respuesta' + id_data + '"></textarea></p>';
@@ -143,9 +155,7 @@
         
         panel += '<button style="margin-left:2%;" type="button" class="btn btn-danger btn-sm" onclick="cancelar_respuesta()">Cancelar</button>';
         panel += '</div>';
-
         $("#panel_respuesta" + id_data).html(panel);
-
     }
     function puedeResponder(){
        panel += '<button style="" type="button" class="btn btn-primary btn-sm" onclick="guardar_respuesta()">Guardar</button>'; 
@@ -166,7 +176,6 @@
             success: function (data) {
                 //$("#loader").hide();
                 if (!data) {
-
                 } else {
                     show_preguntas(data, id_sub, id_panel);
                 }
@@ -176,12 +185,9 @@
             }
         });
     }
-
     function show_preguntas(data, id_data, id_panel) {
-
         var html = "";
         for (var i = 0; i < data.length; i++) {
-
             html += '<p id="txt_pregunta' + data[i].id + '" class="txt_pregunta">' + (i + 1) + '. ' + data[i].nombre + ' ?</p>';
             var btn_response = "<a class='btn_response' href='#' onclick='select_respuesta(" + data[i].id + "," + id_panel + ")'>Respuesta...</a>";
             if (data[i].check == 1) {
@@ -189,11 +195,9 @@
             } else {
                 html += '<p>' + btn_response + '</p>';
             }
-
         }
         $("#info_pregunta" + id_data).html(html);
     }
-
     function select_respuesta(id_pregunta, id_panel) {
         id_txt_respuesta = id_panel;
         $("#txt_respuesta" + id_panel).val("");
@@ -218,7 +222,6 @@
                     $("#txt_respuesta" + id_panel).val("");
                 } else {
                     $("#txt_respuesta" + id_panel).val(data.descripcion);
-
                 }
             },
             error: function (response) {
@@ -226,10 +229,8 @@
             }
         });
     }
-
     function guardar_respuesta() {
         if ($("#txt_respuesta" + id_txt_respuesta).val() == "") {
-
         } else {
             $.ajax({
                 url: "<?php echo base_url(); ?>DefinirRNFController/guardarRespuesta",
@@ -246,7 +247,6 @@
                 success: function (data) {
                     //$("#loader").hide();
                     if (!data) {
-
                     } else {
                         $.alert({
                             type: 'green',
@@ -262,7 +262,6 @@
             });
         }
     }
-
     function cancelar_respuesta() {
         $("#txt_respuesta").val("");
         $(".txt_respuesta").css("color", "#2C2C2C");

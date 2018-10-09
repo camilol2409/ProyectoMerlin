@@ -17,6 +17,19 @@ class Configuracion_model extends CI_Model {
      * el arrgelo de los datos a intertar en la base de datos
      * retorna una bandera de tipo boolean de si los datos fueron registrados.
      */
+
+    function getCaracteristicas() {
+
+        $this->db->select('*');
+        $this->db->order_by('nombre','asc');
+        $this->db->from('caracteristica');
+        $data = $this->db->get();
+        if ($data->num_rows() > 0) { //si el numero de filas es mayor a 0
+            return $data->result_array(); //retorna un arreglo de tipo proceoss
+        } else {
+            return false; /// si no hay datos  en la tabla retorna false
+        }
+    }
     function guardarRespuesta($datos) {
         $this->db->insert('respuesta', $datos);
         if ($this->db->affected_rows()) {

@@ -10,8 +10,6 @@
 <script src="assets/js/interface.js"></script>
 <script src="assets/js/normativa.js"></script>
 
-
-
 <div id="procesos" style="width: 100%; padding: 1%;">
 
     <!--codigo php que dependiendo del rol del usuario, muestra los botones de agregar proceso y secuenciarlos-->
