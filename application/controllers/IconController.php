@@ -5,11 +5,11 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 /**
-         * La  clase RolController extiende de la clase CI_Controller, propia del
+         * La  clase IconController extiende de la clase CI_Controller, propia del
          * framework Codeignither
          * Es una clase que hace uso de los metodos de la clase Rol_model.
-         * @package   levantamientorequisitos/application/controllers/RolController.         
-         * @version   1.0  Fecha 13-06-2018                 
+         * @package   levantamientorequisitos/application/controllers/IconController.         
+         * @version   1.0  Fecha 15-10-2018                 
     */ 
 
 class IconController extends CI_Controller {
@@ -19,7 +19,6 @@ class IconController extends CI_Controller {
     */ 
     function __construct() {
         parent::__construct();
-        //$this->load->model('Rol_model'); //Para conectarse con el modelo de procesos
         $this->load->helper(array('form', 'url'));
         $this->load->library('form_validation');
         $this->load->model('Icon_model');
@@ -51,18 +50,18 @@ class IconController extends CI_Controller {
 
 
     /**
-         * registrarRol
+         * registrarIcono
          * 
-         * Registra los datos de un rol de procesolos datos se obtienen mediante metodo POST
-         * desde la vista roles_view.php  y utiliza la clase Rol_model
-         * metodo registrarSubcaracteristica para registrarlos en la base de datos.
+         * Registra los datos de un Icono , datos se obtienen mediante metodo POST
+         * desde la vista icon_view.php  y utiliza la clase Icon_model
+         * metodo registrarIcono para registrarlos en la base de datos.
          * 
          *                    
          * @param     la funcion no recibe parametros 
          * @return    true o false        
          * @version   1.0                 
     */ 
-    function registrarRol() {
+    function registrarIcono() {
 
         $nombre =  $_REQUEST['icono_name'];
         $descripcion = $_REQUEST['descrip'];
@@ -81,7 +80,7 @@ class IconController extends CI_Controller {
         $registrado=true;
         if($this->upload->do_upload('userfile'))
         {
-            $result = $this->Icon_model->registrarRol($params);
+            $result = $this->Icon_model->registrarIcono($params);
             //echo json_encode($result);
             if(! $result)
             {
@@ -115,17 +114,17 @@ class IconController extends CI_Controller {
 
     
      /**
-         * listarRoles       
+         * listarIconos       
          * Metodo que retorna una lista de las Roles, este es llamado a traves de una peticion AJAX
          *                
-         * @param     la funcion no recibe paramateros 
-         * @return    Un arreglo $result. con la informacion de la roles
+         * @param     la funcion no recibe parametros 
+         * @return    Un arreglo $result. con la informacion de los iconos
          * @version   1.0                 
     */ 
     
-    public function listarRoles() {
+    public function listarIconos() {
 
-        $data = $this->Icon_model->getRole();  //llama al metodo que pertenece al modelo
+        $data = $this->Icon_model->getIcon();  //llama al metodo que pertenece al modelo
         if (!$data) { //si el retorno es falso
             echo json_encode(null);
         } else {
@@ -134,7 +133,7 @@ class IconController extends CI_Controller {
                 //botonos, esto es codigo html
                 $id_icono = $datos['id'];
                 $dir = "./iconos/".$datos['direccion'].".png";
- $btnView = "<button class='btn btn-primary btn-sm' onclick='verRol($id_icono);'><span class='glyphicon glyphicon-search'></span></button>";
+ $btnView = "<button class='btn btn-primary btn-sm' onclick='verIcono($id_icono);'><span class='glyphicon glyphicon-search'></span></button>";
                 $btnEdit = "<button class='btn btn-warning btn-sm' onclick='actualizarIcono($id_icono);'><span class='glyphicon glyphicon-pencil'></span></button>";
                 $btnDelete = "<button class='btn btn-danger btn-sm' onclick='eliminarIcono($id_icono);'><span class='glyphicon glyphicon-trash'></span></button>";
                 $imagen="<img src='$dir' >";
@@ -168,13 +167,13 @@ class IconController extends CI_Controller {
 
 
     /**
-         * actualizarRol
-         * Funcion que es invocada desde la vista roles_view.php
-         * Actualiza la informacion de un rol de proceso los datos 
+         * actualizarIcono
+         * Funcion que es invocada desde la vista icon_view.php
+         * Actualiza la informacion de un icono, los datos 
          * se reciben mediante metodo Post 
          *                 
          * @param     la funcion no recibe paramateros 
-         * @return    true o false
+         * @return    true si se actualizo alguna informacion o false si falla
          * @version   1.0                 
     */ 
     function actualizarIcono() {
@@ -205,7 +204,7 @@ class IconController extends CI_Controller {
             $params['direccion'] = $auto;
             if($this->upload->do_upload('userfile'))
             {
-                $result = $this->Icon_model->actualizarRol($params,$id);
+                $result = $this->Icon_model->actualizarIcono($params,$id);
             //echo json_encode($result);
                 if(! $result)
                 {
@@ -230,7 +229,7 @@ class IconController extends CI_Controller {
         {
             
             $params['direccion'] = $direccion;
-            $result = $this->Icon_model->actualizarRol($params,$id);
+            $result = $this->Icon_model->actualizarIcono($params,$id);
             if(! $result)
             {
                      $actualizado=false;
@@ -260,33 +259,36 @@ class IconController extends CI_Controller {
 
 
     /**
-         * consultarRolId
-         * Funcion que es invocada desde la vista roles_view.php
-         * Consulta la informacion de un Rol. Haciendo uso de la clase
-         * Rol_model que se encarga de obtener la información. 
-         * @param     la funcion no recibe paramateros 
-         * @return    La información del rol de acuerdo al $id. False si no coindicide.
+         * consultarIconoId
+         * Funcion que es invocada desde la vista icono_view.php
+         * Consulta la informacion de un Icono. Haciendo uso de la clase
+         * Icon_model que se encarga de obtener la información. 
+         * @param     la funcion no recibe parametros 
+         * @return    La información del icono de acuerdo al $id. False si no coincide.
          * @version   1.0                 
     */ 
-    function consultarRolId() {
-        $id = $this->input->post('id_rol');
-        $result = $this->Icon_model->rol_Id($id);
+    function consultarIconoId() 
+    {
+        $id = $this->input->post('id_icono');
+        $result = $this->Icon_model->icono_Id($id);
         echo json_encode($result);
     }
 
 
     /**
-         * eliminarRol         
-         * Se encarga de eliminar un registro de un rol         
-         * @param     la funcion no recibe paramateros 
+         * eliminarIcono         
+         * Se encarga de eliminar un registro de un Icono
+         * Y la imagen asociada a este         
+         * @param     la funcion no recibe parametros 
          * @return    true o false
          * @version   1.0                 
     */ 
-    function eliminarRol() {
-        $id_rol = $this->input->post('id_rol');
-        $direccion= $this->Icon_model->icon_Dir($id_rol);        
+    function eliminarIcono() 
+    {
+        $id_icono = $this->input->post('id_icono');
+        $direccion= $this->Icon_model->icon_Dir($id_icono);        
  
-        $result = $this->Icon_model->eliminarRol($id_rol);
+        $result = $this->Icon_model->eliminarIcono($id_icono);
         if(file_exists (""."./iconos/".$direccion.".png"))
             unlink(""."./iconos/".$direccion.".png");
         echo json_encode($result);

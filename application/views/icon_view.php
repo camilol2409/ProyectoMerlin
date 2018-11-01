@@ -27,7 +27,7 @@
         </table>  
     <?php if ($this->session->userdata('tipo')!=3) { 
         echo '<h2>GESTIÓN DE ICONOS</h2>';
-        echo '<button type="button" class="btn btn-primary" id="btnAdd" onclick="nuevoRol();"><span class="glyphicon glyphicon-plus"></span> Nuevo Icono</button>';
+        echo '<button type="button" class="btn btn-primary" id="btnAdd" onclick="nuevoIcono();"><span class="glyphicon glyphicon-plus"></span> Nuevo Icono</button>';
         } 
         else{ 
             echo '<h2>ICONOS</h2>';
@@ -62,8 +62,8 @@
 
        
          <!-- <form role="form" method="post" enctype="multipart/form-data"> -->
-    <div class="modal fade" id="modalRegistroRol" role="dialog">
-            <form role="form"  action="<?php echo base_url('IconController/registrarRol')?>" method="post" onsubmit="return validarDatos(this)" enctype="multipart/form-data">
+    <div class="modal fade" id="modalRegistroIcono" role="dialog">
+            <form role="form"  action="<?php echo base_url('IconController/registrarIcono')?>" method="post" onsubmit="return validarDatos(this)" enctype="multipart/form-data">
                 <div class="modal-dialog">
         
             <!-- Modal content-->
@@ -101,7 +101,7 @@
     
     
     <!-- Ventana Modal para mostar datos de relacionados de un rol-->
-    <div class="modal fade" id="modalVerRol" role="dialog">
+    <div class="modal fade" id="modalVerIcono" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -114,7 +114,7 @@
                     <form role="form">
                         <div class="form-group">
                             <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del Icono</label>
-                            <input type="text" class="form-control" id="rol_name_view" placeholder="Nombre del Icono" readonly="readonly">
+                            <input type="text" class="form-control" id="icono_name_view" placeholder="Nombre del Icono" readonly="readonly">
                         </div>
                         <div class="form-group">
                             <label for="descripcion"><span class="glyphicon glyphicon-flag"></span> Descripcion</label>
@@ -140,7 +140,7 @@
     </div> 
     
     <!-- Ventana Modal para actualizar la informacion de un rol-->
-    <div class="modal fade" id="modalActualizarRol" role="dialog">
+    <div class="modal fade" id="modalActualizarIcono" role="dialog">
             <form role="form"  action="<?php echo base_url('IconController/actualizarIcono')?>" method="post" onsubmit="return validarDatosAct(this)" enctype="multipart/form-data">
                 <div class="modal-dialog">
         

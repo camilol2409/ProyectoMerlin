@@ -9,24 +9,8 @@ var table;
 
 $(function () { ///esto es jQuejry
 
-    cargarRoles(); ///llamamos a la funcion para que se ejecute al cargar la vista
+    cargarIconos(); ///llamamos a la funcion para que se ejecute al cargar la vista
 
-    $("#descripcion").click(function () {
-
-        if ($("#rol_name").val() == "") {
-
-            $("#proceso_name").focus().before("<span class='error'>Ingrese el nombre del rol</span>");
-            $(".error").fadeIn();
-        }
-    });
-    $("#encargado").click(function () {
-
-        if ($("#descripcion").val() == "") {
-
-            $("#prioridad").focus().before("<span class='error'>Ingrese la descripcion del rol</span>");
-            $(".error").fadeIn();
-        }
-    });
 
 });
 
@@ -78,7 +62,7 @@ $(function () {
  * funcion que carga los roles de proceso  en la  la vista 
  * @returns {Boolean} 
  */ 
-function cargarRoles() {
+function cargarIconos() {
 
     table = $('#tablaRol').DataTable({//los datos que me envia el controlador los seteo en la tabla html
         "destroy": true,
@@ -88,7 +72,7 @@ function cargarRoles() {
             "serverSide": true,
             "searching": false,
             "method": "POST",
-            "url": "IconController/listarRoles", //donde llamo a la funcion del controlador para que me liste los proceos
+            "url": "IconController/listarIconos", //donde llamo a la funcion del controlador para que me liste los proceos
             "data": {
             }
         },
@@ -104,126 +88,21 @@ function cargarRoles() {
 }
 
 
-//Abre la ventana modal desde la pagina de gestin de subcaracteristicas
-function nuevoRol() {
-    $("#modalRegistroRol").modal();
+//Abre la ventana modal de registro de icono
+function nuevoIcono() {
+    $("#modalRegistroIcono").modal();
 }
-function prueba() {
-            alert("dFGHJ");
-}
-
-/*
- * 
- * funcion que envia los datos de un rol al controlador para registarlos en la base datos
- * retorna un JSON con el resultado enviado por el controlador de si los 
- * datos fueron insertados en la base de datos.
- */
-function registrarRol() {
-
-    if (validarDatos()) {
-
-$.ajax({
-            url: "http://localhost/levantamientorequisitos/IconController/registrarRol",
-            type: "POST",
-            enctype: 'multipart/form-data',
-            dataType: "json",
-            data: {
-
-                "nombre": $("#icono_name").val(),
-                    "descripcion": $("#descrip").val(),
-                    "userfile": $("#imagen").val()
-            },
-            beforeSend: function () {
-                $.alert({
-                            type: 'blue',
-                            icon: 'glyphicon glyphicon-warning',
-                            title: 'Advertencia!',
-                            content: 'Ya existe un Rol con el mismo nombre',
-                        });
-            },
-            success: function (data) {
-               
-$.alert({
-                            type: 'green',
-                            icon: 'glyphicon glyphicon-warning',
-                            title: 'Advertencia!',
-                            content: 'Ya existe un Rol con el mismo nombre',
-                        });
-            },
-            error: function (response) {
-                $.alert({
-                            type: 'orange',
-                            icon: 'glyphicon glyphicon-warning',
-                            title: 'Advertencia!',
-                            content: 'Ya existe un Rol con el mismo nombre',
-                        });
-            }
-        });
-
-
-       /* $.post("RolController/registrarRol",
-                {
-                    "nombre": $("#rol_name").val(),
-                    "descripcion": $("#descripcion").val(),
-                    "userfile": $("#encargado").val()
-
-                },
-                function (data) {
-
-                    if (data == "exist") {
-                        $.alert({
-                            type: 'orange',
-                            icon: 'glyphicon glyphicon-warning',
-                            title: 'Advertencia!',
-                            content: 'Ya existe un Rol con el mismo nombre',
-                        });
-                    } else {
-
-                        if (data) {
-                            $.alert({
-                                type: 'green',
-                                icon: 'glyphicon glyphicon-ok',
-                                title: 'Exito!',
-                                content: 'Rol Registrado',
-                            });
-
-                            $("#rol_name").val("");
-                            $("#descripcion").val("");
-                            $("#encargado").val("");
-
-                            cargarRoles();
-                            $('#modalRegistroRol').modal('hide');
-
-                        } else {
-                            $.alert({
-                                type: 'red',
-                                icon: 'glyphicon glyphicon-ok',
-                                title: 'Error!',
-                                content: 'Rol NO Registrado',
-                            });
-                            $('#modalRegistroRol').modal('hide');
-                        }
-                    }
-
-                }, "json");*/
-
-
-    } else {
-        $.alert({
-            title: 'Error!',
-            content: 'Diligencie todos los campos',
-        });
-    }
-
-}
-
-function verRol(id_rol) {
-    $.post("IconController/consultarRolId", ///consulta los datos del proceso por ID
+/**
+*Extrae la informacion de la base de datos a traves del controlador 
+*del icono y los plasma en la modal
+**/
+function verIcono(id_icono) {
+    $.post("IconController/consultarIconoId", ///consulta los datos del proceso por ID
             {
-                "id_rol": id_rol
+                "id_icono": id_icono
             },
             function (data) {
-                $("#rol_name_view").val(data.nombre); //setea los Txt con los datos de la BD
+                $("#icono_name_view").val(data.nombre); //setea los Txt con los datos de la BD
                 $("#descripcion_view").val(data.descripcion);
                  var html = '';
                 
@@ -233,22 +112,26 @@ function verRol(id_rol) {
 
 
                 ///carga la modal
-                $("#modalVerRol").modal();
+                $("#modalVerIcono").modal();
             }, "json");
 
 }
-
-function actualizarIcono(id_rol) {
-    idR = id_rol;
-    $.post("IconController/consultarRolId", ///consulta los datos del proceso por ID
+/**
+*Funcion que obtiene los datos del icono 
+*a actualizar y los pone en la ventana
+*modal
+**/
+function actualizarIcono(id_icono) {
+    idI= id_icono;
+    $.post("IconController/consultarIconoId", ///consulta los datos del proceso por ID
             {
-                "id_rol": id_rol
+                "id_icono": id_icono
             },
             function (data) {
 
                 $("#icono_name_edit").val(data.nombre); //setea los Txt con los datos de la BD
                 $("#descrip_edit").val(data.descripcion);
-                $("#id_edit").val(idR);
+                $("#id_edit").val(idI);
                 $("#dir_edit").val(data.direccion);
                 var html = '';
                 
@@ -256,56 +139,22 @@ function actualizarIcono(id_rol) {
                     $("#encargado_edit").html(html);
                     $("#encargado_edit").show();
                 ///carga la modal
-                $("#modalActualizarRol").modal();
+                $("#modalActualizarIcono").modal();
             }, "json");
 
-}
-
-function ActualizarR() {
-    $.post("RolController/actualizarRol",
-            {
-                "nombre": $("#rol_name_edit").val(),
-                "descripcion": $("#descripcion_edit").val(),
-                "encargado": $("#encargado_edit").val(),
-                "id_rol": idR
-            },
-            function (data) {
-                
-                if (data) {
-                    $.alert({
-                        type: 'green',
-                        icon: 'glyphicon glyphicon-ok',
-                        title: 'Exito!',
-                        content: 'Rol Actualizado',
-                    });
-
-                    $("#rol_name").val("");
-                    $("#descripcion").val("");
-                    $("#encargado").val("");
-
-                    cargarRoles();
-                    $('#modalActualizarRol').modal('hide');
-
-                } else {
-                    $.alert({
-                        type: 'red',
-                        icon: 'glyphicon glyphicon-ok',
-                        title: 'Error!',
-                        content: 'No se actualizo el rol',
-                    });
-                    $('#modalActualizarRol').modal('hide');
-                    cargarRoles();
-                }
-            }, "json");
 }
 
 /*
- * funcion que se comunica con el controlador enviandolo el identificador del rol
+ * funcion que se comunica con el controlador enviando el identificador del Icono
  * para poder eliminar los datos de la base de datos.
  * retorna un resultado JSON de si el valor fue eliminado.
  */
+ /**
+ *Realiza la llamada al controlador para eliminar un icono
+ *en caso de que se le de aceptar
+ **/
 
-function eliminarIcono(id_rol) {
+function eliminarIcono(id_icono) {
 
     $.confirm({
         type: 'orange',
@@ -314,12 +163,12 @@ function eliminarIcono(id_rol) {
         content: 'Desea eliminar el Icono ?',
         buttons: {
             aceptar: function () {
-                $.post("IconController/eliminarRol",
+                $.post("IconController/eliminarIcono",
                         {
-                            "id_rol": id_rol
+                            "id_icono": id_icono
                         },
                         function (data) {
-                            cargarRoles();
+                            cargarIconos();
                         }, "json");
 
             },
@@ -344,48 +193,62 @@ function isValid_txt(str) {
  * funcion que valida los datos en las ventanas modales, retornando una bandera de tipo boolean 
  * @returns {Boolean} 
  */ 
-function validarDatos(algo) {
+function validarDatos(algo) 
+{
 
     var band = true;
     var vacios = false;
     var caract = false;
     var longi = false;    
 
-    if ($("#icono_name").val() == "") {
+    if ($("#icono_name").val() == "") 
+    {
         $("#icono_name").focus();
         $(".error").fadeIn();
         band = false;
         vacios = true;
     }
     
-    if (!isValid_txt($("#icono_name").val())) {
+    if (!isValid_txt($("#icono_name").val())) 
+    {
         $("#icono_name").focus();
         $(".error").fadeIn();
         band = false;
         caract = true;
     }
-        if ($("#icono_name").val().length > 50) {
+    if ($("#icono_name").val().length > 20) 
+    {
         
         $(".error").fadeIn();
         band = false;
         longi = true;
     }
 
-    if ($("#descrip").val() == "") {
+    if ($("#descrip").val() == "") 
+    {
 
         $("#descrip").focus();
         $(".error").fadeIn();
         band = false;
         vacios = true;
     }
-        if ($("#descrip").val().length > 250) {
+    if (!isValid_txt($("#descrip").val())) 
+    {
+        $("#descrip").focus();
+        $(".error").fadeIn();
+        band = false;
+        caract = true;
+    }
+    if ($("#descrip").val().length > 40) 
+    {
         
         $(".error").fadeIn();
         band = false;
         longi = true;
     }
 
-    if ($("#imagen").val() == "") {
+    if ($("#imagen").val() == "") 
+    {
         $("#imagen").focus();
         $(".error").fadeIn();
         band = false;
@@ -397,7 +260,7 @@ function validarDatos(algo) {
                             type: 'red',
                             icon: 'glyphicon glyphicon-warning',
                             title: 'Advertencia!',
-                            content: 'El nombre no permite caracteres invalidos',
+                            content: 'El Nombre o Descripcion no permiten caracteres invalidos',
                         });
     }
     if(vacios)
@@ -415,46 +278,59 @@ function validarDatos(algo) {
                             type: 'red',
                             icon: 'glyphicon glyphicon-warning',
                             title: 'Advertencia!',
-                            content: 'Longitud excede max permitido Nombre 50 y Descripcion 250',
+                            content: 'Longitud excede max permitido Nombre 20 y Descripcion 40',
                         });
     }
     return band;
 }
-function validarDatosAct(algo) {
+function validarDatosAct(algo) 
+{
 
     var band = true;
     var vacios = false;
     var caract = false;
     var longi = false;    
 
-    if ($("#icono_name_edit").val() == "") {
+    if ($("#icono_name_edit").val() == "") 
+    {
         $("#icono_name_edit").focus();
         $(".error").fadeIn();
         band = false;
         vacios = true;
     }
     
-    if (!isValid_txt($("#icono_name_edit").val())) {
+    if (!isValid_txt($("#icono_name_edit").val())) 
+    {
         $("#icono_name_edit").focus();
         $(".error").fadeIn();
         band = false;
         caract = true;
     }
-        if ($("#icono_name_edit").val().length > 50) {
+    if ($("#icono_name_edit").val().length > 20) 
+    {
         
         $(".error").fadeIn();
         band = false;
         longi = true;
     }
 
-    if ($("#descrip_edit").val() == "") {
+    if ($("#descrip_edit").val() == "") 
+    {
 
         $("#descrip_edit").focus();
         $(".error").fadeIn();
         band = false;
         vacios = true;
     }
-        if ($("#descrip_edit").val().length > 250) {
+    if (!isValid_txt($("#descrip_edit").val())) 
+    {
+        $("#descrip_edit").focus();
+        $(".error").fadeIn();
+        band = false;
+        caract = true;
+    }
+    if ($("#descrip_edit").val().length > 40) 
+    {
         
         $(".error").fadeIn();
         band = false;
@@ -467,7 +343,7 @@ function validarDatosAct(algo) {
                             type: 'red',
                             icon: 'glyphicon glyphicon-warning',
                             title: 'Advertencia!',
-                            content: 'El nombre no permite caracteres invalidos',
+                            content: 'El Nombre o Descripcion no permiten caracteres invalidos',
                         });
     }
     if(vacios)
@@ -476,7 +352,7 @@ function validarDatosAct(algo) {
                             type: 'red',
                             icon: 'glyphicon glyphicon-warning',
                             title: 'Advertencia!',
-                            content: 'Nombre y descripcion son obligatorios',
+                            content: 'Nombre y Descripcion son obligatorios',
                         });
     }
     if(longi)
@@ -485,7 +361,7 @@ function validarDatosAct(algo) {
                             type: 'red',
                             icon: 'glyphicon glyphicon-warning',
                             title: 'Advertencia!',
-                            content: 'Longitud excede max permitido Nombre 50 y Descripcion 250',
+                            content: 'Longitud excede max permitido Nombre 20 y Descripcion 40',
                         });
     }
     return band;
