@@ -37,7 +37,9 @@
 
 </head>
 <body>
-
+<script type="text/javascript">
+    var urll='<?php echo base_url();?>iconos/';
+</script>
 
 <form role="form"  action="<?php echo base_url('Controlador/lienzo')?>" method="post">
 <div id="container" style="width: 100%; padding: 1%;">

@@ -61,7 +61,7 @@
 					</div>
 
 					<div class="container-login100-form-btn m-t-20">
-                                            <button class="login100-form-btn" type="submit" onclick="login_user()">
+                                            <button class="login100-form-btn" type="submit" onclick="login_user('<?php echo base_url();?>Login/login_user')">
 							Ingresar
 						</button>
 					</div>
@@ -95,9 +95,9 @@
 
 <script>
 
-    function login_user() {
+    function login_user(urll) {
         $.ajax({
-            url: "http://localhost/levantamientorequisitos/Login/login_user",
+            url: urll,
             type: "POST",
             dataType: "json",
             data: {

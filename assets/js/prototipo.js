@@ -20,11 +20,11 @@
     element.appendChild(divs);
     imgs.className="ui-widget-header";
     if(opcion==1)
-      imgs.src="http://localhost/levantamientorequisitos/iconos/circulo.png";
+      imgs.src=urll+"circulo.png";
     else if(opcion==2)
-      imgs.src="http://localhost/levantamientorequisitos/iconos/cuadrado.png";
+      imgs.src=urll+"cuadrado.png";
     else if(opcion==3)
-      imgs.src="http://localhost/levantamientorequisitos/iconos/triangulo.png";
+      imgs.src=urll+"triangulo.png";
     //imgs.title=""+segundos;
     divs.id=""+segundos;
     divs.setAttribute('onclick','borrar(this.id)');
@@ -48,13 +48,13 @@
     element.appendChild(divs);
     imgs.className="ui-widget-header";
     if(opcion==1)
-      imgs.src="http://localhost/levantamientorequisitos/iconos/check.png";
+      imgs.src=urll+"check.png";
     else if(opcion==2)
-      imgs.src="http://localhost/levantamientorequisitos/iconos/llave.png";
+      imgs.src=urll+"llave.png";
     else if(opcion==3)
-      imgs.src="http://localhost/levantamientorequisitos/iconos/lock.png";
+      imgs.src=urll+"lock.png";
     else if(opcion==4)
-      imgs.src="http://localhost/levantamientorequisitos/iconos/corazon.png";
+      imgs.src=urll+"corazon.png";
     imgs.title="etiqueta"+"\n"+"encargado";
     divs.id=""+segundos;
     divs.setAttribute('onclick','borrar(this.id)');
@@ -152,12 +152,12 @@ alert('Element is ' + tamanio + ' vertical pixels from <body>');
   
   if(borrador==-1)
   {
-      document.getElementById("sel").innerHTML = "Seleccion NoRMaL!!!!";
+      document.getElementById("sel").innerHTML = "Seleccion Normal";
       //element.src="basura.png";   
   }
   else
   {
-      document.getElementById("sel").innerHTML = "Seleccion BOrRAdOR!!!!";
+      document.getElementById("sel").innerHTML = "Seleccion BOrrador!!!!";
       //element.src="basura2.png";
   }
   borrador=borrador*-1;

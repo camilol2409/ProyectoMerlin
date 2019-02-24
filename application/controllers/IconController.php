@@ -62,7 +62,7 @@ class IconController extends CI_Controller {
          * @version   1.0                 
     */ 
     function registrarIcono() {
-
+        $urll="".base_url()."IconController";
         $nombre =  $_REQUEST['icono_name'];
         $descripcion = $_REQUEST['descrip'];
         $auto=time();
@@ -95,9 +95,10 @@ class IconController extends CI_Controller {
         }
         if($registrado)
         {
+
             echo '<script type="text/javascript"> 
             alert ("Icono guardado correctamente");
-                    location.href = "http://localhost/levantamientorequisitos/IconController"; 
+                    location.href ="',$urll,'"; 
                  
                  </script>';
         }
@@ -105,7 +106,7 @@ class IconController extends CI_Controller {
         {
                         echo '<script type="text/javascript"> 
                                 alert (" No se pudo guardar el icono ',$this->upload->display_errors(),'");
-                                location.href = "http://localhost/levantamientorequisitos/IconController"; 
+                                location.href ="',$urll,'";  
                               </script>';
         }
         
@@ -239,7 +240,7 @@ class IconController extends CI_Controller {
         {
             echo '<script type="text/javascript"> 
             alert ("Icono actualizado correctamente");
-                    location.href = "http://localhost/levantamientorequisitos/IconController"; 
+                    location.href ="',$urll,'"; 
                  
                  </script>';
         }
@@ -247,7 +248,7 @@ class IconController extends CI_Controller {
         {
                         echo '<script type="text/javascript"> 
                                 alert (" No se pudo actualizar el icono ',$errores,'");
-                                location.href = "http://localhost/levantamientorequisitos/IconController"; 
+                                location.href ="',$urll,'"; 
                  
                             </script>';
         }
