@@ -159,7 +159,7 @@
 
 
 
-                  <button type="button" class="btn btn-danger btn-default pull-left" onclick="location.href = 'http://localhost/levantamientorequisitos/ProcesoController'""><span class="glyphicon glyphicon-remove"></span> Salir</button>
+                  <button type="button" class="btn btn-danger btn-default pull-left" onclick="location.href = '<?php echo base_url();?>ProcesoController'""><span class="glyphicon glyphicon-remove"></span> Salir</button>
                     <!--boton que invoca a una funcion proceso.js la cual crea un nuevo proceso-->
                     <button type="button" class="btn btn-primary btn-default pull-rigth" onclick="guardar()"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
 

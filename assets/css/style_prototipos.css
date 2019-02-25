@@ -22,37 +22,6 @@
   border: 1px #333333 solid;
   border-radius: 8px;
 }
-style_prototipos.css
-Anteriormente este mes
-7 feb.
-J
-Has subido un elemento
-Hoja de estilo
-style_prototipos.css
-#prototipo_container {
-  width: 80%;
-  margin-left: 10%;
-  border: 1px #333333 solid;
-  border-radius: 15px;
-  height: 500px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.left-bar {
-  flex: 0 0 15%;
-  margin: 10px 0 0 10px;
-  border: 1px #333333 solid;
-  border-radius: 8px;
-}
-
-.r-bar {
-  flex: 0 0 15%;
-  margin: 20px 0 0 720px;
-  border: 1px #333333 solid;
-  border-radius: 8px;
-}
 .reformable 
 { 
   width: 99px; height: 100px; 
