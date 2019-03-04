@@ -9,6 +9,7 @@ class PrototipoController extends CI_Controller {
         parent::__construct();
         $this->load->model('Proceso_model');
         $this->load->model('Icon_model');
+        $this->load->model('Lienzo_model');
     }
 
     function show($id) {
@@ -20,6 +21,7 @@ class PrototipoController extends CI_Controller {
             $login["apellido"]=$this->session->userdata('apellido');
             $login["email"]=$this->session->userdata('email');
             $login["login"]=$this->session->userdata('login');
+            $login['id'] = $id;
             $proceso = $this->Proceso_model->proceso_Id($id); 
             //$iconos=$this->$this->Icon_model->getIcon();   
             $login["proceso"] = $proceso;
@@ -29,5 +31,10 @@ class PrototipoController extends CI_Controller {
         }else{
             $this->load->view('login');
         }
+    }
+
+    function save($id) {
+        echo($id);
+        echo(var_dump($this->input->post()));
     }
 }

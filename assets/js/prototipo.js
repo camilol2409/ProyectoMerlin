@@ -1,5 +1,3 @@
-    
-
  var tiempo=new Date();
  var segundos=tiempo.getTime();
  var borrador=1;
@@ -16,7 +14,7 @@
     var imgs = document.createElement("img");
     var divs = document.createElement("div");
     divs.className="ui-widget-content reformable";
-    var element = document.getElementById("division1");
+    var element = document.getElementById("contenido_lienzo");
     element.appendChild(divs);
     imgs.className="ui-widget-header";
     if(opcion==1)
@@ -33,8 +31,6 @@
     $( ".reformable" ).resizable();
     $( ".reformable" ).draggable();
     segundos=segundos+1;
-    
-
  }
 
 
@@ -44,7 +40,7 @@
     var imgs = document.createElement("img");
     var divs = document.createElement("div");
     divs.className="ui-widget-content movible";
-    var element = document.getElementById("division1");
+    var element = document.getElementById("contenido_lienzo");
     element.appendChild(divs);
     imgs.className="ui-widget-header";
     if(opcion==1)
@@ -164,35 +160,83 @@ alert('Element is ' + tamanio + ' vertical pixels from <body>');
     
 
  }
-function guardar()
+function obtenerEstadoActualPagina()
 {
-    var listado="";
-    var a =document.getElementById('division1').getElementsByTagName('div');
-    var bodyRect = document.body.getBoundingClientRect();
-    for (var i=0; i < a.length; i++ )
-    {
-          
-          if(a[i].firstChild)
-          {
-            listado=listado+"*";
-            var elemRect = a[i].getBoundingClientRect(),
-            pathh=a[i].firstChild.src,
-            x   = elemRect.left - bodyRect.left,
-            y   = elemRect.top - bodyRect.top,
-            ancho=elemRect.width,
-            alto=elemRect.height;
-            arraysource=pathh.split("/");
-            source=arraysource[arraysource.length-1];
-            listado=listado+source+'/';
-            listado=listado+ancho+'/'+alto+'/'+x+'/'+y;
-            if(a[i].firstChild.title)
-              listado=listado+'+'+a[i].firstChild.title;
-            
-
-
-            
-          }
-    
-    }
-          alert(listado);
+  var listaElementos = [];
+  var listado="";
+  
+  console.log('Hay ' + $('#contenido_lienzo > div').length + ' elementos');
+  htmlElements = $('#contenido_lienzo > div')
+  for (let index = 0; index < htmlElements.length; index++) {
+    const element = $(htmlElements[index]);
+    const img = element.find('img');
+    elemento = { 
+      source: img.attr('src'),
+      width: element.css('width'),
+      height: element.css('height'),
+      left: element.css('left'),
+      top: element.css('top')
+    };
+    listaElementos.push(elemento);
+  }
+  return listaElementos;
 }
+
+function changePage(pageNumber) {
+  if ($.pagina_actual != pageNumber) {
+    var estado = obtenerEstadoActualPagina();
+    $.estado_actual[$.pagina_actual] = estado;
+    $("#page_list .page-element.bg-primary").removeClass('bg-primary');
+    $($('#page_list .page-element')[pageNumber - 1]).addClass('bg-primary');
+    $('#contenido_lienzo').html('');
+    repaint(pageNumber);
+    $.pagina_actual = pageNumber;
+  }
+}
+
+function addPage() {
+  // TODO: obtener el estado actual y guardarlo
+  var estado = obtenerEstadoActualPagina();
+  var currentPage = $.pagina_actual;
+  $.estado_actual[currentPage] = estado;
+  currentPage++;
+  $('#page_list').append('<div class = "col page-element" onclick = "changePage('+ currentPage +')"><p> Página '+ currentPage +'</p></div>')
+  $.pagina_actual = currentPage;
+  // Seleccionar la nueva página
+  $("#page_list .page-element.bg-primary").removeClass('bg-primary')
+  $("#page_list .page-element:last-child").addClass('bg-primary')
+  // Limpiar el lienzo
+  $('#contenido_lienzo').html('');
+}
+
+function repaint(pageNumber) {
+  var elementos = $.estado_actual[pageNumber];
+  elementos.forEach(element => {
+    var newElement = $('<div></div>');
+    newElement.css('width', element.width);
+    newElement.css('height', element.height);
+    newElement.css('left', element.left);
+    newElement.css('top', element.top);
+    newElement.css('position', 'absolute');
+    imgElement = $('<img/>');
+    imgElement.attr('src', element.source);
+    newElement.append(imgElement);
+    newElement.draggable();
+    newElement.resizable();
+    $('#contenido_lienzo').append(newElement);
+  });
+}
+
+function guardar(base_url, lienzo_id) {
+  // Capturar estado actual antes de enviar
+  $.estado_actual[$.pagina_actual] = obtenerEstadoActualPagina();
+  $.post(base_url + '/PrototipoController/save/' + lienzo_id, $.estado_actual)
+    .done(function (data) {
+      
+    });
+}
+
+$(document).ready(function() {
+  $.pagina_actual = 1;
+  $.estado_actual = {};
+});

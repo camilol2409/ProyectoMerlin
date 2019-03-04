@@ -16,6 +16,46 @@
   border-radius: 8px;
 }
 
+.right-bar {
+  flex: 0 0 15%;
+  margin: 10px 0 0 10px;
+  border: 1px #333333 solid;
+  border-radius: 8px;
+}
+
+#contenido_lienzo {
+  flex: 1 0 0;
+}
+
+#contenedor_lienzo {
+  display: flex;
+  flex-direction: row;
+  border: 1px #333333 solid;
+  border-radius: 8px;
+  height: 500px;
+  align-items: center;
+}
+
+.footer {
+  border-top: 1px solid #dee2e6;
+  position: fixed;
+  bottom: 15px;
+}
+
+#page_list {
+  font-size: 1.8em;
+}
+
+.page-element {
+  border-bottom: 1px solid #dee2e6;
+  cursor: pointer;
+}
+
+.header {
+  height: 55px;
+  padding-top: 10px;
+}
+
 .r-bar {
   flex: 0 0 15%;
   margin: 20px 0 0 720px;
