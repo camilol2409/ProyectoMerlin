@@ -5,28 +5,11 @@
 <!--hoja de estilos para los roles.-->
 <link rel="stylesheet" href="assets/css/style_roles.css">
 <!--archivo .js donde hace los llamados al controlador y las validaciones-->
-<script src="assets/js/roles.js"></script>
+<script src="assets/js/rolGeneral.js"></script>
 
 <div id="rol">
-     <table class="table ">
-            <td>
-            <form action="CaracteristicaController">
-                <button type="submit"  class="form-control btn btn-info" id="btnPreguntas"><span class="glyphicon glyphicon-question-sign"></span> Características y preguntas</button>
-            </form>
-                </td>
-                <td>
-                    <form action="IconController">
-                <button type="submit"  class="form-control btn btn-info" id="btnIconos"><span class="glyphicon glyphicon-picture"></span> Iconos</button>
-            </form>
-                </td>
-                <td>
-                    <form action="RolController">
-                <button type="submit"  class="form-control btn-primary" id="btnRoles"><span class="glyphicon glyphicon-user"></span> Roles</button>
-            </form>
-            </td>
-        </table> 
     <?php if ($this->session->userdata('tipo')!=3) { 
-        echo '<h2>GESTIÓN DE ROLES DEL PROCESO</h2>';
+        echo '<h2>GESTIÓN DE ROLES DEL NEGOCIO</h2>';
         echo '<button type="button" class="btn btn-primary" id="btnAdd" onclick="nuevoRol();"><span class="glyphicon glyphicon-plus"></span> Nuevo Rol</button>';
         } 
         else{ 
@@ -38,22 +21,18 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Descripción</th>                
-                <th>Encargado</th>
+                <th>Descripción</th>
                 <th>Acción</th>
-
             </tr>
         </thead>
         <tfoot>
             <tr>              
                 <th>Nombre</th>
-                <th>Descripción</th>                
-                <th>Encargado</th>
+                <th>Descripción</th>
                 <th>Acción</th>
             </tr>
         </tfoot>
         <tbody>
-
         </tbody>
     </table>
 
@@ -73,16 +52,18 @@
                     <form role="form">
                         <div class="form-group">
                             <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del Rol</label><span id="require">*</span><span id="error"></span>
-                            <input type="text" class="form-control" id="rol_name" placeholder="Nombre del Rol">
+                            <input type="text" class="form-control" id="nombre_rol_negocio" placeholder="Nombre del Rol">
                         </div>
                         <div class="form-group">
                             <label for="descripcion"><span class="glyphicon glyphicon-sort-by-order"></span> Descripción del Rol</label><span id="require">*</span><span id="error"></span>
-                            <textarea placeholder="Descripción"  class="form-control" id ="descripcion" ></textarea> 
+                            <textarea placeholder="Descripción"  class="form-control" id ="descripcion_rol_negocio" ></textarea> 
                         </div>
+                        <!--
                         <div class="form-group">
                             <label for="encargado"><span class="glyphicon glyphicon-flag"></span> Encargado</label><span id="require">*</span><span id="error"></span>
                             <input type="text" class="form-control" id="encargado" placeholder="Encargado">
                         </div>
+                    -->
 
 
 <!--button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-ok"></span> Registrar</button-->
@@ -108,23 +89,26 @@
             <div class="modal-content">
                 <div class="modal-header" style="padding:35px 50px;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4><span class="glyphicon glyphicon-plus"></span> Infomación de roles</h4>
+                    <h4><span class="glyphicon glyphicon-plus"></span> Información de roles</h4>
                 </div>
                 <div class="modal-body" style="padding:40px 50px;">
                     <form role="form">
                         <div class="form-group">
                             <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del Rol</label>
-                            <input type="text" class="form-control" id="rol_name_view" placeholder="Nombre del Rol" readonly="readonly">
+                            <input type="text" class="form-control" id="nombre_rol_negocio_view" placeholder="Nombre del Rol" readonly="readonly">
                         </div>
                         <div class="form-group">
                             <label for="descripcion"><span class="glyphicon glyphicon-flag"></span> Area del proceso</label>
-                            <input type="text" class="form-control" id="descripcion_view" placeholder="Descripcion" readonly="readonly">
+                            <input type="text" class="form-control" id="descripcion_rol_negocio_view" placeholder="Descripcion" readonly="readonly">
                         </div>
 
+<!--
                         <div class="form-group">
                             <label for="encargado"><span class="glyphicon glyphicon-user"></span> Encargado del Rol</label>
                             <input type="text" class="form-control" id="encargado_view" placeholder="Encargado" readonly="readonly">
                         </div>
+                    
+-->
 
 <!--button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-ok"></span> Registrar</button-->
                     </form>
@@ -153,17 +137,19 @@
                     <form role="form">
                         <div class="form-group">
                             <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del Rol</label>
-                            <input type="text" class="form-control" id="rol_name_edit" placeholder="Nombre del Rol">
+                            <input type="text" class="form-control" id="nombre_rol_negocio_edit" placeholder="Nombre del Rol">
                         </div>
                         <div class="form-group">
                             <label for="descripcion"><span class="glyphicon glyphicon-flag"></span> Descripcion del Rol</label>
-                            <input type="text" class="form-control" id="descripcion_edit" placeholder="Descripcion">
+                            <input type="text" class="form-control" id="descripcion_rol_negocio_edit" placeholder="Descripcion">
                         </div>
 
+                        <!--
                         <div class="form-group">
                             <label for="encargado"><span class="glyphicon glyphicon-user"></span> Encargado del Rol</label>
                             <input type="text" class="form-control" id="encargado_edit" placeholder="Encargado">
                         </div>
+                    -->
 
 <!--button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-ok"></span> Registrar</button-->
                     </form>

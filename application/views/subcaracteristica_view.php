@@ -10,16 +10,38 @@
 
 <div id="subcaract">
     
-    <h2>SUBCARACTERISTICAS</h2>
-    <?php if ($this->session->userdata('tipo')==1) {
-           echo '<button type="button" class="btn btn-primary" id="btnAdd" onclick="nuevaSubcaracteristica();"><span class="glyphicon glyphicon-plus"></span> Nueva Subcaracteristica</button>';
-       }
-       else{
-           
-       }
-        
-    ?>
-    
+
+<table class="table ">
+            <td>
+            <form action="PreguntasController">
+                <button type="submit"  class="form-control btn-primary" id="btnPreguntas"><span class="glyphicon glyphicon-question-sign"></span> Subcaracterísticas y preguntas</button>
+            </form>
+                </td>
+                <td>
+                    <form action="IconController">
+                <button type="submit"  class="form-control btn btn-info" id="btnIconos"><span class="glyphicon glyphicon-picture"></span> Iconos</button>
+            </form>
+                </td>
+                <td>
+                    <form action="RolController">
+                <button type="submit"  class="form-control btn btn-info" id="btnRoles"><span class="glyphicon glyphicon-user"></span> Roles</button>
+            </form>
+            </td>
+        </table>
+
+    <h2>CARACTERÍSTICAS Y PREGUNTAS</h2>
+
+    <td>
+        <form>
+        <button button type="button" class="btn btn-warning btn-sm" id="btnAtras" onclick="history.back();"><span class="glyphicon glyphicon-circle-arrow-left"></span> Atrás</button>
+        </form>
+        <form>
+        <!--<button type="button"  id="btnAtras"><span class="glyphicon glyphicon-circle-arrow-left btn btn-primary" onclick="history.back();"></span></button> -->
+        <button button type="button" class="btn btn-primary" id="btnAdd" onclick="nuevaSubcaracteristica();"><span class="glyphicon glyphicon-plus"></span> Nueva Subcaracteristica</button>
+    </form>
+
+    </td>
+
     <!-- tabla donde se muestran todos los registros que se traen de la base de datos por medio del controlador-->
     <table id="tablaSubcaract" class="table table-striped table-bordered">
         <thead>
