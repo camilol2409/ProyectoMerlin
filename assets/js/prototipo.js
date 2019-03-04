@@ -5,11 +5,8 @@
  var borrador=1;
 
  
-  /*$( function() {
-    $( ".reformable" ).resizable();
-    $( ".reformable" ).draggable();
-  } );
- */
+  
+ 
  function imagenes(opcion)
  {
     var i=1;
@@ -30,9 +27,29 @@
     divs.setAttribute('onclick','borrar(this.id)');
     divs.appendChild(imgs);
 
-    $( ".reformable" ).resizable();
-    $( ".reformable" ).draggable();
+    $( ".reformable" ).resizable(
+      {
+        minWidth: 50
+      }
+      );
+    $( ".reformable" ).resizable(
+      {
+        minHeight: 50
+      }
+      );
+    $( ".reformable" ).resizable(
+      {
+        maxWidth: 500
+      }
+      );
+    $( ".reformable" ).resizable(
+      {
+        maxHeight: 500
+      }
+      );
+    $( ".reformable" ).draggable({ containment: [316,62,935,461] });
     segundos=segundos+1;
+    //$( ".reformable" ).draggable({ containment: "r-bar" });
     
 
  }
@@ -152,12 +169,12 @@ alert('Element is ' + tamanio + ' vertical pixels from <body>');
   
   if(borrador==-1)
   {
-      document.getElementById("sel").innerHTML = "Seleccion Normal";
+      document.getElementById("borrador").style.color = "steelblue";
       //element.src="basura.png";   
   }
   else
   {
-      document.getElementById("sel").innerHTML = "Seleccion BOrrador!!!!";
+      document.getElementById("borrador").style.color = "red";
       //element.src="basura2.png";
   }
   borrador=borrador*-1;
@@ -195,4 +212,33 @@ function guardar()
     
     }
           alert(listado);
+
+
+/////////////////////////
+    $.post("ProcesoController/guardarPrototipo", ///consulta los datos del proceso al controldor
+            {   
+                //parametro enviado por POST
+                 "prototipo":listado,
+                 "idproceso":pid
+            },
+            function (data) {
+                //el JSON enviado por el controlador como respuesta
+               if (data) {
+                            $.alert({
+                                type: 'green',
+                                icon: 'glyphicon glyphicon-ok',
+                                title: 'Exito!',
+                                content: 'Prototipo Guardado',
+                            });
+
+                          
+                        } 
+
+            }, "json");
+
+
+
+
+
+/////////////////////////          
 }

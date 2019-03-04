@@ -88,7 +88,7 @@ class Proceso_model extends CI_Model {
      */
     function proceso_Id($id_pro) {
         //creamos la consulta y hacemor un inner join con la tabla role para obtener la informacion perteneciente al proceso
-        $this->db->select('P.nombre, P.descripcion, P.prioridad, P.orden_secuencia, P.idproceso, R.nombre rol, P.id_role');
+        $this->db->select('P.nombre, P.descripcion, P.prioridad, P.orden_secuencia, P.idproceso, R.nombre rol, P.id_role, P.prototipo');
         $this->db->where("idproceso", $id_pro);
         $this->db->from('proceso P');
         $this->db->join('role R','P.id_role = R.idrole');
@@ -113,6 +113,18 @@ class Proceso_model extends CI_Model {
          * creamos la consulta y le pasamos como parametros de entrada el nombre del campo 
          * por el cual se desea actualizar y los datos que quermos actualizar enviados desde el controlador
          */
+        $this->db->where("idproceso", $id);
+        $this->db->update('proceso', $data);
+       
+        if ($this->db->affected_rows()) { //si realizo la actualizacion de forma correcta, retorna verdadero al controlador
+            return true;
+        } else {
+            //si no se actualizaron los datos, retorna falso al controlador
+            return false;
+        }
+    }
+    function actualizarPrototipo($data, $id) {
+  
         $this->db->where("idproceso", $id);
         $this->db->update('proceso', $data);
        

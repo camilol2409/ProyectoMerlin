@@ -21,8 +21,12 @@ class PrototipoController extends CI_Controller {
             $login["email"]=$this->session->userdata('email');
             $login["login"]=$this->session->userdata('login');
             $proceso = $this->Proceso_model->proceso_Id($id); 
-            //$iconos=$this->$this->Icon_model->getIcon();   
-            $login["proceso"] = $proceso;
+            //$iconos=$this->$this->Icon_model->getIcon(); 
+            if($proceso->prototipo)
+                $login["prototipo"] = $proceso->prototipo;
+            else
+                $login["prototipo"] = '0';
+            $login["id"]=$id;
             //$login["iconos"] = $iconos;
             $this->load->view('prototipo_view', $login);
 

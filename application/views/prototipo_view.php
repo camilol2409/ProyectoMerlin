@@ -1,3 +1,7 @@
+  <?php 
+   echo $prototipo;
+
+   ?>
 <html lang="en">
 <head>
      <meta charset="utf-8">
@@ -39,6 +43,8 @@
 <body>
 <script type="text/javascript">
     var urll='<?php echo base_url();?>iconos/';
+    var pid='<?php echo ($id);?>';
+
 </script>
 
 <form role="form"  action="<?php echo base_url('Controlador/lienzo')?>" method="post">
@@ -48,7 +54,7 @@
             PROTOTIPO - PROCESO: 
         </p>
     </h4>
-    <p id="sel">Seleccion Normal!!!!</p>
+
 
 
     <div id="prototipo_container">
@@ -94,14 +100,14 @@
 
             <div class="text-center">
                 <a onclick="setBorrar()">
-                    <span class="mdi mdi-eraser" style="font-size: 2.5em;">
+                    <span id="borrador"class="mdi mdi-eraser" style="font-size: 2.5em;">
                     </span>
                 </a>
             </div>
 
             
         </div>
-        <div id="division1">
+        <div id="division1" >
             
         </div>
         <div class="r-bar">
@@ -204,6 +210,7 @@
             </div>
 
         </div>
+ 
 </div> 
 
 

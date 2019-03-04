@@ -353,6 +353,22 @@ class ProcesoController extends CI_Controller {
         //restorna el resultado a la vista.
         echo json_encode($result);
     }
+    function guardarPrototipo() {
+
+        //parametros de entrada desde la vista por medio de peticiones AJAX de tipo POST
+        $id = $this->input->post('idProceso');
+        $prototipo = $this->input->post('prototipo');
+
+        //se crea un arreglo con los nombres de las columnas de la tabla proceso para luego ser agregados a la base de datos.
+ 
+        $params['prototipo'] = $prototipo;
+        //invoca al metodo de la clase modelo, el cual actualiza los registros de un proceso en la base de datos
+        $result = $this->Proceso_model->actualizarPrototipo($params, $id);
+        //restorna el resultado a la vista.
+        echo json_encode($result);
+    }
+
+
 
     /*
      * metodo que es invocado desde la vista procesos y que sirve para consular en la clase Proceso_model 

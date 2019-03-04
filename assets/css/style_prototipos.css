@@ -22,10 +22,12 @@
   border: 1px #333333 solid;
   border-radius: 8px;
 }
+
 .reformable 
 { 
   width: 99px; height: 100px; 
   position:absolute;
+  
 }
 .movible
 { 
