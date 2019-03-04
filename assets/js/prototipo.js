@@ -153,7 +153,7 @@ $.confirm({
     offset   = elemRect.left - bodyRect.left,
     tamanio=elemRect.width;
 
-alert('Element is ' + tamanio + ' vertical pixels from <body>');
+    alert('Elemento borrador');
     element.parentNode.removeChild(element);
     
   }
@@ -196,7 +196,6 @@ alert('Element is ' + tamanio + ' vertical pixels from <body>');
         else
         {
           var pedazos3=pedazos2[0].split("/");
-          alert(pedazos3[2]);
           cargaricono(pedazos3[0],pedazos3[3],pedazos3[4],pedazos3[1],pedazos3[2]);
         }
 
