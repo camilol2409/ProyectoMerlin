@@ -42,6 +42,7 @@
     <body>
         <script type="text/javascript">
             var urll='<?php echo base_url();?>iconos/';
+            $.estado_desde_db = <?php echo($lienzo_encoded);?>
         </script>
 
         <div class = "container">

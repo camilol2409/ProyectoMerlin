@@ -22,9 +22,11 @@ class PrototipoController extends CI_Controller {
             $login["email"]=$this->session->userdata('email');
             $login["login"]=$this->session->userdata('login');
             $login['id'] = $id;
+            $lienzo_encoded = json_encode($this->Lienzo_model->load($id));
             $proceso = $this->Proceso_model->proceso_Id($id); 
             //$iconos=$this->$this->Icon_model->getIcon();   
             $login["proceso"] = $proceso;
+            $login['lienzo_encoded'] = $lienzo_encoded;
             //$login["iconos"] = $iconos;
             $this->load->view('prototipo_view', $login);
 
@@ -34,7 +36,6 @@ class PrototipoController extends CI_Controller {
     }
 
     function save($id) {
-        echo($id);
-        echo(var_dump($this->input->post()));
+        echo($this->Lienzo_model->create($this->input->post(), $id));
     }
 }

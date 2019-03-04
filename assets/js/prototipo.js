@@ -197,11 +197,12 @@ function changePage(pageNumber) {
 function addPage() {
   // TODO: obtener el estado actual y guardarlo
   var estado = obtenerEstadoActualPagina();
-  var currentPage = $.pagina_actual;
-  $.estado_actual[currentPage] = estado;
-  currentPage++;
-  $('#page_list').append('<div class = "col page-element" onclick = "changePage('+ currentPage +')"><p> Página '+ currentPage +'</p></div>')
-  $.pagina_actual = currentPage;
+  var currentNumber = $.numero_de_paginas;
+  $.estado_actual[$.pagina_actual] = estado;
+  currentNumber++;
+  $('#page_list').append('<div class = "col page-element" onclick = "changePage('+ currentNumber +')"><p> Página '+ currentNumber +'</p></div>')
+  $.pagina_actual = currentNumber;
+  $.numero_de_paginas = currentNumber;
   // Seleccionar la nueva página
   $("#page_list .page-element.bg-primary").removeClass('bg-primary')
   $("#page_list .page-element:last-child").addClass('bg-primary')
@@ -232,11 +233,42 @@ function guardar(base_url, lienzo_id) {
   $.estado_actual[$.pagina_actual] = obtenerEstadoActualPagina();
   $.post(base_url + '/PrototipoController/save/' + lienzo_id, $.estado_actual)
     .done(function (data) {
-      
+        alert('Estado guardado exitosamente');
     });
+}
+
+function groupBy(list, keyGetter) {
+  const map = new Map();
+  list.forEach((item) => {
+    const key = keyGetter(item);
+    const collection = map.get(key);
+    if (!collection) {
+      map.set(key, [item]);
+    } else {
+      collection.push(item);
+    }
+  });
+  return map;
 }
 
 $(document).ready(function() {
   $.pagina_actual = 1;
+  $.numero_de_paginas = 1;
   $.estado_actual = {};
+  grouped = groupBy($.estado_desde_db, element => element['numero']);
+  arr = Array.from(grouped.entries());
+  arr.forEach(el => {
+    el[1] = el[1].map(function (el2) {
+      return { top: el2.top, left: el2.left_position, width: el2.width, height: el2.height, source: el2.source };
+    });
+  });
+  $.estado_actual = arr.reduce(function(map, element) {
+    map[element[0]] = element[1];
+    return map;
+  }, {});
+  for (let i = 0; i < (arr.length - 1); i++) {
+    repaint($.pagina_actual);
+    addPage();
+  }
+  repaint($.pagina_actual);
 });
