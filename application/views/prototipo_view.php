@@ -159,7 +159,7 @@
 
 
 
-                  <button type="button" class="btn btn-danger btn-default pull-left" onclick="location.href = '<?php echo base_url();?>ProcesoController'""><span class="glyphicon glyphicon-remove"></span> Salir</button>
+                  <button type="button" class="btn btn-danger btn-default pull-left" onclick="confirmar()"><span class="glyphicon glyphicon-remove"></span> Salir</button>
                     <!--boton que invoca a una funcion proceso.js la cual crea un nuevo proceso-->
                     <button type="button" class="btn btn-primary btn-default pull-rigth" onclick="guardar()"><span class="glyphicon glyphicon-ok"></span> Guardar</button>
 
@@ -217,5 +217,20 @@
     //$.post("ProcesoController/listarProcesos");
     //alert("dfghjk");
  }
+</script>
+
+<script type="text/javascript">
+    function confirmar() {
+        //Mensaje a mostrar al usuario
+    var mensaje = confirm("¿Desea salir? Perderá todo el prototipo");
+    //Detectamos si el usuario acepto el mensaje
+    if (mensaje) {
+        location.href = '<?php echo base_url();?>ProcesoController'
+    }
+    //Detectamos si el usuario denegó el mensaje
+    else {
+    alert("¡Seguir editando el lienzo!");
+    }
+    }
 </script>
  
