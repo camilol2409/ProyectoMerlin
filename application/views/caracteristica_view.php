@@ -7,11 +7,6 @@
 <script src="assets/js/subcaracteristica.js"></script>
 <meta charset="utf-8">
 
-
-    
-
-
-
 <div id="info_caracteristica">
 
     <table class="table ">
@@ -31,9 +26,10 @@
             </form>
             </td>
         </table> 
+    <h2 style="text-align: center; margin-top: 40px;">CARACTERISTICAS Y PREGUNTAS</h2>
 
+    <br>
 
-    <h2 style="text-align: center; margin-top: 50px;">CARACTERISTICAS Y PREGUNTAS</h2>
     <?php if ($this->session->userdata('tipo')==3 || $this->session->userdata('tipo')==2) {
             echo '<div id="btns_accion">
                     
@@ -50,7 +46,6 @@
        }
         
     ?>
-    
 
     <table id="tabla_caracteristica" class="table table-striped table-bordered">
         <thead>

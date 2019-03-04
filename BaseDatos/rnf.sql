@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2018 a las 20:16:27
--- Versión del servidor: 10.1.31-MariaDB
--- Versión de PHP: 7.2.4
+-- Tiempo de generación: 02-03-2019 a las 17:16:18
+-- Versión del servidor: 10.1.37-MariaDB
+-- Versión de PHP: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -50,6 +50,19 @@ INSERT INTO `caracteristica` (`id`, `nombre`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `icono`
+--
+
+CREATE TABLE `icono` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `direccion` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(100) CHARACTER SET utf16 COLLATE utf16_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `interfaz`
 --
 
@@ -67,9 +80,10 @@ CREATE TABLE `interfaz` (
 --
 
 INSERT INTO `interfaz` (`id`, `nombre`, `descripcion`, `tipo`, `detalle_tipo`, `proceso`) VALUES
-(2, 'compras', 'se comunica con el proceso de compras', 1, 'automaticament e realiza su comunicacion ', 2),
-(11, 'iiiiiii', 'ppppp', 2, 'hiiiihihhhh', 5),
-(12, 'hhhhhhh', 'jjjjjjjjjjjjjjjjjjjjjj', 1, 'zzzzzzzzzzzzzzzzzzzzzzzzzz', 2);
+(2, 'Compras', 'se comunica con el proceso de compras', 1, 'automaticamente se realiza la comunicacion ', 2),
+(11, 'Prueba', 'Interfaz de prueba', 2, '', 5),
+(12, 'Prueba 1234', 'Descripción de la prueba denominada 1234', 1, '', 2),
+(13, 'Interfaz Prueba', 'Descripción de prueba', 3, 'Detalle de prueba', 11);
 
 -- --------------------------------------------------------
 
@@ -89,16 +103,18 @@ CREATE TABLE `normativa` (
 --
 
 INSERT INTO `normativa` (`idnormativa`, `idproceso`, `nombre`, `descripcion`) VALUES
-(1, 5, 'dssdfsdf', 'dsdfsdsaaaaaaaaaaaaaaaaaaaaxzfgfgg'),
-(2, 7, 'sdsds', 'ojojihihihihihoooooooooooooooooooooojojojojohhhhhhhhhhhhyyyyyyyyyyyyyyyyyyyyyyy'),
-(3, 2, 'cccccc', 'ccccczzzzzzzzzzzzakojaodqijjdjpojdoqdqdqjpodqjpdqjdqpjdqñodjdñajadñda'),
-(4, 3, 'norma', 'sasasaa'),
-(5, 5, 'aaaaa', 'aaaaaaaaaaaaa'),
-(6, 5, 'qqqqqqqqqqqqqqqqqqq', 'aaaazzzzzzzzzzzzz'),
-(7, 5, 'jojoojo', 'yiyiiyiyiyiyiyqtqe'),
-(8, 5, 'bbbbb', 'bbbb'),
-(9, 5, 'bbbb', 'agagag'),
-(10, 10, 'cccc', 'xxxx');
+(1, 5, 'ISO 29148', 'Ciclo de vida'),
+(2, 7, 'Iso 25010', 'Es una norma, denominada ISO 25010, se tienen en cuenta los RNF'),
+(3, 2, 'Norma Salud ', 'Resolución por medio de la cual se especifican los nombres de los procedimientos de salud que pueden ser realizados en Colombia.'),
+(4, 3, 'Norma Prueba', 'Prueba - MerlinApp RNF'),
+(5, 5, 'Iso 9001', 'Norma empleada en Calidad '),
+(6, 5, 'Iso 9000', 'Norma empleada en calidad'),
+(7, 5, 'Norma 15504', 'Se emplea para la mejora del proceso de Sw'),
+(8, 5, '27000', 'Norma que habla acerca de la seguridad'),
+(9, 5, 'Prueba', 'La descripción de la prueba'),
+(10, 10, 'Normatividad ', 'La normatividad debe ser cumplida'),
+(11, 11, 'Norma 9001', 'Esta descripción es una prueba'),
+(12, 11, 'Norma 9001111', 'Norma de prueba');
 
 -- --------------------------------------------------------
 
@@ -166,10 +182,10 @@ INSERT INTO `proceso` (`idproceso`, `nombre`, `descripcion`, `prioridad`, `orden
 (2, 'reclutamiento de personal', 'agregar nuevo personal a la empresa', 1, 7, 1),
 (3, 'comprar equipos', 'compra de dispositivos hardware', 3, 4, 1),
 (5, 'consultar certificados', 'verificar estado financiero de los aspirantess', 2, 1, 1),
-(6, 'comprar productos', 'aaa', 1, 6, 7),
 (7, 'comprar ups', 'compra para evitar que los equipos fallen cuando no hay energia', 1, 2, 7),
-(9, 'jojoojo', 'nojojdaojdaojdaojo', 1, 3, 1),
-(10, 'repartir cafe', 'joojajdojodauo', 2, 4, 11);
+(9, 'depuración de actividades', 'verificar las actividades ', 1, 3, 1),
+(10, 'repartir responsabilidades', 'asignar Roles y tareas a los integrantes del equipo ', 2, 4, 1),
+(11, 'Prueba de Reporte PDF', 'Este proceso es una prueba', 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -198,22 +214,40 @@ INSERT INTO `respuesta` (`id`, `id_pregunta`, `id_proceso`, `descripcion`) VALUE
 --
 
 CREATE TABLE `role` (
-  `idrole` int(10) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
-  `encargado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+  `idrole` int(11) NOT NULL,
+  `encargado` varchar(30) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `role`
 --
 
-INSERT INTO `role` (`idrole`, `nombre`, `descripcion`, `encargado`) VALUES
-(1, 'vendedor', 'vendedor de productos', 'Jhonatan Cruz'),
-(6, 'xxx', 'xxx', 'asddddddd'),
-(7, 'aa', 'aawww', 'hhhh'),
-(10, 'Vendedor dos', 'El vende helados', 'Pedro'),
-(11, 'repartidor de tintos', 'reparte los tintos a la 9 am', 'Juan');
+INSERT INTO `role` (`nombre`, `descripcion`, `idrole`, `encargado`) VALUES
+('Tester', 'Encargado de realizar las pruebas de caja negra y caja blanca', 1, 'Francy'),
+('Product Owner', 'Comunica al equipo del proyecto con el cliente', 2, 'Laura');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rol_negocio`
+--
+
+CREATE TABLE `rol_negocio` (
+  `id_rol_negocio` int(11) NOT NULL,
+  `nombre_rol_negocio` varchar(18) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `descripcion_rol_negocio` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `rol_negocio`
+--
+
+INSERT INTO `rol_negocio` (`id_rol_negocio`, `nombre_rol_negocio`, `descripcion_rol_negocio`) VALUES
+(100, 'Diseñador', 'Diseña la app web'),
+(101, 'Porfavor', 'Que'),
+(102, 'AA', 'AA');
 
 -- --------------------------------------------------------
 
@@ -241,7 +275,8 @@ INSERT INTO `sub_caracteristica` (`id_sub`, `nombre`, `descripcion`, `id_caract`
 (10, 'Madurez', 'Capacidad del sistema para satisfacer las necesidades de fiabilidad en condiciones normales', 16),
 (11, 'Disponibilidad', 'Capacidad del sistema o componente de estar operativo y accesible para su uso cuando se requiere', 16),
 (12, 'Tolerancia a fallos', 'Capacidad del sistema o componente para operar según lo previsto en presencia de fallos hardware o software.', 16),
-(13, 'Capacidad de recuperación', 'Capacidad del producto software para recuperar los datos directamente afectados y reestablecer el estado deseado del sistema en caso de interrupción o fallo', 16);
+(13, 'Capacidad de recuperación', 'Capacidad del producto software para recuperar los datos directamente afectados y reestablecer el estado deseado del sistema en caso de interrupción o fallo', 16),
+(14, 'A', 'A', 19);
 
 -- --------------------------------------------------------
 
@@ -261,8 +296,7 @@ CREATE TABLE `tipo_interfaz` (
 INSERT INTO `tipo_interfaz` (`id_tipo`, `nombre_interfaz`) VALUES
 (1, 'Automatica'),
 (2, 'Semiautomatica'),
-(3, 'Manual'),
-(4, 'dddddddddddddddd');
+(3, 'Manual');
 
 -- --------------------------------------------------------
 
@@ -308,7 +342,8 @@ INSERT INTO `usuario` (`user_id`, `user_name`, `user_apellido`, `user_email`, `u
 (1, 'Johan', 'Ordoñez', 'joan@unicauca.edu.co', 'johan', 'df7d3f6008e5ddbea40df09931b33007ee0d2ab5', '1'),
 (3, 'proyecto', 'II', 'admin@rnf.com', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '1'),
 (4, 'Lucero', 'Cruz', 'luceroc@unicauca.edu.co', 'luceroC', '06b8abdc1bed263dcce2f8b6cde6c5189e61e582', '3'),
-(5, 'alejandra', 'Tapia', 'alejandraTap@unicauca.edu.co', 'alejandraTp', '5563c629a6666d259e97e42b3ae5538ea402350f', '2');
+(5, 'alejandra', 'Tapia', 'alejandraTap@unicauca.edu.co', 'alejandraTp', '5563c629a6666d259e97e42b3ae5538ea402350f', '2'),
+(6, 'Daniela', 'Jácome', 'danitpk@unicauca.edu.co', 'danitpk', '141f87be1330a105a87923f4ee6383bd7de46541', '1');
 
 --
 -- Índices para tablas volcadas
@@ -318,6 +353,12 @@ INSERT INTO `usuario` (`user_id`, `user_name`, `user_apellido`, `user_email`, `u
 -- Indices de la tabla `caracteristica`
 --
 ALTER TABLE `caracteristica`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `icono`
+--
+ALTER TABLE `icono`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -360,7 +401,13 @@ ALTER TABLE `respuesta`
 -- Indices de la tabla `role`
 --
 ALTER TABLE `role`
-  ADD PRIMARY KEY (`idrole`);
+  ADD UNIQUE KEY `idrole` (`idrole`);
+
+--
+-- Indices de la tabla `rol_negocio`
+--
+ALTER TABLE `rol_negocio`
+  ADD PRIMARY KEY (`id_rol_negocio`);
 
 --
 -- Indices de la tabla `sub_caracteristica`
@@ -397,16 +444,22 @@ ALTER TABLE `caracteristica`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT de la tabla `icono`
+--
+ALTER TABLE `icono`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `interfaz`
 --
 ALTER TABLE `interfaz`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `normativa`
 --
 ALTER TABLE `normativa`
-  MODIFY `idnormativa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idnormativa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
@@ -418,7 +471,7 @@ ALTER TABLE `preguntas`
 -- AUTO_INCREMENT de la tabla `proceso`
 --
 ALTER TABLE `proceso`
-  MODIFY `idproceso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idproceso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `respuesta`
@@ -430,25 +483,31 @@ ALTER TABLE `respuesta`
 -- AUTO_INCREMENT de la tabla `role`
 --
 ALTER TABLE `role`
-  MODIFY `idrole` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idrole` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `rol_negocio`
+--
+ALTER TABLE `rol_negocio`
+  MODIFY `id_rol_negocio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT de la tabla `sub_caracteristica`
 --
 ALTER TABLE `sub_caracteristica`
-  MODIFY `id_sub` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_sub` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_interfaz`
 --
 ALTER TABLE `tipo_interfaz`
-  MODIFY `id_tipo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_tipo` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -11,7 +11,7 @@
           <table class="table ">
             <td>
             <form action="PreguntasController">
-                <button type="submit"  class="form-control btn-primary" id="btnPreguntas"><span class="glyphicon glyphicon-question-sign"></span> Preguntas</button>
+                <button type="submit"  class="form-control btn-primary" id="btnPreguntas"><span class="glyphicon glyphicon-question-sign"></span> Características y preguntas</button>
             </form>
                 </td>
                 <td>
@@ -25,9 +25,12 @@
             </form>
             </td>
         </table>
+
     <h2 style="margin-bottom: 40px;">PREGUNTAS</h2>
-   
-   
+    <form>
+        <button button type="button" class="btn btn-warning btn-sm" id="btnAtras" onclick="history.back();"><span class="glyphicon glyphicon-circle-arrow-left"></span> Atrás</button>
+        </form>
+
     <table id="tablaPreguntas" class="table table-striped table-bordered">
         <thead>
             <tr>             
@@ -56,7 +59,7 @@
             <div class="modal-content">
                 <div class="modal-header" style="padding:35px 50px;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4><span class="glyphicon glyphicon-plus"></span> Infomación de las Preguntas</h4>
+                    <h4><span class="glyphicon glyphicon-plus"></span> Información de las Preguntas</h4>
                 </div>
                 <div class="modal-body" style="padding:40px 50px;">
                     <form role="form">
