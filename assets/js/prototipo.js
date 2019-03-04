@@ -181,6 +181,94 @@ alert('Element is ' + tamanio + ' vertical pixels from <body>');
     
 
  }
+ function cargar()
+ {
+
+    var pedazos1=prt.split("*");
+    for (var i = 1; i < pedazos1.length; i++) 
+    {
+        var pedazos2=pedazos1[i].split("+");
+        if(pedazos2.length>1)
+        {
+          var pedazos3=pedazos2[0].split("/");
+          cargaretiqueta(pedazos3[0],pedazos2[1],pedazos3[3],pedazos3[4]);
+        }
+        else
+        {
+          var pedazos3=pedazos2[0].split("/");
+          alert(pedazos3[2]);
+          cargaricono(pedazos3[0],pedazos3[3],pedazos3[4],pedazos3[1],pedazos3[2]);
+        }
+
+    }
+    
+ }
+ function cargaricono(opcion,x,y,anc,lar)
+ {
+    var i=1;
+    var imgs = document.createElement("img");
+    var divs = document.createElement("div");
+    divs.className="ui-widget-content reformable";
+    var element = document.getElementById("division1");
+    element.appendChild(divs);
+      imgs.src=urll+opcion;
+    //imgs.title=""+segundos;
+    divs.id=""+segundos;
+    divs.setAttribute('onclick','borrar(this.id)');
+    divs.style.left =x;
+    divs.style.top = y;
+    divs.style.width =anc;
+    divs.style.height =lar;
+    divs.appendChild(imgs);
+
+    $( ".reformable" ).resizable(
+      {
+        minWidth: 50
+      }
+      );
+    $( ".reformable" ).resizable(
+      {
+        minHeight: 50
+      }
+      );
+    $( ".reformable" ).resizable(
+      {
+        maxWidth: 500
+      }
+      );
+    $( ".reformable" ).resizable(
+      {
+        maxHeight: 500
+      }
+      );
+    $( ".reformable" ).draggable({ containment: [316,62,935,461] });
+    segundos=segundos+1;
+    //$( ".reformable" ).draggable({ containment: "r-bar" });
+
+ }
+ function cargaretiqueta(opcion,valor,x,y)
+ {
+    var i=1;
+    var imgs = document.createElement("img");
+    var divs = document.createElement("div");
+    divs.className="ui-widget-content movible";
+    var element = document.getElementById("division1");
+    element.appendChild(divs);
+    imgs.className="ui-widget-header";
+      imgs.src=urll+opcion;
+    var titu=valor.split(" ");
+    imgs.title=titu[0]+"\n"+titu[1];
+    divs.id=""+segundos;
+    divs.setAttribute('onclick','borrar(this.id)');
+    divs.setAttribute('ondblclick','nuevaEtiqueta(this.id)');
+    divs.style.left =x;
+    divs.style.top = y;
+    divs.appendChild(imgs);
+
+    $( ".movible" ).draggable();
+    segundos=segundos+1;
+ }
+ 
 function guardar()
 {
     var listado="";

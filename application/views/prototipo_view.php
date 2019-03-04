@@ -1,7 +1,3 @@
-  <?php 
-   echo $prototipo;
-
-   ?>
 <html lang="en">
 <head>
      <meta charset="utf-8">
@@ -41,11 +37,7 @@
 
 </head>
 <body>
-<script type="text/javascript">
-    var urll='<?php echo base_url();?>iconos/';
-    var pid='<?php echo ($id);?>';
 
-</script>
 
 <form role="form"  action="<?php echo base_url('Controlador/lienzo')?>" method="post">
 <div id="container" style="width: 100%; padding: 1%;">
@@ -108,7 +100,18 @@
             
         </div>
         <div id="division1" >
-            
+ 
+<script type="text/javascript">
+    var urll='<?php echo base_url();?>iconos/';
+    var pid='<?php echo ($id);?>';
+    var prt='<?php echo ($prototipo);?>';
+    var guard=true;
+    if(prt.length>2)
+    {
+        cargar();
+    }
+
+</script>
         </div>
         <div class="r-bar">
             <div class="text-center">
