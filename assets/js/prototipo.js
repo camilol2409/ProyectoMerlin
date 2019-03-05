@@ -188,7 +188,7 @@ function addPage() {
   var currentNumber = $.numero_de_paginas;
   $.estado_actual[$.pagina_actual] = estado;
   currentNumber++;
-  $('#page_list').append('<div class = "col page-element" onclick = "changePage('+ currentNumber +')"><p> Página '+ currentNumber +'</p></div>')
+  $('#page_list').append('<div class = "col page-element" onclick = "changePage(' + currentNumber + ')"><span> Página ' + currentNumber + '</span><button onclick = "deletePage('+ currentNumber +')" class= "btn btn-link float-right btn-delete"><span class = "mdi mdi-delete"></span></button ></div>');
   $.pagina_actual = currentNumber;
   $.numero_de_paginas = currentNumber;
   // Seleccionar la nueva página
@@ -235,6 +235,20 @@ function guardar(base_url, lienzo_id) {
     .done(function (data) {
         alert('Estado guardado exitosamente');
     });
+}
+
+function deletePage(pageNumber) {
+  if($.numero_de_paginas == 1) {
+    alert('No puedes borrar todas las páginas');
+  }
+  else if(confirm('¿Realmente desea borrar esta página?')) {
+    $.numero_de_paginas = $.numero_de_paginas - 1;
+    if(pageNumber == $.pagina_actual) {
+      changePage($.pagina_actual - 1);
+    }
+    delete($.estado_actual[pageNumber]);
+    $($("#page_list .page-element")[pageNumber - 1]).remove();
+  }
 }
 
 function groupBy(list, keyGetter) {

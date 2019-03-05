@@ -60,7 +60,10 @@
             <div class = "row">
                 <div class = "col-2" id = "page_list">
                     <div class = "col page-element bg-primary" onclick = "changePage(1)">
-                        <p>Página 1</p>
+                        <span>Página 1</span>
+                        <button onclick = "deletePage(1)" class= "btn btn-link float-right">
+                            <span class = "mdi mdi-delete"></span>
+                        </button>
                     </div>
                 </div>
                 <div class = "col-10" id = "contenedor_lienzo">
