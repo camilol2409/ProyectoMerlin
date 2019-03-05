@@ -50,6 +50,31 @@ INSERT INTO `caracteristica` (`id`, `nombre`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `elementos`
+--
+
+CREATE TABLE `elementos` (
+  `id` int(11) NOT NULL,
+  `pagina_id` int(11) NOT NULL,
+  `width` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `height` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `top` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `left_position` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `source` varchar(300) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `elementos`
+--
+
+INSERT INTO `elementos` (`id`, `pagina_id`, `width`, `height`, `top`, `left_position`, `source`) VALUES
+(3, 4, '99px', '100px', '53px', '450.698px', 'http://localhost/levantamientorequisitos/iconos/circulo.png'),
+(4, 4, '99px', '100px', '267px', '276.698px', 'http://localhost/levantamientorequisitos/iconos/cuadrado.png'),
+(5, 5, '99px', '100px', '173px', '440.698px', 'http://localhost/levantamientorequisitos/iconos/triangulo.png');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `icono`
 --
 
@@ -88,6 +113,24 @@ INSERT INTO `interfaz` (`id`, `nombre`, `descripcion`, `tipo`, `detalle_tipo`, `
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `lienzos`
+--
+
+CREATE TABLE `lienzos` (
+  `id` int(11) NOT NULL,
+  `proceso_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `lienzos`
+--
+
+INSERT INTO `lienzos` (`id`, `proceso_id`) VALUES
+(3, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `normativa`
 --
 
@@ -118,6 +161,25 @@ INSERT INTO `normativa` (`idnormativa`, `idproceso`, `nombre`, `descripcion`) VA
 
 -- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `paginas`
+--
+
+CREATE TABLE `paginas` (
+  `id` int(11) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `lienzo_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `paginas`
+--
+
+INSERT INTO `paginas` (`id`, `numero`, `lienzo_id`) VALUES
+(4, 1, 3),
+(5, 2, 3);
+
+-- --------------------------------------------------------
 --
 -- Estructura de tabla para la tabla `paralelos`
 --
@@ -226,7 +288,11 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`nombre`, `descripcion`, `idrole`, `encargado`) VALUES
 ('Tester', 'Encargado de realizar las pruebas de caja negra y caja blanca', 1, 'Francy'),
-('Product Owner', 'Comunica al equipo del proyecto con el cliente', 2, 'Laura');
+('Product Owner', 'Comunica al equipo del proyecto con el cliente', 2, 'Laura'),
+('Cliente', 'Este rol, da a conocer las necesidades de su organización', 6, 'asddddddd'),
+('Tester', 'Realiza las pruebas de caja negra y caja blanca', 7, 'hhhh'),
+('Desarrollador ', 'Realiza la codificación de las funcionalidades', 10, 'Pedro'),
+('Analista', 'Persona que analiza los requerimientos y realiza especificación', 11, 'Juan');
 
 -- --------------------------------------------------------
 
@@ -356,6 +422,13 @@ ALTER TABLE `caracteristica`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `elementos`
+--
+ALTER TABLE `elementos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pagina_id` (`pagina_id`);
+
+--
 -- Indices de la tabla `icono`
 --
 ALTER TABLE `icono`
@@ -368,10 +441,24 @@ ALTER TABLE `interfaz`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `lienzos`
+--
+ALTER TABLE `lienzos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `proceso_id` (`proceso_id`);
+
+--
 -- Indices de la tabla `normativa`
 --
 ALTER TABLE `normativa`
   ADD PRIMARY KEY (`idnormativa`);
+
+--
+-- Indices de la tabla `paginas`
+--
+ALTER TABLE `paginas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `lienzo_id` (`lienzo_id`);
 
 --
 -- Indices de la tabla `paralelos`
@@ -444,6 +531,12 @@ ALTER TABLE `caracteristica`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT de la tabla `elementos`
+--
+ALTER TABLE `elementos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `icono`
 --
 ALTER TABLE `icono`
@@ -456,10 +549,22 @@ ALTER TABLE `interfaz`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT de la tabla `lienzos`
+--
+ALTER TABLE `lienzos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `normativa`
 --
 ALTER TABLE `normativa`
   MODIFY `idnormativa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `paginas`
+--
+ALTER TABLE `paginas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
@@ -510,6 +615,28 @@ ALTER TABLE `usuario`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `elementos`
+--
+ALTER TABLE `elementos`
+  ADD CONSTRAINT `elementos_ibfk_1` FOREIGN KEY (`pagina_id`) REFERENCES `paginas` (`id`);
+
+--
+-- Filtros para la tabla `lienzos`
+--
+ALTER TABLE `lienzos`
+  ADD CONSTRAINT `lienzos_ibfk_1` FOREIGN KEY (`proceso_id`) REFERENCES `proceso` (`idproceso`);
+
+--
+-- Filtros para la tabla `paginas`
+--
+ALTER TABLE `paginas`
+  ADD CONSTRAINT `paginas_ibfk_1` FOREIGN KEY (`lienzo_id`) REFERENCES `lienzos` (`id`);
+COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
