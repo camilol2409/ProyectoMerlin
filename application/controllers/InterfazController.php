@@ -57,7 +57,7 @@ class InterfazController extends CI_Controller {
             $login["email"]=$this->session->userdata('email');
             $login["login"]=$this->session->userdata('login');
             //llamamos a la vista de interfaces           
-            $this->load->view('icon_view',$login);
+            $this->load->view('interfaces_view',$login);
         } else {
             //redireccionamos a la vista login cuando no ha iniciado sesion
             $this->load->view('login');
