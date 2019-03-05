@@ -65,7 +65,7 @@
                 </div>
                 <div class = "col-10" id = "contenedor_lienzo">
                     <!--Barra lateral izquierda -->
-                    <div class="left-bar">
+                    <div class="left-bar text-primary">
                         <div class="text-center">
                             <a  onclick="imagenes(1)">
                                 <span class="mdi mdi-checkbox-blank-circle-outline" style="font-size: 2.5em;">
@@ -111,7 +111,7 @@
                     </div>
                     <div id = "contenido_lienzo">
                     </div>
-                    <div class = "right-bar">
+                    <div class = "right-bar text-primary">
                         <div class="text-center">
                             <a onclick="etiquetas(1)">
                                 <span class="mdi mdi-check-outline" style="font-size: 2.5em;">

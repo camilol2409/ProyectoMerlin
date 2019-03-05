@@ -1,20 +1,21 @@
  var tiempo=new Date();
  var segundos=tiempo.getTime();
- var borrador=1;
 
- 
-  /*$( function() {
-    $( ".reformable" ).resizable();
-    $( ".reformable" ).draggable();
-  } );
- */
  function imagenes(opcion)
  {
+    $.borrando = false;
     var i=1;
     var imgs = document.createElement("img");
     var divs = document.createElement("div");
     divs.className="ui-widget-content reformable";
     var element = document.getElementById("contenido_lienzo");
+    $(divs).on('click', function(element) {
+      if($.borrando) {
+      
+        var elementToRemove = $(element.target).hasClass('ui-draggable') ? $(element.target) : $(element.target).parents('.ui-draggable').remove()
+        $.borrando = false;
+      }
+    });
     element.appendChild(divs);
     imgs.className="ui-widget-header";
     if(opcion==1)
@@ -25,17 +26,22 @@
       imgs.src=urll+"triangulo.png";
     //imgs.title=""+segundos;
     divs.id=""+segundos;
-    divs.setAttribute('onclick','borrar(this.id)');
     divs.appendChild(imgs);
 
-    $( ".reformable" ).resizable();
-    $( ".reformable" ).draggable();
+    $( ".reformable" ).resizable({
+      minWidth: 50, 
+      minHeight: 50,
+      maxWidth: 350,
+      maxHeight: 350
+    });
+   $(".reformable").draggable({ containment: [316, 62, 935, 461] });
     segundos=segundos+1;
  }
 
 
  function etiquetas(opcion)
  {
+   $.borrando = false;
     var i=1;
     var imgs = document.createElement("img");
     var divs = document.createElement("div");
@@ -140,25 +146,7 @@ alert('Element is ' + tamanio + ' vertical pixels from <body>');
 
  function setBorrar()
  {
-  //var element = document.getElementById("trash");
-  //document.write(document.getElementById("sel").innerHTML);
-
-
-
-  
-  if(borrador==-1)
-  {
-      document.getElementById("sel").innerHTML = "Seleccion Normal";
-      //element.src="basura.png";   
-  }
-  else
-  {
-      document.getElementById("sel").innerHTML = "Seleccion BOrrador!!!!";
-      //element.src="basura2.png";
-  }
-  borrador=borrador*-1;
-    
-
+    $.borrando = true;
  }
 function obtenerEstadoActualPagina()
 {
@@ -222,8 +210,20 @@ function repaint(pageNumber) {
     imgElement = $('<img/>');
     imgElement.attr('src', element.source);
     newElement.append(imgElement);
-    newElement.draggable();
-    newElement.resizable();
+    newElement.draggable({ containment: [316, 62, 935, 461] });
+    newElement.resizable({
+      minWidth: 50,
+      minHeight: 50,
+      maxWidth: 350,
+      maxHeight: 350
+    });
+    newElement.on('click', function(element) {
+      if($.borrando) {
+        var elementToRemove = $(element.target).hasClass('ui-draggable') ? $(element.target) : $(element.target).parents('.ui-draggable')
+        elementToRemove.remove()
+        $.borrando = false;
+      }
+    })
     $('#contenido_lienzo').append(newElement);
   });
 }
@@ -255,6 +255,7 @@ $(document).ready(function() {
   $.pagina_actual = 1;
   $.numero_de_paginas = 1;
   $.estado_actual = {};
+  $.borrando = false;
   grouped = groupBy($.estado_desde_db, element => element['numero']);
   arr = Array.from(grouped.entries());
   arr.forEach(el => {
