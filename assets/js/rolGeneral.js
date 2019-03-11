@@ -326,6 +326,8 @@ function onlyLetters(l) {
     } else {
         return true;
     }
+
+    // CHANGE 11-03
 }
 
 
