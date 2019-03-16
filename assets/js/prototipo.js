@@ -31,7 +31,7 @@
       maxWidth: 350,
       maxHeight: 350
     });
-   $(".reformable").draggable({ containment: [316, 62, 935, 461] });
+   $(".reformable").draggable({ containment: [465, 62, 990, 460] });
     segundos=segundos+1;
  }
 
