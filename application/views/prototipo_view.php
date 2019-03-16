@@ -69,48 +69,42 @@
                 <div class = "col-10" id = "contenedor_lienzo">
                     <!--Barra lateral izquierda -->
                     <div class="left-bar text-primary">
-                        <div class="text-center">
-                            <a  onclick="imagenes(1)">
-                                <span class="mdi mdi-checkbox-blank-circle-outline" style="font-size: 2.5em;">
-                                </span>
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a  onclick="imagenes(2)">
-                                <span class="mdi mdi-border-all-variant" style="font-size: 2.5em;">
-                                </span>
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a onclick="imagenes(3)">
-                                <span class="mdi mdi-triangle-outline" style="font-size: 2.5em;">
-                                </span>
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a  onclick="return false">
-                                <span class="mdi mdi-image" style="font-size: 2.5em;">
-                                </span>
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a  onclick="return false">
-                                <span class="mdi mdi-table" style="font-size: 2.5em;">
-                                </span>
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a onclick="return false">
-                                <span class="mdi mdi-pencil" style="font-size: 2.5em;">
-                                </span>
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a onclick="setBorrar()">
-                                <span id="borrador"class="mdi mdi-eraser" style="font-size: 2.5em;">
-                                </span>
-                            </a>
-                        </div>
+
+                        <ul class="list-group">
+                            <li class="list-group-item text-center">
+                                <a onclick="setBorrar()">
+                                    <span id="borrador"class="mdi mdi-eraser" style="font-size: 2.5em;">
+                                    </span>
+                                </a>
+                            </li>
+                        <?php 
+                            $i=0;
+                            if($iconos)
+                            {
+                            $lim=sizeof($iconos);
+                            while($i<10 && $i<$lim)
+                            {
+                                
+                                $direccion=$iconos[$i]['direccion'];
+                                $direccion2=base_url().'iconos/'.$direccion.'.png';
+                                $i++;
+                                echo "<li class='list-group-item text-center'>
+                                        <a  onclick='imagenes($direccion)'>
+                                            <span style='font-size: 2.5em;'>
+                                                <img class='mini-img' src='$direccion2'><img>
+                                            </span>
+                                        </a>
+                                </li> ";
+
+                            }    
+                            }
+                            
+
+                        ?>
+
+
+                        </ul>       
+                       
                     </div>
                     <div id = "contenido_lienzo">
                     </div>
@@ -166,7 +160,7 @@
                 <a class = "btn btn-danger btn-lg" href = "<?php echo base_url();?>ProcesoController" role = "button" onclick="return confirm('¿Deseas salir? Perderás todo el progreso realizado')">
                     <span class="glyphicon glyphicon-remove"></span> Salir
                 </a>
-                <a class = "btn btn-primary btn-lg" href = "#" onclick = "guardar('<?php echo base_url(); ?>', <?php echo $id ?>)">
+                <a class = "btn btn-primary btn-lg" href = "#" onclick = "guardar('<?php echo base_url(); ?>', '<?php echo $id; ?>')">
                     <span class="glyphicon glyphicon-ok"></span> Guardar
                 </a>
             </div>

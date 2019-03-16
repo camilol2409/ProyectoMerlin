@@ -1,3 +1,12 @@
+.list-group{
+    max-height: 250px;
+    margin-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+}
+.mini-img{
+  height: 20px;
+  min-width: 20%;
+}
 #prototipo_container {
   width: 80%;
   margin-left: 10%;
@@ -10,10 +19,13 @@
 }
 
 .left-bar {
+  max-height: 250px;
+  overflow:scroll;
   flex: 0 0 15%;
   margin: 10px 0 0 10px;
   border: 1px #333333 solid;
   border-radius: 8px;
+
 }
 
 .bg-primary .btn-delete {

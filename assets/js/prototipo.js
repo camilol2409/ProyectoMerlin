@@ -3,7 +3,7 @@
  var borrador=1;
  function imagenes(opcion)
  {
-    $.borrando = false;
+    //$.borrando = false;
     var i=1;
     var imgs = document.createElement("img");
     var divs = document.createElement("div");
@@ -18,14 +18,11 @@
     });
     element.appendChild(divs);
     imgs.className="ui-widget-header";
-    if(opcion==1)
-      imgs.src=urll+"circulo.png";
-    else if(opcion==2)
-      imgs.src=urll+"cuadrado.png";
-    else if(opcion==3)
-      imgs.src=urll+"triangulo.png";
+    imgs.src=urll+opcion+".png";
     //imgs.title=""+segundos;
     divs.id=""+segundos;
+        
+    divs.setAttribute('onclick','borrar(this.id)');
     divs.appendChild(imgs);
 
     $( ".reformable" ).resizable({
@@ -56,7 +53,7 @@
     else if(opcion==3)
       imgs.src=urll+"lock.png";
     else if(opcion==4)
-      imgs.src=urll+"corazon.png";
+      imgs.src=urll+opcion;
     imgs.title="etiqueta"+"\n"+"encargado";
     divs.id=""+segundos;
     divs.setAttribute('onclick','borrar(this.id)');
@@ -133,14 +130,7 @@ $.confirm({
   {
     
     var element = document.getElementById(titulo);
-    var bodyRect = document.body.getBoundingClientRect(),
-    elemRect = element.getBoundingClientRect(),
-    offset   = elemRect.left - bodyRect.left,
-    tamanio=elemRect.width;
-
-alert('Element is ' + tamanio + ' vertical pixels from <body>');
     element.parentNode.removeChild(element);
-    
   }
  }
 
@@ -234,7 +224,7 @@ function repaint(pageNumber) {
       if($.borrando) {
         var elementToRemove = $(element.target).hasClass('ui-draggable') ? $(element.target) : $(element.target).parents('.ui-draggable')
         elementToRemove.remove()
-        $.borrando = false;
+        //$.borrando = false;
       }
     })
     $('#contenido_lienzo').append(newElement);

@@ -24,10 +24,10 @@ class PrototipoController extends CI_Controller {
             $login['id'] = $id;
             $lienzo_encoded = json_encode($this->Lienzo_model->load($id));
             $proceso = $this->Proceso_model->proceso_Id($id); 
-            //$iconos=$this->$this->Icon_model->getIcon();   
+            $iconos = $this->Icon_model->getIcon();              
             $login["proceso"] = $proceso;
             $login['lienzo_encoded'] = $lienzo_encoded;
-            //$login["iconos"] = $iconos;
+            $login["iconos"] = $iconos;
             $this->load->view('prototipo_view', $login);
 
         }else{
