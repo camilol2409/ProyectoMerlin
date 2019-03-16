@@ -1,8 +1,4 @@
-.list-group{
-    max-height: 250px;
-    margin-bottom: 10px;
-    -webkit-overflow-scrolling: touch;
-}
+
 .mini-img{
   height: 20px;
   min-width: 20%;
