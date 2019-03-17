@@ -1,11 +1,6 @@
 <script src="<?php echo base_url();?>assets/jquery-1.10.2.min.js"></script>
 <script src="<?php echo base_url();?>assets/jquery.dataTables.js"></script>
 <script src="<?php echo base_url();?>assets/dataTables.bootstrap.js"></script>
-<!--
-<script src="<?php echo base_url();?>assets/bootstrap-notify-master/bootstrap-notify.js"></script>
-<script src="<?php echo base_url();?>assets/bootstrap-notify-master/bootstrap-notify.min.js"></script>
-<link rel = "stylesheet" type = "text/css" 
-      href = "assets/bootstrap-notify-master/animate.css">-->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.css">
 
@@ -28,5 +23,4 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">  <!--Iconos Material.-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

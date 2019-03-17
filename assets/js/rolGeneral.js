@@ -166,7 +166,7 @@ function registrarRol() {
     } else {
         $.alert({
             title: 'Error!',
-            content: 'Diligencie todos los campos',
+            content: 'Al ingresar datos',
         });
         //$("#descripcion_rol_negocio_view").val("");
     }
@@ -205,6 +205,7 @@ function actualizarRol(id_rol) {
 }
 
 function ActualizarR() {
+    if (validarDatosA()) {
     $.post("RolGeneralController/actualizarRol",
             {
                 "nombre_rol_negocio": $("#nombre_rol_negocio_edit").val(),
@@ -238,6 +239,13 @@ function ActualizarR() {
                     cargarRoles();
                 }
             }, "json");
+        }else {
+        $.alert({
+            title: 'Error!',
+            content: 'Al actualizar los datos',
+        });
+        //$("#descripcion_rol_negocio_view").val("");
+    }
 }
 
 /*
@@ -292,6 +300,15 @@ function validarDatos() {
         $("#nombre_rol_negocio").focus().before("<span class='error'>Ingrese el nombre del rol</span>");
         $(".error").fadeIn();
         band = false;
+    }else if (onlyLetters($("#nombre_rol_negocio").val())) {
+        $("#nombre_rol_negocio").focus().before("<span class='error'>No se aceptan Numeros</span>");
+        $(".error").fadeIn();
+        band = false;
+    }
+    if ($("#nombre_rol_negocio").val().length>20) {
+        $("#nombre_rol_negocio").focus().before("<span class='error'>Longitud excede max permitido Descripcion 20</span>");
+        $(".error").fadeIn();
+        band = false;
     }
     if (!isValid_txt($("#rol_name").val())) {
         $("#nombre_rol_negocio").focus().before("<span class='error'>Caracteres no válidos</span>");
@@ -304,17 +321,67 @@ function validarDatos() {
         $("#descripcion_rol_negocio").focus().before("<span class='error'>Ingrese la descripción del rol</span>");
         $(".error").fadeIn();
         band = false;
-    }
-    else if (onlyLetters($("#descripcion_rol_negocio").val())) {
+    }else if (onlyLetters($("#descripcion_rol_negocio").val())) {
         $("#descripcion_rol_negocio").focus().before("<span class='error'>No se aceptan Numeros</span>");
         $(".error").fadeIn();
         band = false;
         $("#descripcion_rol_negocio_view").val("");
     }
+    if ($("#descripcion_rol_negocio").val().length>40) {
+
+        $("#descripcion_rol_negocio").focus().before("<span class='error'>Longitud excede max permitido Descripcion 40</span>");
+        $(".error").fadeIn();
+        $("#descripcion_rol_negocio_view").val("");
+        band = false;
+    }
 
     return band;
 }
+function validarDatosA() {
 
+    var band = true;
+    if ($("#nombre_rol_negocio_edit").val() == "") {
+        $("#nombre_rol_negocio_edit").focus().before("<span class='error'>Ingrese el nombre del rol</span>");
+        $(".error").fadeIn();
+        band = false;
+    }else if (onlyLetters($("#nombre_rol_negocio_edit").val())) {
+        $("#nombre_rol_negocio_edit").focus().before("<span class='error'>No se aceptan Numeros</span>");
+        $(".error").fadeIn();
+        band = false;
+    }
+    if (!isValid_txt($("#rol_name_edit").val())) {
+        $("#nombre_rol_negocio_edit").focus().before("<span class='error'>Caracteres no válidos</span>");
+        $(".error").fadeIn();
+        band = false;
+    }
+    if ($("#nombre_rol_negocio_edit").val().length>20) {
+        $("#nombre_rol_negocio_edit").focus().before("<span class='error'>Longitud excede max permitido Nombre 20</span>");
+        $(".error").fadeIn();
+        $("#nombre_rol_negocio_edit").val("");
+        band = false;
+    }
+    if ($("#descripcion_rol_negocio_edit").val() == "") {
+
+        $("#descripcion_rol_negocio_edit").focus().before("<span class='error'>Ingrese la descripción del rol</span>");
+        $(".error").fadeIn();
+        band = false;
+    }else if (onlyLetters($("#descripcion_rol_negocio_edit").val())) {
+        $("#descripcion_rol_negocio_edit").focus().before("<span class='error'>No se aceptan Numeros</span>");
+        $(".error").fadeIn();
+        band = false;
+        $("#descripcion_rol_negocio_view_edit").val("");
+    }
+    if ($("#descripcion_rol_negocio_edit").val().length>40) {
+
+        $("#descripcion_rol_negocio_edit").focus().before("<span class='error'>Longitud excede max permitido Descripcion 40</span>");
+        $(".error").fadeIn();
+        $("#descripcion_rol_negocio_view_edit").val("");
+        band = false;
+    }
+
+
+    return band;
+}
 /* 
  * funcion que valida que en una cadena de caracteres solo sean de letras
  * @returns {Boolean} 
