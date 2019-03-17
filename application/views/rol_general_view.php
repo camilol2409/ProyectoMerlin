@@ -41,7 +41,6 @@
 
     <div class="modal fade" id="modalRegistroRol" role="dialog">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header" style="padding:35px 50px;">
@@ -49,7 +48,7 @@
                     <h4><span class="glyphicon glyphicon-plus"></span> Registro de Roles</h4>
                 </div>
                 <div class="modal-body" style="padding:40px 50px;">
-                    <form role="form">
+                   <form role="form">
                         <div class="form-group">
                             <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del Rol</label><span id="require">*</span><span id="error"></span>
                             <input type="text" class="form-control" id="nombre_rol_negocio" maxlength="18" placeholder="Nombre del Rol"> 
@@ -58,15 +57,6 @@
                             <label for="descripcion"><span class="glyphicon glyphicon-sort-by-order"></span> Descripción del Rol</label><span id="require">*</span><span id="error"></span>
                             <textarea maxlength="30" placeholder="Descripción"  class="form-control" id ="descripcion_rol_negocio" ></textarea> 
                         </div>
-                        <!--
-                        <div class="form-group">
-                            <label for="encargado"><span class="glyphicon glyphicon-flag"></span> Encargado</label><span id="require">*</span><span id="error"></span>
-                            <input type="text" class="form-control" id="encargado" placeholder="Encargado">
-                        </div>
-                    -->
-
-
-<!--button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-ok"></span> Registrar</button-->
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -82,6 +72,7 @@
     
     
     <!-- Ventana Modal para mostar datos de relacionados de un rol-->
+
     <div class="modal fade" id="modalVerRol" role="dialog">
         <div class="modal-dialog">
 
@@ -101,22 +92,10 @@
                             <label for="descripcion"><span class="glyphicon glyphicon-flag"></span> Area del proceso</label>
                             <input type="text" class="form-control" id="descripcion_rol_negocio_view" placeholder="Descripcion" readonly="readonly">
                         </div>
-
-<!--
-                        <div class="form-group">
-                            <label for="encargado"><span class="glyphicon glyphicon-user"></span> Encargado del Rol</label>
-                            <input type="text" class="form-control" id="encargado_view" placeholder="Encargado" readonly="readonly">
-                        </div>
-                    
--->
-
-<!--button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-ok"></span> Registrar</button-->
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-                   <!-- <button type="submit" class="btn btn-primary btn-default pull-rigth" onclick="ActualizarP();" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> Actualizar</button>-->
-
                 </div>
             </div>
 
@@ -141,6 +120,7 @@
                         </div>
                         <div class="form-group">
                             <label for="descripcion"><span class="glyphicon glyphicon-flag"></span> Descripcion del Rol</label>
+<<<<<<< HEAD
                             <input type="text" class="form-control" id="descripcion_rol_negocio_edit" maxlength="50" placeholder="Descripcion">
                         </div>
 
@@ -150,15 +130,22 @@
                             <input type="text" class="form-control" id="encargado_edit" placeholder="Encargado">
                         </div>
                     -->
+=======
+                            <input type="text" class="form-control" id="descripcion_rol_negocio_edit" placeholder="Descripcion">
+                        </div>     
+                   
+>>>>>>> f017c882983676b2371ea1af134ef542b1b1d4f2
 
-<!--button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-ok"></span> Registrar</button-->
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-                    <button type="submit" class="btn btn-primary btn-default pull-rigth" onclick="ActualizarR();" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> Actualizar</button>
+                    <button type="submit" class="btn btn-primary btn-default pull-rigth" onclick="ActualizarR();" ><span class="glyphicon glyphicon-ok"></span> Actualizar</button>
 
                 </div>
+
+
+
             </div>
 
         </div>
