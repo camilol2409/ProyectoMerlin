@@ -212,7 +212,6 @@ function ActualizarR() {
                 "id_rol_negocio": idR
             },
             function (data) {
-                
                 if (data) {
                     $.alert({
                         type: 'green',
@@ -226,8 +225,8 @@ function ActualizarR() {
 
                     cargarRoles();
                     $('#modalActualizarRol').modal('hide');
-
-                } else {
+                    }
+                else {
                     $.alert({
                         type: 'red',
                         icon: 'glyphicon glyphicon-ok',
@@ -293,7 +292,7 @@ function validarDatos() {
         $(".error").fadeIn();
         band = false;
     }
-    if (!isValid_txt($("#rol_name").val())) {
+    if (!isValid_txt($("#nombre_rol_negocio").val())) {
         $("#nombre_rol_negocio").focus().before("<span class='error'>Caracteres no válidos</span>");
         $(".error").fadeIn();
         band = false;
@@ -312,6 +311,13 @@ function validarDatos() {
         $("#descripcion_rol_negocio_view").val("");
     }
 
+    if ($("#nombre_rol_negocio").size()>18){
+        $("#nombre_rol_negocio").focus().before("<span class='error'>Tamaño excedido</span>");
+        $(".error").fadeIn();
+        band = false; 
+        //$("#nombre_rol_negocio_view").val("");  
+    }
+ 
     return band;
 }
 
@@ -326,8 +332,6 @@ function onlyLetters(l) {
     } else {
         return true;
     }
-
-    // CHANGE 11-03
 }
 
 

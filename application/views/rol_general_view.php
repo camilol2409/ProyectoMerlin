@@ -52,11 +52,11 @@
                     <form role="form">
                         <div class="form-group">
                             <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del Rol</label><span id="require">*</span><span id="error"></span>
-                            <input type="text" class="form-control" id="nombre_rol_negocio" placeholder="Nombre del Rol">
+                            <input type="text" class="form-control" id="nombre_rol_negocio" maxlength="18" placeholder="Nombre del Rol"> 
                         </div>
                         <div class="form-group">
                             <label for="descripcion"><span class="glyphicon glyphicon-sort-by-order"></span> Descripción del Rol</label><span id="require">*</span><span id="error"></span>
-                            <textarea placeholder="Descripción"  class="form-control" id ="descripcion_rol_negocio" ></textarea> 
+                            <textarea maxlength="30" placeholder="Descripción"  class="form-control" id ="descripcion_rol_negocio" ></textarea> 
                         </div>
                         <!--
                         <div class="form-group">
@@ -137,11 +137,11 @@
                     <form role="form">
                         <div class="form-group">
                             <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del Rol</label>
-                            <input type="text" class="form-control" id="nombre_rol_negocio_edit" placeholder="Nombre del Rol">
+                            <input type="text" class="form-control" id="nombre_rol_negocio_edit" maxlength="18" placeholder="Nombre del Rol">
                         </div>
                         <div class="form-group">
                             <label for="descripcion"><span class="glyphicon glyphicon-flag"></span> Descripcion del Rol</label>
-                            <input type="text" class="form-control" id="descripcion_rol_negocio_edit" placeholder="Descripcion">
+                            <input type="text" class="form-control" id="descripcion_rol_negocio_edit" maxlength="50" placeholder="Descripcion">
                         </div>
 
                         <!--

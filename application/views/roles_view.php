@@ -73,7 +73,7 @@
                     <form role="form">
                         <div class="form-group">
                             <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del Rol</label><span id="require">*</span><span id="error"></span>
-                            <input type="text" class="form-control" id="rol_name" placeholder="Nombre del Rol">
+                            <input type="text" class="form-control" id="rol_name" maxlength="50 placeholder="Nombre del Rol">
                         </div>
                         <div class="form-group">
                             <label for="descripcion"><span class="glyphicon glyphicon-sort-by-order"></span> Descripción del Rol</label><span id="require">*</span><span id="error"></span>
@@ -81,7 +81,7 @@
                         </div>
                         <div class="form-group">
                             <label for="encargado"><span class="glyphicon glyphicon-flag"></span> Encargado</label><span id="require">*</span><span id="error"></span>
-                            <input type="text" class="form-control" id="encargado" placeholder="Encargado">
+                            <input type="text" class="form-control" id="encargado" maxlength="30" placeholder="Encargado">
                         </div>
 
 
@@ -153,7 +153,7 @@
                     <form role="form">
                         <div class="form-group">
                             <label for="usrname"><span class="glyphicon glyphicon-comment"></span> Nombre del Rol</label>
-                            <input type="text" class="form-control" id="rol_name_edit" placeholder="Nombre del Rol">
+                            <input type="text" class="form-control" id="rol_name_edit" maxlength="18" placeholder="Nombre del Rol">
                         </div>
                         <div class="form-group">
                             <label for="descripcion"><span class="glyphicon glyphicon-flag"></span> Descripcion del Rol</label>
@@ -162,7 +162,7 @@
 
                         <div class="form-group">
                             <label for="encargado"><span class="glyphicon glyphicon-user"></span> Encargado del Rol</label>
-                            <input type="text" class="form-control" id="encargado_edit" placeholder="Encargado">
+                            <input type="text" class="form-control" id="encargado_edit" maxlength="30" placeholder="Encargado">
                         </div>
 
 <!--button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-ok"></span> Registrar</button-->
