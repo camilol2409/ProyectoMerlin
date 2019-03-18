@@ -1,0 +1,8 @@
+ADMINISTRADOR:
+admin - admin
+
+ELICITADOR
+alejandraTp - elicitadora
+
+CLIENTE
+luceroC - cliente1

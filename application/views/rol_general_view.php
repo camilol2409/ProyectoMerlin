@@ -120,22 +120,8 @@
                         </div>
                         <div class="form-group">
                             <label for="descripcion"><span class="glyphicon glyphicon-flag"></span> Descripcion del Rol</label>
-<<<<<<< HEAD
                             <input type="text" class="form-control" id="descripcion_rol_negocio_edit" maxlength="50" placeholder="Descripcion">
                         </div>
-
-                        <!--
-                        <div class="form-group">
-                            <label for="encargado"><span class="glyphicon glyphicon-user"></span> Encargado del Rol</label>
-                            <input type="text" class="form-control" id="encargado_edit" placeholder="Encargado">
-                        </div>
-                    -->
-=======
-                            <input type="text" class="form-control" id="descripcion_rol_negocio_edit" placeholder="Descripcion">
-                        </div>     
-                   
->>>>>>> f017c882983676b2371ea1af134ef542b1b1d4f2
-
                     </form>
                 </div>
                 <div class="modal-footer">
