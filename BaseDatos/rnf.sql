@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-03-2019 a las 17:16:18
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.1
+-- Tiempo de generación: 19-03-2019 a las 07:36:43
+-- Versión del servidor: 10.1.31-MariaDB
+-- Versión de PHP: 7.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -63,15 +63,6 @@ CREATE TABLE `elementos` (
   `source` varchar(300) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `elementos`
---
-
-INSERT INTO `elementos` (`id`, `pagina_id`, `width`, `height`, `top`, `left_position`, `source`) VALUES
-(3, 4, '99px', '100px', '53px', '450.698px', 'http://localhost/levantamientorequisitos/iconos/circulo.png'),
-(4, 4, '99px', '100px', '267px', '276.698px', 'http://localhost/levantamientorequisitos/iconos/cuadrado.png'),
-(5, 5, '99px', '100px', '173px', '440.698px', 'http://localhost/levantamientorequisitos/iconos/triangulo.png');
-
 -- --------------------------------------------------------
 
 --
@@ -84,6 +75,14 @@ CREATE TABLE `icono` (
   `direccion` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `descripcion` varchar(100) CHARACTER SET utf16 COLLATE utf16_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `icono`
+--
+
+INSERT INTO `icono` (`id`, `nombre`, `direccion`, `descripcion`) VALUES
+(1, 'Circulo', '1552960486', 'Es un círculo'),
+(2, 'Triángulo', '1552960683', 'Es un triángulo');
 
 -- --------------------------------------------------------
 
@@ -120,13 +119,6 @@ CREATE TABLE `lienzos` (
   `id` int(11) NOT NULL,
   `proceso_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `lienzos`
---
-
-INSERT INTO `lienzos` (`id`, `proceso_id`) VALUES
-(3, 5);
 
 -- --------------------------------------------------------
 
@@ -168,18 +160,12 @@ INSERT INTO `normativa` (`idnormativa`, `idproceso`, `nombre`, `descripcion`) VA
 CREATE TABLE `paginas` (
   `id` int(11) NOT NULL,
   `numero` int(11) NOT NULL,
-  `lienzo_id` int(11) NOT NULL
+  `lienzo_id` int(11) NOT NULL,
+  `nombre` varchar(200) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `paginas`
---
-
-INSERT INTO `paginas` (`id`, `numero`, `lienzo_id`) VALUES
-(4, 1, 3),
-(5, 2, 3);
-
 -- --------------------------------------------------------
+
 --
 -- Estructura de tabla para la tabla `paralelos`
 --
@@ -313,7 +299,8 @@ CREATE TABLE `rol_negocio` (
 INSERT INTO `rol_negocio` (`id_rol_negocio`, `nombre_rol_negocio`, `descripcion_rol_negocio`) VALUES
 (100, 'Diseñador', 'Diseña la app web'),
 (101, 'Porfavor', 'Que'),
-(102, 'AA', 'AA');
+(102, 'AA', 'AA'),
+(103, 'Tester', 'La persona que se encarga de probar los desarrollo');
 
 -- --------------------------------------------------------
 
@@ -534,13 +521,13 @@ ALTER TABLE `caracteristica`
 -- AUTO_INCREMENT de la tabla `elementos`
 --
 ALTER TABLE `elementos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `icono`
 --
 ALTER TABLE `icono`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `interfaz`
@@ -552,7 +539,7 @@ ALTER TABLE `interfaz`
 -- AUTO_INCREMENT de la tabla `lienzos`
 --
 ALTER TABLE `lienzos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `normativa`
@@ -564,7 +551,7 @@ ALTER TABLE `normativa`
 -- AUTO_INCREMENT de la tabla `paginas`
 --
 ALTER TABLE `paginas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
@@ -588,13 +575,13 @@ ALTER TABLE `respuesta`
 -- AUTO_INCREMENT de la tabla `role`
 --
 ALTER TABLE `role`
-  MODIFY `idrole` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idrole` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `rol_negocio`
 --
 ALTER TABLE `rol_negocio`
-  MODIFY `id_rol_negocio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id_rol_negocio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT de la tabla `sub_caracteristica`
@@ -613,7 +600,6 @@ ALTER TABLE `tipo_interfaz`
 --
 ALTER TABLE `usuario`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-COMMIT;
 
 --
 -- Restricciones para tablas volcadas
@@ -623,7 +609,7 @@ COMMIT;
 -- Filtros para la tabla `elementos`
 --
 ALTER TABLE `elementos`
-  ADD CONSTRAINT `elementos_ibfk_1` FOREIGN KEY (`pagina_id`) REFERENCES `paginas` (`id`);
+  ADD CONSTRAINT `elementos_ibfk_1` FOREIGN KEY (`pagina_id`) REFERENCES `paginas` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `lienzos`
@@ -635,8 +621,9 @@ ALTER TABLE `lienzos`
 -- Filtros para la tabla `paginas`
 --
 ALTER TABLE `paginas`
-  ADD CONSTRAINT `paginas_ibfk_1` FOREIGN KEY (`lienzo_id`) REFERENCES `lienzos` (`id`);
+  ADD CONSTRAINT `paginas_ibfk_1` FOREIGN KEY (`lienzo_id`) REFERENCES `lienzos` (`id`) ON DELETE CASCADE;
 COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
