@@ -48,7 +48,7 @@
         <div class = "container">
             <div class = "row header">
                 <div class = "col-sm-4 offset-sm-4 text-center">
-                    <h3>PROTOTIPO - PROCESO:</h4>
+                    <h3>PROTOTIPO - PROCESO: <?php echo($proceso->nombre) ?></h4>
                 </div>
                 <div class = "col-sm-4 text-right">
                     <a href = "#" class = "btn btn-success btn-lg" role = "button" onclick = "addPage()">
@@ -59,10 +59,10 @@
             </div>
             <div class = "row">
                 <div class = "col-2" id = "page_list">
-                    <div class = "col page-element bg-primary" onclick = "changePage(1)">
-                        <span>Página 1</span>
-                        <button onclick = "deletePage(1)" class= "btn btn-link float-right">
-                            <span class = "mdi mdi-delete"></span>
+                    <div id = 'page_1' class = "col page-element bg-primary" onclick = "changePage(1)">
+                        <span class = 'name-holder'>Página 1</span>
+                        <button onclick = "launchEditModal(1)" class= "btn btn-edit btn-link float-right">
+                            <span class = "mdi mdi-pencil"></span>
                         </button>
                     </div>
                 </div>
@@ -165,6 +165,28 @@
                 </a>
             </div>
         </div>
+        <div class = "modal" id = "cambiarNombrePaginaModal" role = "dialog" tabindex = "-1">
+            <div class = "modal-dialog modal-dialog-centered" role = "document">
+                <div class = "modal-content">
+                    <div class = "modal-header">
+                        <h5 class = "modal-title">Editar nombre de página</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class = "modal-body col">
+                        <div class = "form-group">
+                            <label for = "new_page_name">Nuevo nombre de la página</label>
+                            <input type = 'text' id = "new_page_name" class = "form-control">
+                        </div>
+                    </div>
+                    <div class = "modal-footer">
+                        <button type="button" class="btn btn-primary" onclick = "guardarNuevoNombre()">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="modal fade" id="modalEtiqueta" role="dialog">
             <div class="modal-dialog">
 
@@ -204,5 +226,6 @@
 
             </div>
         </div>
+        
     </body>
 </html>

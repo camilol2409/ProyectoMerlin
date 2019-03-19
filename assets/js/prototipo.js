@@ -174,11 +174,16 @@ function obtenerEstadoActualPagina()
 }
 
 function changePage(pageNumber) {
+  if (!$.estado_actual[pageNumber]) {
+    return;
+  }
   if ($.pagina_actual != pageNumber) {
     var estado = obtenerEstadoActualPagina();
-    $.estado_actual[$.pagina_actual] = estado;
+    $.estado_actual[$.pagina_actual] = $.estado_actual[$.pagina_actual] || {};
+    $.estado_actual[$.pagina_actual]['elementos'] = estado;
+    $.estado_actual[$.pagina_actual]['nombre'] = $('#page_' + $.pagina_actual + ' span.name-holder').html();
     $("#page_list .page-element.bg-primary").removeClass('bg-primary');
-    $($('#page_list .page-element')[pageNumber - 1]).addClass('bg-primary');
+    $('#page_'+pageNumber).addClass('bg-primary');
     $('#contenido_lienzo').html('');
     repaint(pageNumber);
     $.pagina_actual = pageNumber;
@@ -188,12 +193,16 @@ function changePage(pageNumber) {
 function addPage() {
   // TODO: obtener el estado actual y guardarlo
   var estado = obtenerEstadoActualPagina();
-  var currentNumber = $.numero_de_paginas;
-  $.estado_actual[$.pagina_actual] = estado;
+  var currentNumber = $.numero_de_paginas + $.deletedPages;
+  $.estado_actual[$.pagina_actual] = $.estado_actual[$.pagina_actual] || {};
+  $.estado_actual[$.pagina_actual]['elementos'] = estado;
+  $.estado_actual[$.pagina_actual]['nombre'] = "Página " + $.pagina_actual;
   currentNumber++;
-  $('#page_list').append('<div class = "col page-element" onclick = "changePage(' + currentNumber + ')"><span> Página ' + currentNumber + '</span><button onclick = "deletePage('+ currentNumber +')" class= "btn btn-link float-right btn-delete"><span class = "mdi mdi-delete"></span></button ></div>');
+  $.estado_actual[currentNumber] = $.estado_actual[currentNumber] || {};
+  $.estado_actual[currentNumber]['nombre'] = "Página " + currentNumber;
+  $('#page_list').append('<div id = "page_' + currentNumber + '" class = "col page-element" onclick = "changePage(' + currentNumber + ')"><span class = "name-holder"> Página ' + currentNumber + '</span><button onclick = "launchEditModal('+ currentNumber +')" class= "btn btn-edit btn-link float-right"><span class = "mdi mdi-pencil"></span></button ><button onclick = "deletePage('+ currentNumber +')" class= "btn btn-link float-right btn-delete"><span class = "mdi mdi-delete"></span></button ></div>');
   $.pagina_actual = currentNumber;
-  $.numero_de_paginas = currentNumber;
+  $.numero_de_paginas++;
   // Seleccionar la nueva página
   $("#page_list .page-element.bg-primary").removeClass('bg-primary')
   $("#page_list .page-element:last-child").addClass('bg-primary')
@@ -202,7 +211,10 @@ function addPage() {
 }
 
 function repaint(pageNumber) {
-  var elementos = $.estado_actual[pageNumber];
+  if(!$.estado_actual || !$.estado_actual[pageNumber]) {
+    return
+  }
+  var elementos = $.estado_actual[pageNumber]['elementos'];
   elementos.forEach(element => {
     var newElement = $('<div></div>');
     newElement.css('width', element.width);
@@ -233,7 +245,10 @@ function repaint(pageNumber) {
 
 function guardar(base_url, lienzo_id) {
   // Capturar estado actual antes de enviar
-  $.estado_actual[$.pagina_actual] = obtenerEstadoActualPagina();
+  $.estado_actual[$.pagina_actual] = $.estado_actual[$.pagina_actual] || {};
+  $.estado_actual[$.pagina_actual]['elementos'] = obtenerEstadoActualPagina();
+  $.estado_actual[$.pagina_actual]['nombre'] = $('#page_' + $.pagina_actual + ' span.name-holder').html();
+  debugger;
   $.post(base_url + '/PrototipoController/save/' + lienzo_id, $.estado_actual)
     .done(function (data) {
         alert('Estado guardado exitosamente');
@@ -247,10 +262,12 @@ function deletePage(pageNumber) {
   else if(confirm('¿Realmente desea borrar esta página?')) {
     $.numero_de_paginas = $.numero_de_paginas - 1;
     if(pageNumber == $.pagina_actual) {
-      changePage($.pagina_actual - 1);
+      ordered_indexes = Object.keys($.estado_actual).map((el) => parseInt(el)).sort();
+      changePage(ordered_indexes[ordered_indexes.indexOf(pageNumber) - 1]);
     }
     delete($.estado_actual[pageNumber]);
-    $($("#page_list .page-element")[pageNumber - 1]).remove();
+    $.deletedPages++;
+    $("#page_" + pageNumber).remove();
   }
 }
 
@@ -268,9 +285,23 @@ function groupBy(list, keyGetter) {
   return map;
 }
 
+function launchEditModal(page_number) {
+  $.editing_name_page = page_number;
+  $('#cambiarNombrePaginaModal').modal('show');
+}
+
+function guardarNuevoNombre() {
+  var list_element = $('#page_' + $.editing_name_page + ' span.name-holder');
+  $.estado_actual[$.editing_name_page] = $.estado_actual[$.editing_name_page] || {};
+  $.estado_actual[$.editing_name_page]['nombre'] = $('#new_page_name').val();
+  list_element.html($('#new_page_name').val());
+  $('#cambiarNombrePaginaModal').modal('hide');
+}
+
 $(document).ready(function() {
   $.pagina_actual = 1;
   $.numero_de_paginas = 1;
+  $.deletedPages = 0;
   $.estado_actual = {};
   $.borrando = false;
   grouped = groupBy($.estado_desde_db, element => element['numero']);

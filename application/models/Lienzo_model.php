@@ -24,18 +24,14 @@ class Lienzo_model extends CI_Model {
     }
 
     function create($data, $proceso_id) {
-        /*
-         * llamaos a la funcion insert a traves del metodo que pertenece al framwork y le pasamos como valores el nombre 
-         * de la tabla en la base de datos y los valores a registrar
-         */
         $proceso_to_insert = array('proceso_id' => $proceso_id);
         $this->db->insert('lienzos', $proceso_to_insert);
         $new_lienzo_id = $this->db->insert_id();
         foreach($data as $clave1 => $item) {
-            $page_to_insert = array('numero' => $clave1, 'lienzo_id' => $new_lienzo_id);
+            $page_to_insert = array('numero' => $clave1, 'lienzo_id' => $new_lienzo_id, 'nombre' => $item['nombre']);
             $this->db->insert('paginas', $page_to_insert);
             $new_page_id = $this->db->insert_id();
-            foreach($item as $element){
+            foreach($item['elementos'] as $element){
                 $to_insert = array(
                     'width' => $element['width'],
                     'height' => $element['height'],
