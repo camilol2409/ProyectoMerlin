@@ -110,43 +110,43 @@
                     </div>
                     <div class = "right-bar text-primary">
                         <div class="text-center">
-                            <a onclick="etiquetas(1)">
+                            <a href = "#">
                                 <span class="mdi mdi-check-outline" style="font-size: 2.5em;">
                                 </span>
                             </a>
                         </div>
                         <div class="text-center">
-                            <a href="#" onclick="return false">
+                            <a href ="#">
                                 <span class="mdi mdi-water" style="font-size: 2.5em;">
                                 </span>
                             </a>
                         </div>
                         <div class="text-center">
-                            <a href="#" onclick="return false">
+                            <a href ="#">
                                 <span class="mdi mdi-pencil" style="font-size: 2.5em;">
                                 </span>
                             </a>
                         </div>
                         <div class="text-center">
-                            <a  onclick="etiquetas(4)">
+                            <a href = "#">
                                 <span class="mdi mdi-heart-outline" style="font-size: 2.5em;">
                                 </span>
                             </a>
                         </div>
                         <div class="text-center">
-                            <a  onclick="etiquetas(3)">
+                            <a href = "#">
                                 <span class="mdi mdi-security-lock" style="font-size: 2.5em;">
                                 </span>
                             </a>
                         </div>
                         <div class="text-center">
-                            <a  onclick="etiquetas(2)">
+                            <a href = "#">
                                 <span class="mdi mdi-wrench" style="font-size: 2.5em;">
                                 </span>
                             </a>
                         </div>
                         <div class="text-center">
-                            <a href="#" onclick="return false">
+                            <a href="#">
                                 <span class="mdi mdi-toolbox-outline" style="font-size: 2.5em;">
                                 </span>
                             </a>
