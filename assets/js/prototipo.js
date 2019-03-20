@@ -196,11 +196,11 @@ function addPage() {
   var currentNumber = $.numero_de_paginas + $.deletedPages;
   $.estado_actual[$.pagina_actual] = $.estado_actual[$.pagina_actual] || {};
   $.estado_actual[$.pagina_actual]['elementos'] = estado;
-  $.estado_actual[$.pagina_actual]['nombre'] = "Página " + $.pagina_actual;
+  $.estado_actual[$.pagina_actual]['nombre'] = $.estado_actual[$.pagina_actual]['nombre'] || "Página " + $.pagina_actual;
   currentNumber++;
   $.estado_actual[currentNumber] = $.estado_actual[currentNumber] || {};
   $.estado_actual[currentNumber]['nombre'] = "Página " + currentNumber;
-  $('#page_list').append('<div id = "page_' + currentNumber + '" class = "col page-element" onclick = "changePage(' + currentNumber + ')"><span class = "name-holder"> Página ' + currentNumber + '</span><button onclick = "launchEditModal('+ currentNumber +')" class= "btn btn-edit btn-link float-right"><span class = "mdi mdi-pencil"></span></button ><button onclick = "deletePage('+ currentNumber +')" class= "btn btn-link float-right btn-delete"><span class = "mdi mdi-delete"></span></button ></div>');
+  $('#page_list').append('<div id = "page_' + currentNumber + '" class = "col page-element" onclick = "changePage(' + currentNumber + ')"><span class = "name-holder">' + $.estado_actual[currentNumber]['nombre'] + '</span><button onclick = "launchEditModal('+ currentNumber +')" class= "btn btn-edit btn-link float-right"><span class = "mdi mdi-pencil"></span></button ><button onclick = "deletePage('+ currentNumber +')" class= "btn btn-link float-right btn-delete"><span class = "mdi mdi-delete"></span></button ></div>');
   $.pagina_actual = currentNumber;
   $.numero_de_paginas++;
   // Seleccionar la nueva página
@@ -248,7 +248,6 @@ function guardar(base_url, lienzo_id) {
   $.estado_actual[$.pagina_actual] = $.estado_actual[$.pagina_actual] || {};
   $.estado_actual[$.pagina_actual]['elementos'] = obtenerEstadoActualPagina();
   $.estado_actual[$.pagina_actual]['nombre'] = $('#page_' + $.pagina_actual + ' span.name-holder').html();
-  debugger;
   $.post(base_url + '/PrototipoController/save/' + lienzo_id, $.estado_actual)
     .done(function (data) {
         alert('Estado guardado exitosamente');
@@ -300,8 +299,7 @@ function guardarNuevoNombre() {
 
 $(document).ready(function() {
   $.pagina_actual = 1;
-  $.numero_de_paginas = 1;
-  $.deletedPages = 0;
+  $.numero_de_paginas = 1;  
   $.estado_actual = {};
   $.borrando = false;
   grouped = groupBy($.estado_desde_db, element => element['numero']);
@@ -312,9 +310,19 @@ $(document).ready(function() {
     });
   });
   $.estado_actual = arr.reduce(function(map, element) {
-    map[element[0]] = element[1];
+    map[element[0]] = {};
+    map[element[0]]['elementos'] = element[1];
     return map;
   }, {});
+  Object.keys($.estado_actual).forEach(function (key) {
+    index = $.estado_desde_db.findIndex(function (element) {
+      return parseInt(element.numero) == key
+    });
+    $.estado_actual[key]['nombre'] = $.estado_desde_db[index].nombre
+  });
+  ordered_indexes = Object.keys($.estado_actual).map((el) => parseInt(el)).sort((a, b) => { return b - a; });
+  max_number = ordered_indexes[0];
+  $.deletedPages = (max_number - arr.length) || 0;
   for (let i = 0; i < (arr.length - 1); i++) {
     repaint($.pagina_actual);
     addPage();
