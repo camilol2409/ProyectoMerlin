@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -15,7 +15,7 @@ class Lienzo_model extends CI_Model {
     }
 
     function load($proceso_id) {
-        $this->db->select('l.id, p.numero, el.width, el.height, el.left_position, el.top, el.source');
+        $this->db->select('l.id, p.numero, p.nombre, el.width, el.height, el.left_position, el.top, el.source');
         $this->db->where('l.proceso_id', $proceso_id);
         $this->db->from('lienzos l');
         $this->db->join('paginas p', 'p.lienzo_id = l.id');
@@ -24,18 +24,20 @@ class Lienzo_model extends CI_Model {
     }
 
     function create($data, $proceso_id) {
-        /*
-         * llamaos a la funcion insert a traves del metodo que pertenece al framwork y le pasamos como valores el nombre 
-         * de la tabla en la base de datos y los valores a registrar
-         */
         $proceso_to_insert = array('proceso_id' => $proceso_id);
+        $this->db->where('l.proceso_id', $proceso_id);
+        $this->db->from('lienzos l');
+        if ($this->db->count_all_results() > 0) {
+            $this->db->where('proceso_id', $proceso_id);
+            $this->db->delete('lienzos');
+        }
         $this->db->insert('lienzos', $proceso_to_insert);
         $new_lienzo_id = $this->db->insert_id();
         foreach($data as $clave1 => $item) {
-            $page_to_insert = array('numero' => $clave1, 'lienzo_id' => $new_lienzo_id);
+            $page_to_insert = array('numero' => $clave1, 'lienzo_id' => $new_lienzo_id, 'nombre' => $item['nombre']);
             $this->db->insert('paginas', $page_to_insert);
             $new_page_id = $this->db->insert_id();
-            foreach($item as $element){
+            foreach($item['elementos'] as $element){
                 $to_insert = array(
                     'width' => $element['width'],
                     'height' => $element['height'],

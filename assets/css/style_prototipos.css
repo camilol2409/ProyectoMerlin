@@ -25,8 +25,12 @@
 
 }
 
-.bg-primary .btn-delete {
+.bg-primary .btn-delete, .bg-primary .btn-edit {
   color: white;
+}
+
+#page_list .btn {
+  padding: .375rem 0.15rem;
 }
 
 .right-bar {
@@ -57,6 +61,8 @@
 
 #page_list {
   font-size: 1.8em;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 
 .page-element {

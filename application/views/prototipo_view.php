@@ -48,7 +48,7 @@
         <div class = "container">
             <div class = "row header">
                 <div class = "col-sm-4 offset-sm-4 text-center">
-                    <h3>PROTOTIPO - PROCESO:</h4>
+                    <h3>PROTOTIPO - PROCESO: <?php echo($proceso->nombre) ?></h4>
                 </div>
                 <div class = "col-sm-4 text-right">
                     <a href = "#" class = "btn btn-success btn-lg" role = "button" onclick = "addPage()">
@@ -59,10 +59,10 @@
             </div>
             <div class = "row">
                 <div class = "col-2" id = "page_list">
-                    <div class = "col page-element bg-primary" onclick = "changePage(1)">
-                        <span>Página 1</span>
-                        <button onclick = "deletePage(1)" class= "btn btn-link float-right">
-                            <span class = "mdi mdi-delete"></span>
+                    <div id = 'page_1' class = "col page-element bg-primary" onclick = "changePage(1)">
+                        <span class = 'name-holder'>Página 1</span>
+                        <button onclick = "launchEditModal(1)" class= "btn btn-edit btn-link float-right">
+                            <span class = "mdi mdi-pencil"></span>
                         </button>
                     </div>
                 </div>
@@ -110,43 +110,43 @@
                     </div>
                     <div class = "right-bar text-primary">
                         <div class="text-center">
-                            <a onclick="etiquetas(1)">
+                            <a href = "#">
                                 <span class="mdi mdi-check-outline" style="font-size: 2.5em;">
                                 </span>
                             </a>
                         </div>
                         <div class="text-center">
-                            <a href="#" onclick="return false">
+                            <a href ="#">
                                 <span class="mdi mdi-water" style="font-size: 2.5em;">
                                 </span>
                             </a>
                         </div>
                         <div class="text-center">
-                            <a href="#" onclick="return false">
+                            <a href ="#">
                                 <span class="mdi mdi-pencil" style="font-size: 2.5em;">
                                 </span>
                             </a>
                         </div>
                         <div class="text-center">
-                            <a  onclick="etiquetas(4)">
+                            <a href = "#">
                                 <span class="mdi mdi-heart-outline" style="font-size: 2.5em;">
                                 </span>
                             </a>
                         </div>
                         <div class="text-center">
-                            <a  onclick="etiquetas(3)">
+                            <a href = "#">
                                 <span class="mdi mdi-security-lock" style="font-size: 2.5em;">
                                 </span>
                             </a>
                         </div>
                         <div class="text-center">
-                            <a  onclick="etiquetas(2)">
+                            <a href = "#">
                                 <span class="mdi mdi-wrench" style="font-size: 2.5em;">
                                 </span>
                             </a>
                         </div>
                         <div class="text-center">
-                            <a href="#" onclick="return false">
+                            <a href="#">
                                 <span class="mdi mdi-toolbox-outline" style="font-size: 2.5em;">
                                 </span>
                             </a>
@@ -163,6 +163,28 @@
                 <a class = "btn btn-primary btn-lg" href = "#" onclick = "guardar('<?php echo base_url(); ?>', '<?php echo $id; ?>')">
                     <span class="glyphicon glyphicon-ok"></span> Guardar
                 </a>
+            </div>
+        </div>
+        <div class = "modal" id = "cambiarNombrePaginaModal" role = "dialog" tabindex = "-1">
+            <div class = "modal-dialog modal-dialog-centered" role = "document">
+                <div class = "modal-content">
+                    <div class = "modal-header">
+                        <h5 class = "modal-title">Editar nombre de página</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class = "modal-body col">
+                        <div class = "form-group">
+                            <label for = "new_page_name">Nuevo nombre de la página</label>
+                            <input type = 'text' id = "new_page_name" class = "form-control">
+                        </div>
+                    </div>
+                    <div class = "modal-footer">
+                        <button type="button" class="btn btn-primary" onclick = "guardarNuevoNombre()">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="modal fade" id="modalEtiqueta" role="dialog">
@@ -204,5 +226,6 @@
 
             </div>
         </div>
+        
     </body>
 </html>
